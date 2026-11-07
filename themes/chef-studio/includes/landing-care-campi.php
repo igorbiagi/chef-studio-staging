@@ -148,6 +148,7 @@ add_action('acf/init', function () {
 
     acf_add_local_field_group([
         'key' => 'group_lcare_landing_care',
+        'show_in_rest' => 1,
         'title' => 'Testi pagina Care',
         'position' => 'acf_after_title',
         'style' => 'default',
