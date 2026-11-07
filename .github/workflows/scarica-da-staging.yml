@@ -65,7 +65,7 @@ jobs:
             {
               head -n 6 scarica.lftp
               echo "cd \"$WP_CONTENT_DIR\""
-              sed 's#/$##' elenco-plugin.txt | grep -E '^(chef|local-pages)' | while read -r d; do
+              sed 's#^plugins/##; s#/$##' elenco-plugin.txt | grep -E '^(chef|local-pages)' | while read -r d; do
                 echo "$M \"plugins/$d\" \"./plugins/$d\""
               done
               echo "bye"
