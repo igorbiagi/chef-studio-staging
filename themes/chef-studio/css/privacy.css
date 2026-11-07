@@ -1,0 +1,173 @@
+    html {
+    font-family: "Helvetica Neue",Helvetica,Arial,FreeSans,sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 18px;
+    color: #59636D;
+    }
+
+    .contenitore-privacy {
+	max-width:900px;
+    padding-top: 30px;
+	margin-left: auto;
+    margin-right: auto;
+    zoom: 1;
+	}
+	
+	.testo-piu-grande {
+    font-size: 15px !important;
+    line-height: 25px !important;;
+    color: #292929 !important;;
+    text-align: justify;
+}
+
+    .contenuto-privacy {
+    position: relative;
+    padding: 25px 16px;
+    margin: 0 auto;
+    border-radius: 3px 3px 0 0;
+	}
+
+	.contenitore-privacy h1 {
+	font-family: "Helvetica Neue",Helvetica,Arial,FreeSans,sans-serif;	
+    font-size: 18px;
+    line-height: 19px;
+    font-weight: bold;
+    padding-top: 24px;
+    color: #333333;
+    margin: 0;
+    }
+
+	.contenitore-privacy h2 {
+    font-family: "Helvetica Neue",Helvetica,Arial,FreeSans,sans-serif;
+	font-size: 16px;
+    line-height: 19px;
+    font-weight: bold;
+    padding-top: 24px;
+    color: #424242;
+    margin: 0;
+    }	
+	
+	.contenitore-privacy h3 {
+	font-family: "Helvetica Neue",Helvetica,Arial,FreeSans,sans-serif;	
+    font-size: 14px;
+    line-height: 19px;
+    font-weight: bold;
+    padding-top: 24px;
+    color: #424242;
+    margin-bottom: 9px;
+    }
+	
+	.contenitore-privacy h4 {
+	font-family: "Helvetica Neue",Helvetica,Arial,FreeSans,sans-serif;	
+    font-size: 13px;
+    line-height: 19px;
+    font-weight: bold;
+    padding-top: 24px;
+    color: #59636D;
+	margin: 0;
+    }
+	
+	.contenitore-privacy .evidenzia {
+    font-size: 13px;
+    line-height: 19px;
+    font-weight: 500;
+    padding-top: 6px;
+    color: #59636D;
+	margin: 0;
+    }
+	
+    .contenitore-privacy p {
+	font-size: 13px;
+    font-weight: 300;
+    line-height: 20px;
+    margin-bottom: 9px;
+	color: #6C6C6C;
+	}
+
+	.contenitore-privacy a {
+    font-weight: normal;
+    border-bottom: 1px solid #F6F6F6;
+    color: #333b43;	
+	cursor: pointer;
+	}
+	
+	.contenitore-privacy .informativa
+	{
+	border-top: 1px solid #DFDFDF;
+	padding-bottom: 12px;
+	}
+	
+	.contenitore-privacy .box {
+	border: 1px solid;
+	border-color: #E0E0E0;
+    border-bottom-color: #D3D3D3;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+	padding: 10px;
+    border-radius: 3px;
+    margin-bottom: 15px;	
+	margin-top: 21px;
+	}
+	
+	.contenitore-privacy .box h3 {
+	padding-top:0;	
+	margin-top:0;
+	padding-bottom: 6px;
+	border-bottom: 1px solid #DDD;
+	}
+	
+	.contenitore-privacy .box p {
+	margin-bottom: 0;
+	}
+	
+	.contenitore-privacy .box-bordi {
+	border-color: #E0E0E0;
+    border-bottom-color: #D3D3D3;
+	}
+	
+	.contenitore-privacy .definizioni {
+	border-top: 1px solid #DFDFDF;
+	border-bottom: 1px solid #DFDFDF;
+	}
+	
+	.contenitore-privacy .definizioni p {
+	margin-top:0;
+	}
+		
+	.contenitore-privacy .definizioni h4 {
+	padding-top: 12px;
+	}
+	
+	.contenitore-privacy ul {
+	width: 100%;
+	margin:0;
+	padding:0;	
+	}
+	
+	.contenitore-privacy ul li {
+	list-style: none;	
+	}
+	
+	.contenitore-privacy ul li p {
+	margin-top:0;	
+		}
+		
+	.elenco ul li {
+	list-style: disc;  	
+	margin-left: 30px;
+	font-size: 13px;
+    font-weight: 300;
+    line-height: 20px;
+	color: #6C6C6C;
+	}	
+	
+	.contenuto-privacy .centrato {
+	text-align: center;	
+	}
+	
+	.contenuto-privacy .padding-bottom-16px {
+	padding-bottom: 16px;
+	}
+	
+	

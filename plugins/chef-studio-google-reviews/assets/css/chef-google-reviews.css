@@ -1,0 +1,524 @@
+.chef-google-reviews {
+	--chef-google-reviews-border: #ddd;
+	--chef-google-reviews-muted: #8a8a8a;
+	--chef-google-reviews-text: #111;
+	--chef-google-reviews-card: #fff;
+	--chef-google-reviews-star: #f6bb32;
+	--chef-google-reviews-star-empty: #e1e3e7;
+	--chef-google-reviews-google: #4285f4;
+	--chef-google-reviews-focus: #1a73e8;
+
+	background: transparent;
+	color: var(--chef-google-reviews-text);
+	font: inherit;
+	max-width: 100%;
+	overflow-x: hidden;
+	width: 100%;
+}
+
+.chef-google-reviews *,
+.chef-google-reviews *::before,
+.chef-google-reviews *::after {
+	box-sizing: border-box;
+}
+
+.chef-google-reviews-inner {
+	align-items: center;
+	display: flex;
+	gap: 22px;
+	width: 100%;
+}
+
+.chef-google-reviews-summary {
+	align-items: center;
+	display: flex;
+	flex: 0 0 265px;
+}
+
+.chef-google-reviews-business {
+	align-items: flex-start;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	max-width: 265px;
+	width: 100%;
+}
+
+.chef-google-reviews-logo {
+	border-radius: 50%;
+	display: block;
+	height: 78px;
+	object-fit: cover;
+	width: 78px;
+}
+
+.chef-google-reviews-business-name {
+	display: block;
+	font-size: 1.02rem;
+	font-weight: 700;
+	line-height: 1.2;
+	max-width: 100%;
+	overflow-wrap: anywhere;
+}
+
+.chef-google-reviews-stars,
+.chef-google-review-stars {
+	color: var(--chef-google-reviews-star-empty);
+	display: flex;
+	gap: 2px;
+	line-height: 1;
+}
+
+.chef-google-review-stars {
+	margin: 0;
+}
+
+.chef-google-reviews-star {
+	display: block;
+	height: 18px;
+	object-fit: contain;
+	opacity: 0.24;
+	width: 18px;
+}
+
+.chef-google-reviews-star-filled {
+	opacity: 1;
+}
+
+.chef-google-reviews-average {
+	color: var(--chef-google-reviews-muted);
+	font-size: 0.95rem;
+	line-height: 1.35;
+}
+
+.chef-google-reviews-count,
+.chef-google-reviews-count:visited {
+	color: var(--chef-google-reviews-text) !important;
+	font-size: 0.88rem;
+	font-weight: 400;
+	line-height: 1.35;
+	text-decoration: none;
+}
+
+.chef-google-reviews-count:hover,
+.chef-google-reviews-count:focus-visible,
+.chef-google-reviews-source-note a:hover,
+.chef-google-reviews-source-note a:focus-visible {
+	text-decoration: underline;
+}
+
+.chef-google-reviews-carousel-wrap {
+	display: block;
+	flex: 1 1 auto;
+	max-width: 100%;
+	min-width: 0;
+	overflow: hidden;
+	padding: 0 24px;
+	position: relative;
+	width: 100%;
+}
+
+.chef-google-reviews-track {
+	display: flex;
+	flex: 1 1 auto;
+	gap: 16px;
+	max-width: 100%;
+	min-width: 0;
+	overflow-x: auto;
+	padding: 2px 1px;
+	scroll-behavior: smooth;
+	scroll-snap-type: x mandatory;
+	scrollbar-width: none;
+	width: 100%;
+}
+
+.chef-google-reviews-track::-webkit-scrollbar {
+	display: none;
+}
+
+.chef-google-reviews-track:focus-visible,
+.chef-google-reviews-nav:focus-visible,
+.chef-google-review-more:focus-visible {
+	outline: 2px solid var(--chef-google-reviews-focus);
+	outline-offset: 3px;
+}
+
+.chef-google-review-card {
+	background: var(--chef-google-reviews-card);
+	border: 1px solid var(--chef-google-reviews-border);
+	border-radius: 12px;
+	display: flex;
+	flex: 0 0 calc((100% - 32px) / 3);
+	flex-direction: column;
+	min-height: 214px;
+	padding: 18px 18px 16px;
+	scroll-snap-align: start;
+	width: calc((100% - 32px) / 3);
+}
+
+.chef-google-review-header {
+	align-items: flex-start;
+	display: flex;
+	gap: 10px;
+	min-width: 0;
+	position: relative;
+}
+
+.chef-google-review-avatar {
+	border-radius: 50%;
+	display: block;
+	flex: 0 0 42px;
+	height: 42px;
+	object-fit: cover;
+	width: 42px;
+}
+
+.chef-google-review-avatar-placeholder {
+	align-items: center;
+	background: #eef2ff;
+	color: #4f5fbf;
+	display: inline-flex;
+	font-weight: 700;
+	justify-content: center;
+}
+
+.chef-google-review-meta {
+	min-width: 0;
+	padding-right: 28px;
+}
+
+.chef-google-review-author {
+	display: block;
+	font-size: 0.98rem;
+	font-weight: 700;
+	line-height: 1.25;
+	overflow-wrap: anywhere;
+}
+
+.chef-google-review-date {
+	color: var(--chef-google-reviews-muted);
+	font-size: 0.85rem;
+	line-height: 1.3;
+	margin-top: 2px;
+}
+
+.chef-google-review-source {
+	align-items: center;
+	border-radius: 50%;
+	color: var(--chef-google-reviews-google);
+	display: inline-flex;
+	font-weight: 800;
+	height: 22px;
+	justify-content: center;
+	line-height: 1;
+	margin-left: auto;
+	width: 22px;
+}
+
+.chef-google-review-google-icon {
+	display: block;
+	height: 20px;
+	width: 20px;
+}
+
+.chef-google-review-rating-row {
+	align-items: center;
+	display: flex;
+	gap: 8px;
+	margin: 13px 0 10px;
+}
+
+.chef-google-review-verified {
+	align-items: center;
+	display: inline-flex;
+	height: 16px;
+	justify-content: center;
+	line-height: 1;
+	width: 16px;
+}
+
+.chef-google-review-verified-icon {
+	display: block;
+	height: 16px;
+	width: 16px;
+}
+
+.chef-google-review-text {
+	font-size: 0.96rem;
+	line-height: 1.34;
+	overflow-wrap: anywhere;
+	white-space: pre-wrap;
+}
+
+.chef-google-review-text.is-collapsed {
+	display: -webkit-box;
+	overflow: hidden;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 4;
+}
+
+.chef-google-review-text.is-expanded {
+	display: block;
+	overflow: visible;
+	-webkit-line-clamp: unset;
+}
+
+.chef-google-review-more {
+	align-self: flex-start;
+	background: transparent !important;
+	border: 0 !important;
+	border-radius: 0 !important;
+	box-shadow: none !important;
+	color: var(--chef-google-reviews-muted) !important;
+	cursor: pointer;
+	font-family: inherit;
+	font-size: 0.9rem !important;
+	font-weight: 600;
+	line-height: 1.25 !important;
+	margin: 11px 0 0;
+	min-height: 0 !important;
+	padding: 0 !important;
+	text-align: left;
+	text-transform: none !important;
+}
+
+.chef-google-reviews-nav {
+	align-items: center;
+	appearance: none;
+	background: #fff !important;
+	border: 1px solid #d9d9d9 !important;
+	border-radius: 50% !important;
+	box-sizing: border-box !important;
+	box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.05) !important;
+	color: #666 !important;
+	cursor: pointer;
+	display: inline-flex !important;
+	flex: 0 0 36px !important;
+	height: 36px !important;
+	justify-content: center;
+	line-height: 1 !important;
+	max-height: 36px !important;
+	max-width: 36px !important;
+	min-height: 36px !important;
+	min-width: 36px !important;
+	outline-color: #d9d9d9 !important;
+	padding: 0 !important;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, color 180ms ease, opacity 180ms ease, transform 180ms ease;
+	text-transform: none !important;
+	width: 36px !important;
+	z-index: 2;
+}
+
+.chef-google-reviews .chef-google-reviews-carousel-wrap > button.chef-google-reviews-nav {
+	-webkit-border-radius: 50% !important;
+	aspect-ratio: 1 / 1;
+	border-radius: 50% !important;
+	display: inline-flex !important;
+	flex-basis: 36px !important;
+	height: 36px !important;
+	max-height: 36px !important;
+	max-width: 36px !important;
+	min-height: 36px !important;
+	min-width: 36px !important;
+	width: 36px !important;
+}
+
+.chef-google-reviews-prev {
+	left: 5px;
+}
+
+.chef-google-reviews-next {
+	right: 5px;
+}
+
+.chef-google-reviews-nav:hover {
+	background-color: #4d4d4d !important;
+	border-color: #4d4d4d !important;
+	color: #fff !important;
+	outline-color: #272727 !important;
+	transform: translateY(-50%) scale(1.03);
+}
+
+.chef-google-reviews-nav:hover::before,
+.chef-google-reviews-nav:focus-visible::before {
+	border-color: #fff;
+}
+
+.chef-google-reviews-nav:focus-visible {
+	background-color: #4d4d4d !important;
+	border-color: #4d4d4d !important;
+	box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.05) !important;
+	outline-color: #272727 !important;
+}
+
+.chef-google-reviews-nav:disabled {
+	cursor: default;
+	opacity: 0.45;
+}
+
+.chef-google-reviews-nav:disabled:hover {
+	background: #fff !important;
+	border-color: #d9d9d9 !important;
+	color: #666 !important;
+	outline-color: #d9d9d9 !important;
+	transform: translateY(-50%);
+}
+
+.chef-google-reviews-nav:disabled:hover::before {
+	border-color: currentColor;
+}
+
+.chef-google-reviews-prev::before {
+	border-color: currentColor;
+	border-style: solid;
+	border-width: 0 3px 3px 0;
+	content: "";
+	display: block;
+	height: 10px;
+	margin-left: 3px;
+	transform: rotate(135deg);
+	width: 10px;
+}
+
+.chef-google-reviews-next::before {
+	border-color: currentColor;
+	border-style: solid;
+	border-width: 0 3px 3px 0;
+	content: "";
+	display: block;
+	height: 10px;
+	margin-right: 3px;
+	transform: rotate(-45deg);
+	width: 10px;
+}
+
+.chef-google-reviews-source-note {
+	color: var(--chef-google-reviews-muted);
+	font-size: 0.78rem;
+	line-height: 1.45;
+	margin: 22px auto 0;
+	max-width: 720px;
+	text-align: center;
+}
+
+.chef-google-reviews-source-note a,
+.chef-google-reviews-source-note a:visited {
+	color: inherit;
+	margin-left: 4px;
+}
+
+.chef-google-reviews-empty {
+	color: var(--chef-google-reviews-muted);
+	font: inherit;
+	margin: 0;
+}
+
+.chef-google-reviews-layout-grid .chef-google-reviews-inner,
+.chef-google-reviews-layout-list .chef-google-reviews-inner {
+	align-items: flex-start;
+}
+
+.chef-google-reviews-layout-grid .chef-google-reviews-carousel-wrap,
+.chef-google-reviews-layout-list .chef-google-reviews-carousel-wrap {
+	display: block;
+	overflow: visible;
+	padding: 0;
+	width: 100%;
+}
+
+.chef-google-reviews-layout-grid .chef-google-reviews-track {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	overflow: visible;
+}
+
+.chef-google-reviews-layout-grid .chef-google-review-card,
+.chef-google-reviews-layout-list .chef-google-review-card {
+	width: auto;
+}
+
+.chef-google-reviews-layout-list .chef-google-reviews-track {
+	display: flex;
+	flex-direction: column;
+	overflow: visible;
+}
+
+.chef-google-reviews-layout-list .chef-google-review-card {
+	flex-basis: auto;
+	min-height: 0;
+}
+
+.chef-google-reviews-summary-only {
+	display: inline-flex;
+	max-width: 360px;
+}
+
+@media (max-width: 1100px) and (min-width: 901px) {
+	.chef-google-reviews-summary {
+		flex-basis: 245px;
+	}
+
+	.chef-google-reviews-business {
+		max-width: 245px;
+	}
+
+	.chef-google-review-card {
+		flex-basis: calc((100% - 16px) / 2);
+		width: calc((100% - 16px) / 2);
+	}
+}
+
+@media (max-width: 900px) {
+	.chef-google-reviews-inner {
+		align-items: stretch;
+		flex-direction: column;
+		gap: 18px;
+	}
+
+	.chef-google-reviews-summary {
+		flex-basis: auto;
+		width: 100%;
+	}
+
+	.chef-google-reviews-business {
+		max-width: none;
+	}
+
+	.chef-google-review-card {
+		flex-basis: min(78vw, 320px);
+		min-height: 220px;
+		width: min(78vw, 320px);
+	}
+
+	.chef-google-reviews-nav {
+		height: 36px !important;
+		width: 36px !important;
+	}
+}
+
+@media (max-width: 640px) {
+	.chef-google-review-card {
+		flex-basis: min(82vw, 300px);
+		padding: 20px;
+		width: min(82vw, 300px);
+	}
+
+	.chef-google-reviews-track {
+		gap: 16px;
+	}
+
+	.chef-google-reviews-prev {
+		left: 5px;
+	}
+
+	.chef-google-reviews-next {
+		right: 5px;
+	}
+
+	.chef-google-reviews-carousel-wrap {
+		padding: 0 28px;
+	}
+}

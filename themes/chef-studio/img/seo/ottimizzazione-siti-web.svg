@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #010101;
+      }
+    </style>
+  </defs>
+  <title>Artboard 1 copia 64</title>
+  <g id="Logo">
+    <g>
+      <path class="cls-1" d="M114.9225,226.4768l-101.614-58.181V131.6829l101.614-58.2824v43.8118L53.1676,150.0614l61.7549,32.8672Z"></path>
+      <path class="cls-1" d="M157.3868,56.501h18.5754L143.0529,243.499H124.6636Z"></path>
+      <path class="cls-1" d="M185.078,182.9286l61.7544-32.8672L185.078,117.2123V73.4005l101.6135,58.2824v36.6129L185.078,226.4768Z"></path>
+    </g>
+  </g>
+</svg>

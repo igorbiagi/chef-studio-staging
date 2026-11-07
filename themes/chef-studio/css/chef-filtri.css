@@ -1,0 +1,115 @@
+@charset "utf-8";
+:root {
+--yith-wcan-filters_colors_accent: var(--primary-color)!important;	
+}
+
+.filters-container h1, .filters-container h2, .filters-container h3, .filters-container h4, .filters-container h5, .filters-container h6{
+	font-family: var(--font-primary)!important;
+}
+
+.filters-container {
+	font-family: var(--font-primary)!important;
+}
+
+.yith-wcan-filters-opener {
+    margin-bottom: 15px !important;
+   /* padding: 8px 12px !important;
+    font-size: 16px !important;
+    background-color: var(--primary-color) !important;
+    color: var(--above-color) !important;*/
+	border:none!important;
+	width:100%;
+	background-color:var(--sfondo-color)!important;
+	color: var(--secondary-color)!important;
+	text-align:right!important;
+	font-size:1.1rem!important;
+}
+
+.yith-wcan-filters-opener:active, .yith-wcan-filters-opener:focus, .yith-wcan-filters-opener:hover {
+	color: var(--secondary-color)!important;
+	background-color:var(--sfondo-color)!important;
+}
+
+.yith-wcan-filters.filters-modal h3{
+	line-height: inherit!important;
+	text-align: left!important;
+	padding-left: 10px;
+}
+
+.yith-wcan-filters-opener i.filter-icon{
+	filter: var(--secondary-color-filter)!important;
+	margin-top: -5px;
+	width: 15px!important;
+	height: 15px!important;
+}
+
+.apply-filters{
+	border-radius: 0!important;
+	color: var(--above-color)!important;
+}
+
+.yith-wcbr-brand-thumbnail.borderless .yith-wcbr-thumbnail-list ul li {
+        border-bottom: none!important;
+    }
+
+
+    .yith-wcbr-brand-thumbnail.borderless .yith-wcbr-thumbnail-list ul li {
+        border-left: none !important;
+    }
+
+
+    .yith-wcbr-brand-thumbnail.borderless .yith-wcbr-thumbnail-list ul li:nth-child(even) {
+        border-left: none!important;
+    }
+
+.yith-wcan-filters {
+    background-color: var(--bonus-color)!important;
+	border-radius: var(--border-radius)	
+}
+
+.yith-wcan-filters.filters-modal h3.mobile-only {
+	margin-top: 44px!important;
+}
+
+.yith-wcan-filters.filters-modal .close-button{
+	margin-top: 44px!important;
+}
+
+.yith-wcan-filters.filters-modal .filters-container {
+    padding: 44px 10px 10px 10px;
+}
+
+.filter-content{
+	margin:0 10px;
+}
+
+.yith-wcan-filters .yith-wcan-filter {
+    margin-bottom: 15px;
+}
+
+body.yith-wcan-preset-modal-open:after {
+	display: none!important;
+	background: red!important;
+}
+
+.yith-wcan-filters .btn {
+    padding: 8px 12px!important;
+    font-size: 16px!important;
+}
+	
+@media screen and (min-width: 980px){
+.yith-wcan-filters-opener{
+		display: none!important;
+}
+	
+body.admin-bar .yith-wcan-filters.filters-modal {
+       top: 0!important;
+       z-index: 3000!important;
+ }
+	
+.filters-container{
+	margin-top: 10px;
+	padding:0 10px 20px 10px
+}
+
+	}

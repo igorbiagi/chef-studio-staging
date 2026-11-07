@@ -1,0 +1,196 @@
+@charset "utf-8";
+:root {
+	
+  --primary-color: 	hsl(338, 71%, 30%);
+  --primary-light-color: hsl(338, 71%, 35%);
+  --primary-color-filter: brightness(0) saturate(100%) invert(15%) sepia(45%) saturate(3732%) hue-rotate(316deg) brightness(98%) contrast(100%); /*--https://angel-rs.github.io/css-color-filter-generator generare il colore*/
+ --primary-color-soft: #cd9ea9;
+	
+  --secondary-color: 	hsl(210, 61%, 70%);
+  --secondary-light-color:	hsl(210, 61%, 75%);
+  --secondary-color-filter: brightness(0) saturate(100%) invert(69%) sepia(43%) saturate(523%) hue-rotate(180deg) brightness(95%) contrast(85%);
+  --secondary-color-soft: #d1e0f4;
+	
+  --super-color: hsl(39, 94%, 59%);
+  --super-light-color:	hsl(39, 94%, 64%);
+  --super-color-filter: brightness(0) saturate(100%) invert(74%) sepia(89%) saturate(1020%) hue-rotate(334deg) brightness(104%) contrast(95%);
+
+  --bonus-color: #f2ece7;
+  --bonus-color-filter: brightness(0) saturate(100%) invert(93%) sepia(3%) saturate(577%) hue-rotate(334deg) brightness(105%) contrast(90%);
+  --soft-color: #f5f3ef;
+  --soft-light-color: #f8f3ee;
+  --soft-color-filter: brightness(0) saturate(100%) invert(91%) sepia(22%) saturate(207%) hue-rotate(337deg) brightness(92%) contrast(89%);
+  --sfondo-color: #fcfbfb;
+  --sfondo-color-filter: brightness(0) saturate(100%) invert(100%) sepia(98%) saturate(8%) hue-rotate(333deg) brightness(105%) contrast(97%);
+  --txt-color: #270d17;
+  --txt-color-filter: brightness(0) saturate(100%) invert(5%) sepia(15%) saturate(6019%) hue-rotate(304deg) brightness(98%) contrast(96%);
+	
+  --above-color: #FCFBFB;
+  --above-color-filter: brightness(0) saturate(100%) invert(98%) sepia(100%) saturate(0%) hue-rotate(330deg) brightness(103%) contrast(103%);
+	
+  --menu-bar-mobile: var(--sfondo-color);
+  --menu-bar-desktop: var(--sfondo-color);
+  --menu-back-mobile: var(--sfondo-color);
+  --menu-back-desktop: var(--sfondo-color);
+  --menu-back-desktop-light: var(--soft-color);
+  --menu-arrow-filter: var(--primary-color-filter);
+	
+  --txt-menu-desktop: var(--txt-color);
+  --icon-color-filter: brightness(0) saturate(100%) invert(98%) sepia(100%) saturate(0%) hue-rotate(330deg) brightness(103%) contrast(103%);
+  --txt-menu-tendina-desktop: var(--txt-color);
+  --txt-menu-tendina-mobile: var(--txt-color);
+	
+  --footer-back: var(--bonus-color);
+  --footer-txt: var(--txt-color);
+
+  --info-color: hsl(201, 59%, 78%);	
+  --info-light-color: hsl(201, 59%, 78%);	
+  --warning-color: hsl(49, 93%, 77%);
+  --warning-light-color: hsl(49, 93%, 77%);
+  --success-color: hsl(114, 35%, 68%);
+  --success-light-color: hsl(110, 53%, 87%);
+  --danger-color: hsl(1, 63%, 74%);
+  --danger-light-color: hsl(1, 63%, 74%);
+  --chef-whatsapp-color: hsl(142, 70%, 49%);
+  --chef-whatsapp-light-color: hsl(142, 70%, 53%);
+  --chef-whatsapp-rgb: 37, 211, 102;
+	
+  --box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;;
+  --border-radius: 15px;
+  --border: 1px solid vat(--txt-color);/*solo per tabella*/
+  --border-style: 1px solid;
+  --glow: none;
+	
+  --font-primary: "Bricolage Grotesque", sans-serif;
+  --font-secondary: "Bricolage Grotesque", sans-serif;
+  --text-align: left;
+  --titoletto-align: left;
+  --h-align: left;
+  --anteprime-align: left;
+  --svg-color: brightness(0) saturate(100%);/*       brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%)*/
+  --site-width: 1300px;
+  --padding-h: 35px;
+  --padding-h-small: 10px;
+  --padding-laterale: 10px;
+	
+  --color-seo: #265B7D;
+  --color-web: #4F8C75;
+  --color-grafica: #A84E4F;
+  --color-foto: #7A77AF;
+	
+	--seo-color-filter: brightness(0) saturate(100%) invert(27%) sepia(24%) saturate(1350%) hue-rotate(176deg) brightness(94%) contrast(92%);
+	--web-color-filter: brightness(0) saturate(100%) invert(48%) sepia(18%) saturate(670%) hue-rotate(108deg) brightness(93%) contrast(90%);
+	--grafica-color-filter: brightness(0) saturate(100%) invert(36%) sepia(32%) saturate(1030%) hue-rotate(330deg) brightness(92%) contrast(93%);
+	--foto-color-filter: brightness(0) saturate(100%) invert(52%) sepia(18%) saturate(690%) hue-rotate(215deg) brightness(94%) contrast(92%);
+}
+
+@media screen and (min-width: 1025px){
+:root {
+  --padding-h: 60px;
+	}
+}
+
+	
+	
+
+/*------------------------ se voglio la tendina piccola con box shadow-----------------*/
+@media screen and (min-width: 1250px){
+	
+nav ul li .sub-menu { 
+	left: auto!important;
+  	width: 400px!important;
+	padding-bottom: var(border-radius)!important; 	
+	box-shadow: 0 0px 6px 0 rgba(30,33,41,.1)!important;
+	top: 70px!important;
+	border-radius: var(--border-radius)!important;
+	/*padding-top: 10px!important; */
+}
+	
+nav ul li li .sub-menu { 
+	left: auto!important;
+  	width: auto!important;
+	padding-bottom: none!important; 	
+	box-shadow: none!important;
+	top: 0!important;
+	border-radius: var(--border-radius)!important;
+	padding-top:0!important; 
+}
+	
+/* colore hover menu*/	
+	
+#menu-visibility .current-menu-item > a {/* questo serve se il colore mobile della tendina è scuro e desktop è chiaro*/	
+	border-bottom: var(--border-style) var(--primary-light-color)!important;
+	background-color: transparent!important;
+}
+
+#menu-visibility .current-menu-parent > a {
+        border-bottom: var(--border-style) var(--primary-light-color)!important;
+		background-color: transparent!important;
+    }
+
+	/* Lev 1 menu*/	
+nav ul li a {
+	border-radius: 0!important;
+	border: var(--border-style) var(--menu-bar-desktop)!important;
+	border-bottom: var(--border-style) var(--menu-bar-desktop);
+}
+	
+nav ul li a:hover {
+	border-bottom: var(--border-style) var(--primary-light-color)!important;
+	background-color: transparent;
+}
+	/* Lev 2 menu*/	
+		
+nav ul li li a {
+	border-radius: 0!important;
+	border: var(--border-style) var(--menu-back-desktop)!important;
+	border-bottom: var(--border-style) var(--menu-bar-desktop);
+}
+	
+nav ul li li a:hover {
+	border-bottom: var(--border-style) var(--primary-light-color)!important;
+	background-color: transparent!important;
+}
+
+}
+
+#menu-visibility .current-menu-item > a {
+	background-color: var(--bonus-color);
+	    margin-bottom: 5px;
+}
+
+#menu-menu-header > li {
+	border-bottom: var(--border-style) var(--bonus-color);
+	margin-bottom: 5px!important;
+}
+
+/*------------------ fine tendina con box shadow ------------------------------------------*/
+
+
+/*------------------ menu in linea su mobile------------------------------------------*/
+
+nav ul ul { 
+	display: flex;
+	flex-wrap: wrap;	
+}
+
+#menu-visibility ul li a{ /* lev 2*/
+	font-size: 16px;
+	border-radius: var(--border-radius);
+}
+
+@media screen and (min-width: 1250px){
+#menu-visibility ul li a { /* lev 2*/
+	background-color:transparent;
+	font-size: 18px!important;
+	height: auto;
+	padding: 8px 10px;
+	margin-bottom: 5px;
+}
+	
+#menu-menu-header > li {
+    border-bottom: none;
+}
+}
+
+/*------------------ fine lev menu in linea------------------------------------------*/

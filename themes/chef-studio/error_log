@@ -1,0 +1,4 @@
+[23-Sep-2026 10:14:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_header() in /home/chefstu1/public_html/wp-content/themes/chef-studio/index.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/chefstu1/public_html/wp-content/themes/chef-studio/index.php on line 2

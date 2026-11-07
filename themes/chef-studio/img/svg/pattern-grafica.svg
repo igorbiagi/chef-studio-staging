@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #616160;
+      }
+    </style>
+  </defs>
+  <title>Tavola disegno 17 copia 4</title>
+  <g id="Livello_12" data-name="Livello 12">
+    <rect class="cls-1" x="89.6092" y="-8.3727" width="2.0181" height="18.7635" transform="translate(89.6092 91.6273) rotate(-90)"/>
+    <rect class="cls-1" x="98.3342" y="1.0091" width="1.6658" height="17.1013"/>
+    <rect class="cls-1" x="8.3727" y="-8.3727" width="2.0181" height="18.7635" transform="translate(8.3727 10.3908) rotate(-90)"/>
+    <rect class="cls-1" y="1.0091" width="1.6658" height="17.1013" transform="translate(1.6658 19.1194) rotate(-180)"/>
+    <rect class="cls-1" x="89.6092" y="89.6092" width="2.0181" height="18.7635" transform="translate(189.6092 8.3727) rotate(90)"/>
+    <rect class="cls-1" x="98.3342" y="81.8896" width="1.6658" height="17.1013"/>
+    <rect class="cls-1" x="8.3727" y="89.6092" width="2.0181" height="18.7635" transform="translate(108.3727 89.6092) rotate(90)"/>
+    <rect class="cls-1" y="81.8896" width="1.6658" height="17.1013" transform="translate(1.6658 180.8806) rotate(180)"/>
+    <g>
+      <g>
+        <rect class="cls-1" x="48.3378" y="51.6658" width="1.6658" height="17.1013"/>
+        <rect class="cls-1" x="50.0036" y="51.6658" width="1.6658" height="17.1013"/>
+      </g>
+      <rect class="cls-1" x="48.3378" y="31.2329" width="1.6658" height="17.1013"/>
+      <rect class="cls-1" x="50.0036" y="31.2329" width="1.6658" height="17.1013"/>
+      <g>
+        <rect class="cls-1" x="38.9529" y="40.6165" width="1.6658" height="17.1013" transform="translate(88.9529 9.3814) rotate(90)"/>
+        <rect class="cls-1" x="38.9529" y="42.2822" width="1.6658" height="17.1013" transform="translate(90.6186 11.0471) rotate(90)"/>
+      </g>
+      <g>
+        <rect class="cls-1" x="49.1671" y="30.3993" width="1.6658" height="37.5341" transform="translate(99.1664 -0.8336) rotate(90)"/>
+        <rect class="cls-1" x="49.1671" y="32.0651" width="1.6658" height="37.5341" transform="translate(100.8322 0.8322) rotate(90)"/>
+      </g>
+    </g>
+  </g>
+</svg>

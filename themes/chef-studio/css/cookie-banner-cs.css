@@ -1,0 +1,137 @@
+/* Regole custom Chef Studio per il banner cookie Complianz. */
+
+/* Nasconde il contenuto della prima colonna (il logo) */
+.cmplz-cookiebanner .cmplz-header .cmplz-logo {
+    display: none !important;
+}
+
+/* Modifica la griglia dell'header rimuovendo la prima colonna */
+.cmplz-cookiebanner .cmplz-header {
+    grid-template-columns: 1fr auto !important;
+}
+
+/* Riposiziona il titolo nella prima colonna e il pulsante di chiusura nella seconda */
+.cmplz-cookiebanner .cmplz-header .cmplz-title {
+    grid-column-start: 1 !important;
+    justify-self: start !important; /* Cambia in 'center' se vuoi che il titolo rimanga centrato */
+}
+
+.cmplz-cookiebanner .cmplz-header .cmplz-close {
+    grid-column-start: 2 !important;
+}
+
+.cmplz-cookiebanner.cmplz-show {
+    box-shadow: var(--box-shadow)!important;
+}
+
+
+.cmplz-cookiebanner .cmplz-buttons .cmplz-btn.cmplz-accept {
+    background-color: var(--primary-color)!important;
+    border: 1px solid var(--primary-color)!important;
+}
+
+.cmplz-cookiebanner .cmplz-links .cmplz-link {
+    color: var(--primary-color)!important;
+}
+
+/* aggiusto il secondo livello */
+.cmplz-cookiebanner .cmplz-categories .cmplz-category .cmplz-category-header {
+    grid-template-columns: 1fr auto 35px!important;
+}
+
+/* Sovrascrive lo sfondo dello switch quando non è attivo */
+.cmplz-cookiebanner .cmplz-categories .cmplz-category .cmplz-banner-checkbox .cmplz-label:before {
+    background-color: var(--primary-color) !important;
+}
+
+/* Sostituisce l'outline blu di focus con il colore primario chiaro */
+.cmplz-cookiebanner .cmplz-categories .cmplz-category .cmplz-banner-checkbox input.cmplz-consent-checkbox:focus + .cmplz-label:before {
+    box-shadow: 0 0 0 2px var(--primary-light-color) !important;
+}
+
+/* fine il secondo livello */
+
+/* Fino a 768px: banner in basso senza angoli arrotondati sotto */
+@media (max-width: 768px) {
+    .cmplz-cookiebanner {
+        bottom: 0 !important;
+        margin-bottom: 0 !important;
+        border-bottom-left-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+    }
+}
+
+/* Sopra i 768px: staccato dal bordo inferiore di 10px */
+@media (min-width: 769px) {
+    .cmplz-cookiebanner {
+        bottom: 10px !important;
+        margin-bottom: 0 !important;
+        /* Ripristina il border-radius uniforme definito nelle variabili CSS */
+        border-radius: var(--cmplz_banner_border_radius) !important;
+    }
+}
+
+
+@media (min-width: 1024px) {
+    /* 1. Allinea il blocco bottoni in alto ed evita che si dilati in altezza */
+    .cmplz-cookiebanner .cmplz-buttons {
+        align-self: start !important;
+        justify-content: flex-start !important;
+        gap: 10px !important; /* Spazio uniforme tra i bottoni */
+    }
+
+    /* 2. Ripristina l'altezza naturale dei singoli bottoni */
+    .cmplz-cookiebanner .cmplz-buttons .cmplz-btn {
+        height: auto !important;
+        min-height: unset !important;
+        flex: initial !important; /* Impedisce al bottone di espandersi per riempire lo spazio */
+        padding: 10px 20px !important; /* Controllo preciso dell'imbottitura */
+    }
+
+/* Centra il blocco dei bottoni verticalmente rispetto all'altezza del banner */
+    .cmplz-cookiebanner .cmplz-buttons {
+        align-self: center !important;
+        justify-content: center !important;
+        gap: 10px !important;
+    }
+
+    /* Mantiene l'altezza naturale dei bottoni (senza farli allungare) */
+    .cmplz-cookiebanner .cmplz-buttons .cmplz-btn {
+        height: auto !important;
+        min-height: unset !important;
+        flex: initial !important;
+        padding: 10px 20px !important;
+    }
+}
+
+
+@media (min-width: 1024px) {
+    .cmplz-cookiebanner .cmplz-buttons .cmplz-btn {
+        min-width: auto!important; 
+        width: 100%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .cmplz-cookiebanner {
+        margin: 10px auto !important; /* Centra anche se il posizionamento fosse static/relative */
+        width: calc(var(--site-width) - (var(--padding-laterale) * 2)) !important;
+        max-width: calc(100% - 20px); /* Previene lo scroll orizzontale su schermi < 1300px */
+        
+        /* Regole per il centraggio orizzontale con position: fixed/absolute */
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        
+        grid-column-gap: 10px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        bottom: 0;
+        top: initial;
+    }
+}
+
+@media (min-width: 350px) {
+    .cmplz-cookiebanner .cmplz-body {
+        margin-top: 20px;
+    }
+}

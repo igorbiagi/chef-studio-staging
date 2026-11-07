@@ -1,0 +1,8 @@
+[04-Nov-2026 22:27:00 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function add_action() in /home/chefstu1/public_html/wp-content/themes/twentytwentyfive/functions.php:24
+Stack trace:
+#0 {main}
+  thrown in /home/chefstu1/public_html/wp-content/themes/twentytwentyfive/functions.php on line 24
+[07-Nov-2026 16:59:18 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function add_action() in /home/chefstu1/public_html/wp-content/themes/twentytwentyfive/functions.php:24
+Stack trace:
+#0 {main}
+  thrown in /home/chefstu1/public_html/wp-content/themes/twentytwentyfive/functions.php on line 24

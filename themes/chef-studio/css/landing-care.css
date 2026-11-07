@@ -1,0 +1,199 @@
+/*
+ * Pagina Chef Studio Care
+ * Si aggiunge a css/landing-bonifica.css, solo sul template pagine/landing-care.php.
+ * Tutte le regole sono sotto .lcare.
+ */
+
+.lcare .lcare-dot {
+	background: #4fc38a;
+	animation: none;
+	box-shadow: 0 0 0 4px rgba(79, 195, 138, .2);
+}
+
+.lcare .lcare-btn-yellow {
+	background: var(--lbh-yellow);
+	color: var(--lbh-ink);
+	box-shadow: 0 9px 24px rgba(0, 0, 0, .18);
+}
+
+.lcare .lcare-btn-yellow:hover {
+	background: #f7a91a;
+	color: var(--lbh-ink);
+}
+
+/* Card "cosa facciamo": icone verdi invece che rosse */
+.lcare .lcare-features .lbh-signal-ico {
+	background: rgba(63, 125, 98, .12);
+	color: var(--lbh-ok);
+}
+
+/* Piani */
+.lcare .lcare-plans {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 20px;
+	align-items: stretch;
+	margin-top: 40px;
+}
+
+.lcare .lcare-plan {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	padding: 30px 28px 28px;
+	border-radius: var(--lbh-radius);
+	border: 1px solid var(--lbh-line);
+	background: #fff;
+}
+
+.lcare .lcare-plan-hl {
+	border: 2px solid var(--lbh-ink);
+	box-shadow: 0 30px 60px -30px rgba(39, 13, 23, .45);
+	transform: translateY(-8px);
+}
+
+.lcare .lcare-plan-tag {
+	position: absolute;
+	top: -13px;
+	left: 28px;
+	padding: 5px 12px;
+	border-radius: 999px;
+	background: var(--lbh-yellow);
+	color: var(--lbh-ink);
+	font-size: 12px;
+	font-weight: 800;
+	letter-spacing: .04em;
+	text-transform: uppercase;
+}
+
+.lcare .lcare-plan h3 {
+	font-size: 24px;
+	line-height: 1.15;
+	font-weight: 700;
+	color: var(--lbh-ink);
+}
+
+.lcare .lcare-plan-who {
+	margin-top: 6px;
+	min-height: 2.7em;
+	color: var(--lbh-muted);
+	font-size: 15px;
+	line-height: 1.35;
+}
+
+.lcare .lcare-plan-price {
+	display: flex;
+	align-items: baseline;
+	gap: 8px;
+	margin-top: 18px;
+	color: var(--lbh-ink);
+}
+
+.lcare .lcare-plan-price strong {
+	font-size: 56px;
+	line-height: 1;
+	font-weight: 700;
+	letter-spacing: -.02em;
+}
+
+.lcare .lcare-plan-price span {
+	color: var(--lbh-muted);
+	font-size: 16px;
+}
+
+.lcare .lcare-plan-eq {
+	margin-top: 8px;
+	font-size: 15px;
+	font-weight: 700;
+	color: var(--lbh-ink);
+}
+
+.lcare .lcare-plan-save {
+	align-self: flex-start;
+	margin-top: 8px;
+	padding: 3px 10px;
+	border-radius: 999px;
+	background: rgba(63, 125, 98, .14);
+	color: var(--lbh-ok);
+	font-size: 13px;
+	font-weight: 700;
+}
+
+.lcare .lcare-plan-rate {
+	margin-top: 8px;
+	font-size: 14px;
+	color: var(--lbh-muted);
+}
+
+.lcare .lcare-plan-hours {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-top: 18px;
+	padding: 10px 12px;
+	border-radius: 10px;
+	background: var(--lbh-sand);
+	font-size: 15px;
+	font-weight: 700;
+	color: var(--lbh-ink);
+}
+
+.lcare .lcare-plan-hours .lbh-ico {
+	width: 20px;
+	height: 20px;
+	flex: 0 0 auto;
+}
+
+.lcare .lcare-plan-list {
+	flex: 1 1 auto;
+	margin-top: 18px;
+	gap: 10px;
+}
+
+.lcare .lcare-plan-list li {
+	font-size: 15px;
+	line-height: 1.35;
+}
+
+.lcare .lcare-plan-list .lcare-plan-sub {
+	font-weight: 700;
+	color: var(--lbh-ink);
+}
+
+.lcare .lcare-plan-btn {
+	width: 100%;
+	margin-top: 24px;
+}
+
+/* Box bonifica in evidenza come avviso */
+.lcare .lcare-alert {
+	margin-top: 0;
+	background: rgba(194, 56, 47, .06);
+	border: 1px solid rgba(194, 56, 47, .3);
+}
+
+.lcare .lcare-alert .lbh-care-kicker {
+	color: var(--lbh-red);
+}
+
+.lcare .lcare-faq-section {
+	padding-top: 0;
+}
+
+@media (max-width: 980px) {
+	.lcare .lcare-plans {
+		grid-template-columns: 1fr;
+		max-width: 520px;
+		margin-left: auto;
+		margin-right: auto;
+		gap: 28px;
+	}
+
+	.lcare .lcare-plan-hl {
+		transform: none;
+	}
+
+	.lcare .lcare-plan-who {
+		min-height: 0;
+	}
+}

@@ -1,0 +1,1243 @@
+@charset "utf-8";
+/* -----------------Menu nella versione mobile-----------------*/
+
+:root{
+	--chef-mobile-bar-height: 50px;
+	--chef-mobile-menu-icon-stroke: 3px;
+}
+
+#menu-visibility{
+	overflow:auto;/* permette lo scroll quando il menu è aperto*/
+	background-color:var(--menu-back-mobile);/*sfondo menu mobile*/
+	position:fixed;
+	width: 100%;
+	height: calc(100% - var(--chef-mobile-bar-height)); /* fallback storico: il drawer moderno usa 100dvh nel media query mobile */
+	visibility:hidden;
+	margin-top: var(--chef-mobile-bar-height);
+	padding-bottom: 20px;/*spazio sotto al menu*/;
+	padding-top: 10px;/*lo stacco un pochino*/
+}
+
+#menu-visibility ul li{
+	margin-bottom:0;/*reset*/
+}
+
+#menu-visibility ul li a{
+	color: var(--txt-menu-tendina-mobile);
+	font-size: 18px;
+	display: inline-block;
+	font-weight: normal;
+	border-radius: var(--border-radius);
+	padding: 10px;
+	margin:0 5px;
+	text-align:left;
+	text-decoration: none;
+}
+
+#menu-visibility ul li a:hover, #menu-visibility ul li a:focus{
+	color: var(--txt-menu-tendina-mobile);
+}
+
+#menu-visibility ul ul{
+	padding-top:0;
+	padding-bottom: 0;
+}
+
+#menu-visibility ul ul li a{/* lev 2*/
+	margin-left: 10px;
+	margin-bottom: 5px;
+}
+
+#menu-visibility ul ul ul  { /* lev 3*/
+	padding-left: 10px;
+}
+
+/* #menu-visibility ul ul ul ul { lev 4
+	display: flex;
+	flex-wrap: wrap;	
+}*/
+
+#menu-visibility ul ul ul li a{/* lev 3*/
+	font-size: 16px;
+	margin-bottom:5px;
+	margin-left: 20px;
+}
+
+#menu-visibility ul ul ul ul a { /* lev 4*/
+	margin-left: 35px;
+}
+
+#menu-visibility ul ul ul ul li a{ /* lev 4*/
+	font-size: 15px;
+}
+
+#menu-visibility ul ul li:first-child {
+	border-top: none;
+}
+
+#menu-visibility ul li a:before {
+ 	content: url("../img/svg/arrow-right.svg");
+	display: inline-block;
+	padding-right: 4px;
+	filter:var(--menu-arrow-filter);
+	width: 16px;
+}
+
+#menu-visibility input{/*nascondere l'input*/
+	display:none}
+
+/* ----------------- div bar per l'attivazione del menu ------------------ */
+
+#bar{
+	background-color:var(--menu-bar-mobile); 
+	height: var(--chef-mobile-bar-height);
+	width:100%;
+	z-index:1006;
+	position:fixed;
+	box-shadow: 1px 3px 4px 0px rgb(0 0 0 / 10%);
+	top:0;
+}
+
+#bar #logo, #bar #logo span {
+	height: var(--chef-mobile-bar-height);
+	width: 130px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin:auto;
+	font-size: 20px;
+}
+
+#bar #logo .margin-bot-15px{
+	margin-bottom: 0;
+	line-height: 0;
+}
+
+#bar img{
+	width: 100%;
+}
+
+/* ----------------- Hamburger animation ------------------ */
+
+#hamburger {
+  	display: none;
+}
+
+.menuicon {
+ 	position:fixed;
+	height: var(--chef-mobile-bar-height);
+	width:44px;
+	margin-left:5px;
+	z-index:2003;
+	top: 0;
+	transition: left 0.2s ease;
+}
+
+.menuicon  span {
+    display: block;
+    top: calc((var(--chef-mobile-bar-height) / 2) - (var(--chef-mobile-menu-icon-stroke) / 2));
+    width: 30px;
+    height: var(--chef-mobile-menu-icon-stroke);
+    left:8px;
+    background-color: var(--txt-color);
+    position: relative;
+	border-radius: var(--border-radius);
+    transition-duration: 0;  
+    transition-delay: .1s;
+}
+    
+.menuicon  span::after, .menuicon  span::before {
+    display: block;
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: var(--chef-mobile-menu-icon-stroke);
+    background-color: var(--txt-color);
+	border-radius:var(--border-radius);
+    transition-duration: .1s;
+	-webkit-transition-delay: .1s, 0;
+    transition-delay: .1s, 0;
+}
+
+.menuicon  span::before {
+      margin-top: -8px;
+}
+.menuicon  span::after {
+      margin-top: 8px;
+}
+
+#hamburger:checked ~ .menuicon span{
+    background-color: rgba(0,0,0,0);
+}
+    
+#hamburger:checked ~ .menuicon span::before {
+      margin-top: 0px;
+      -webkit-transition-delay: 0, .3s;
+      -moz-transition-delay: 0, .3s;
+      -ms-transition-delay: 0,.3s;
+      -o-transition-delay: 0, .3s;
+      transition-delay: 0, .3s;
+}
+	
+#hamburger:checked ~ .menuicon span::after {
+      margin-top: 0px;
+      -webkit-transition-delay: 0, .3s;
+      -moz-transition-delay: 0, .3s;
+      -ms-transition-delay: 0,.3s;
+      -o-transition-delay: 0, .3s;
+      transition-delay: 0, .3s;
+}
+
+#hamburger:checked ~ .menuicon span::before {
+      -webkit-transform: rotate(45deg);
+      -moz-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      -o-transform: rotate(45deg);
+      transform: rotate(45deg);
+}
+
+#hamburger:checked ~ .menuicon span::after {
+      -webkit-transform: rotate(-45deg);
+      -moz-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      -o-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+}
+
+/* ----------------- menu animation faccio apparire il menu --------------------------------------------- */
+
+#hamburger:checked ~ #menu-visibility {
+  visibility: visible;
+  z-index: 1005;
+}
+
+.super-wrapper {
+	/* ----position: relative;per evitare lo scroll di un div fixed sopra il contenitore---- */
+	margin-top: var(--chef-mobile-bar-height);
+}
+
+body.menu-open {/* ----evito lo scroll sotto con uno piccolo sript---- */
+	overflow: hidden;
+	height: 100vh;
+}
+
+/*#hamburger:checked ~ .super-wrapper {
+	position: fixed;
+	width: 100%;
+	overflow: hidden;
+}*/
+
+.chef-mobile-menu-header,
+.chef-mobile-menu-backdrop,
+.chef-mobile-menu-contact,
+.chef-mobile-menu-contact-item,
+.chef-mobile-submenu-toggle,
+.chef-mobile-menu-heading-back,
+.chef-mobile-submenu-all{
+	display: none;
+}
+
+@media screen and (max-width: 1249px){
+	body{
+		--chef-mobile-menu-panel-width: min(82vw, 430px, calc(100vw - 54px));
+	}
+
+	#menu-visibility{
+		top: 0;
+		left: 0;
+		display: flex;
+		flex-direction: column;
+		width: var(--chef-mobile-menu-panel-width);
+		height: 100dvh;
+		margin-top: 0;
+		padding: 0;
+		overflow: hidden;
+		visibility: visible;
+		z-index: 2002;
+		background-color: #ffffff;
+		box-shadow: 18px 0 48px rgba(39, 13, 23, 0.22);
+		transform: translateX(-103%);
+		transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+		pointer-events: none;
+	}
+
+	#hamburger:checked ~ #menu-visibility{
+		transform: translateX(0);
+		z-index: 3002;
+		visibility: visible;
+		pointer-events: auto;
+	}
+
+	.chef-mobile-menu-backdrop{
+		position: fixed;
+		inset: 0;
+		display: block;
+		z-index: 3001;
+		background-color: rgba(39, 13, 23, 0.54);
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+		transition: opacity 0.2s ease, visibility 0.2s ease;
+	}
+
+	#hamburger:checked ~ .chef-mobile-menu-backdrop{
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+	}
+
+	#hamburger:checked ~ .menuicon{
+		top: 15px;
+		left: 18px;
+		margin-left: 0;
+		z-index: 3004;
+		animation: chef-mobile-menu-close-slide-in 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+	}
+
+	body.chef-mobile-menu-submenu-open #hamburger:checked ~ .menuicon{
+		left: calc(var(--chef-mobile-menu-panel-width) - 62px);
+	}
+
+	#hamburger:checked ~ .menuicon span{
+		background-color: rgba(0,0,0,0);
+	}
+
+	#hamburger:checked ~ .menuicon span::before,
+	#hamburger:checked ~ .menuicon span::after{
+		background-color: var(--txt-color);
+	}
+
+	@keyframes chef-mobile-menu-close-slide-in{
+		from{
+			transform: translateX(calc(-1 * var(--chef-mobile-menu-panel-width)));
+		}
+
+		to{
+			transform: translateX(0);
+		}
+	}
+
+	.chef-mobile-menu-header{
+		position: relative;
+		display: grid;
+		grid-template-columns: 58px minmax(0, 1fr);
+		align-items: center;
+		min-height: 76px;
+		padding: 0 75px 0 15px;
+		border-bottom: 1px solid rgba(39, 13, 23, 0.16);
+		color: var(--txt-color);
+		font-size: clamp(1.25rem, 5.2vw, 1.65rem);
+		line-height: 1;
+		font-weight: 760;
+		letter-spacing: 0;
+	}
+
+	.chef-mobile-menu-heading-label{
+		grid-column: 2;
+	}
+
+	.chef-mobile-menu-heading-back{
+		position: absolute;
+		top: 0;
+		left: 18px;
+		display: none;
+		align-items: center;
+		justify-content: center;
+		width: 44px;
+		min-height: 76px;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		background-color: transparent;
+		color: var(--txt-color);
+		cursor: pointer;
+		-webkit-appearance: none;
+		appearance: none;
+		overflow: visible;
+	}
+
+	.chef-mobile-menu-heading-back::before{
+		content: "";
+		display: block;
+		position: absolute;
+		top: 50%;
+		left: 14px;
+		width: 18px;
+		height: 18px;
+		border-top: var(--chef-mobile-menu-icon-stroke) solid currentColor;
+		border-left: var(--chef-mobile-menu-icon-stroke) solid currentColor;
+		border-radius: 2px 0 0 0;
+		background-color: transparent;
+		transform: translateY(-50%) rotate(-45deg);
+	}
+
+	.chef-mobile-menu-heading-back::after{
+		content: none;
+	}
+
+	#menu-visibility.chef-mobile-menu-is-submenu .chef-mobile-menu-heading-back{
+		display: flex;
+	}
+
+	#menu-visibility > a{
+		display: none;
+	}
+
+	#menu-visibility .menu-header{
+		position: relative;
+		flex: 1 1 auto;
+		min-height: 0;
+		margin: 0;
+		overflow: hidden;
+		text-align: left;
+	}
+
+	#menu-visibility .menu-header ul{
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		display: block;
+		width: 100%;
+		height: 100%;
+		margin: 0!important;
+		padding: 0 0 22px 0;
+		overflow-x: hidden;
+		overflow-y: auto;
+		list-style: none;
+		background-color: #ffffff;
+		transform: translateX(100%);
+		transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease, visibility 0.2s ease;
+		visibility: hidden;
+		opacity: 0;
+		pointer-events: none;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	#menu-visibility .menu-header > ul,
+	#menu-visibility .menu-header ul.chef-mobile-panel-active{
+		transform: translateX(0);
+		z-index: 3;
+		visibility: visible;
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	#menu-visibility .menu-header ul.chef-mobile-panel-parent{
+		transform: translateX(0);
+		z-index: 1;
+		visibility: visible;
+		opacity: 1;
+		pointer-events: none;
+	}
+
+	#menu-visibility .menu-header li{
+		position: static;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 58px;
+		align-items: stretch;
+		min-height: 66px;
+		margin: 0!important;
+		border-bottom: 1px solid rgba(39, 13, 23, 0.14);
+		background-color: #ffffff;
+	}
+
+	#menu-visibility .menu-header li:not(.has-children):not(.menu-item-has-children) > a,
+	#menu-visibility .menu-header li.chef-mobile-submenu-all > a{
+		grid-column: 1 / -1;
+	}
+
+	#menu-visibility .menu-header a{
+		display: flex;
+		align-items: center;
+		min-width: 0;
+		width: 100%;
+		min-height: 66px;
+		margin: 0;
+		padding: 16px 20px;
+		border: 0;
+		border-radius: 0;
+		color: var(--txt-color);
+		font-size: clamp(1.25rem, 5vw, 1.7rem);
+		line-height: 1.12;
+		font-weight: 750;
+		text-decoration: none;
+		background-color: transparent;
+	}
+
+	#menu-visibility .menu-header a::before,
+	#menu-visibility .menu li.has-children > a::after,
+	#menu-visibility .menu li.menu-item-has-children > a::after{
+		content: none;
+		display: none;
+	}
+
+	#menu-visibility .menu-header li:hover,
+	#menu-visibility .menu-header li:focus-within{
+		background-color: rgba(242, 236, 231, 0.7);
+	}
+
+	#menu-visibility .menu-header a:hover,
+	#menu-visibility .menu-header a:focus{
+		color: var(--txt-color);
+		background-color: transparent;
+	}
+
+	#menu-visibility .menu-header li:hover > .chef-mobile-submenu-toggle,
+	#menu-visibility .menu-header li:focus-within > .chef-mobile-submenu-toggle{
+		background-color: transparent!important;
+	}
+
+	#menu-visibility .menu-header li.current-menu-item,
+	#menu-visibility .menu-header li.current-menu-parent,
+	#menu-visibility .menu-header li.current_page_item,
+	#menu-visibility .menu-header li.current_page_parent{
+		background-color: var(--bonus-color)!important;
+	}
+
+	#menu-visibility .menu-header li.current-menu-item > a,
+	#menu-visibility .menu-header li.current-menu-parent > a,
+	#menu-visibility .menu-header li.current_page_item > a,
+	#menu-visibility .menu-header li.current_page_parent > a{
+		margin: 0!important;
+		border: 0!important;
+		border-radius: 0!important;
+		background-color: transparent!important;
+	}
+
+	#menu-visibility .menu-header li.current-menu-item > .chef-mobile-submenu-toggle,
+	#menu-visibility .menu-header li.current-menu-parent > .chef-mobile-submenu-toggle,
+	#menu-visibility .menu-header li.current_page_item > .chef-mobile-submenu-toggle,
+	#menu-visibility .menu-header li.current_page_parent > .chef-mobile-submenu-toggle{
+		border-radius: 0!important;
+		background-color: transparent!important;
+	}
+
+	#menu-visibility .menu-header > ul > li.chef-mobile-contact-menu-item{
+		display: block;
+		min-height: 0;
+		padding: 16px 20px;
+		border-bottom: 0;
+		background-color: #ffffff;
+	}
+
+	#menu-visibility .menu-header > ul > li.chef-mobile-contact-menu-item > a{
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 14px;
+		min-height: 52px;
+		padding: 0 54px 0 24px;
+		border-radius: 100px;
+		background-color: var(--super-color);
+		box-shadow: 0 8px 22px rgba(39, 13, 23, 0.12);
+		color: var(--txt-color);
+		font-size: 1.05rem;
+		font-weight: 820;
+		line-height: 1.1;
+	}
+
+	#menu-visibility .menu-header > ul > li.chef-mobile-contact-menu-item > a:hover,
+	#menu-visibility .menu-header > ul > li.chef-mobile-contact-menu-item > a:focus{
+		background-color: var(--super-light-color);
+		box-shadow: 0 10px 26px rgba(39, 13, 23, 0.16);
+		transform: translateY(-1px);
+	}
+
+	#menu-visibility .menu-header > ul > li.chef-mobile-contact-menu-item > a::after{
+		content: "";
+		position: absolute;
+		right: 24px;
+		top: 50%;
+		display: block;
+		width: 24px;
+		height: var(--chef-mobile-menu-icon-stroke);
+		background-color: currentColor;
+		transform: translateY(-50%);
+	}
+
+	#menu-visibility .menu-header > ul > li.chef-mobile-contact-menu-item > a::before{
+		content: "";
+		position: absolute;
+		right: 24px;
+		top: 50%;
+		display: block;
+		width: 9px;
+		height: 9px;
+		border-top: var(--chef-mobile-menu-icon-stroke) solid currentColor;
+		border-right: var(--chef-mobile-menu-icon-stroke) solid currentColor;
+		filter: none;
+		transform: translateY(-50%) rotate(45deg);
+	}
+
+	.chef-mobile-submenu-toggle{
+		display: flex;
+		align-items: center;
+		min-height: 66px;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		border-radius: 0!important;
+		background-color: transparent;
+		color: var(--txt-color);
+		cursor: pointer;
+		-webkit-appearance: none;
+		appearance: none;
+	}
+
+	.chef-mobile-submenu-toggle:hover,
+	.chef-mobile-submenu-toggle:focus{
+		border-radius: 0!important;
+		background-color: transparent!important;
+	}
+
+	.chef-mobile-submenu-toggle{
+		justify-content: center;
+		width: 58px;
+	}
+
+	.chef-mobile-submenu-toggle::before{
+		content: "";
+		display: block;
+		width: 13px;
+		height: 13px;
+		border-top: var(--chef-mobile-menu-icon-stroke) solid currentColor;
+		border-right: var(--chef-mobile-menu-icon-stroke) solid currentColor;
+	}
+
+	.chef-mobile-submenu-toggle::before{
+		transform: rotate(45deg);
+	}
+
+	#menu-visibility .chef-mobile-submenu-all{
+		display: grid;
+	}
+
+	#menu-visibility .chef-mobile-submenu-all a{
+		padding-left: 20px;
+		font-weight: 820;
+	}
+
+	#menu-visibility .menu-header .sub-menu{
+		margin-top: 0;
+		padding-left: 0;
+	}
+
+	#menu-visibility .menu-header .sub-menu li a{
+		margin-left: 0;
+		padding-left: 44px;
+		font-size: clamp(1.1rem, 4.8vw, 1.45rem);
+	}
+
+	#menu-visibility .menu-header .sub-menu > li.chef-mobile-submenu-all > a{
+		padding-left: 20px;
+		font-size: clamp(1.25rem, 5vw, 1.7rem);
+		font-weight: 820;
+	}
+
+	#menu-visibility .menu-header .sub-menu .sub-menu li a{
+		margin-left: 0;
+		padding-left: 58px;
+		font-size: clamp(1rem, 4.4vw, 1.32rem);
+	}
+
+	#menu-visibility .menu-header .icona-account-chef::before,
+	#menu-visibility .menu-header .icona-carrello-chef::before{
+		margin-right: 10px;
+	}
+
+	#menu-visibility .menu-header .cart-contents-count{
+		margin-left: 5px;
+	}
+
+	#menu-visibility .menu-header > ul > li.chef-mobile-menu-contact-item{
+		display: block;
+		min-height: 0;
+		margin: 0;
+		padding: 0;
+		border-bottom: 0;
+		background-color: #ffffff;
+	}
+
+	#menu-visibility .menu-header > ul > li.chef-mobile-menu-contact-item .chef-mobile-menu-contact{
+		display: block;
+		padding: 18px 20px 24px;
+		border-top: 1px solid rgba(39, 13, 23, 0.14);
+		background-color: #ffffff;
+		color: var(--txt-color);
+	}
+
+	#menu-visibility.chef-mobile-menu-is-submenu .menu-header > ul > li.chef-mobile-menu-contact-item{
+		display: none;
+	}
+
+	#menu-visibility .menu-header .chef-mobile-menu-contact a{
+		width: auto;
+		min-height: 0;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		border-radius: 0;
+		background-color: transparent;
+		box-shadow: none;
+		color: var(--txt-color);
+		font-size: 1rem;
+		line-height: 1.2;
+		font-weight: 760;
+		text-decoration: none;
+	}
+
+	#menu-visibility .menu-header .chef-mobile-menu-contact a:hover,
+	#menu-visibility .menu-header .chef-mobile-menu-contact a:focus{
+		background-color: transparent;
+		color: var(--txt-color);
+		transform: none;
+	}
+
+	#menu-visibility .menu-header .chef-mobile-menu-contact .wrap-wa.chef-mobile-menu-whatsapp{
+		position: static;
+		right: auto;
+		bottom: auto;
+		z-index: auto;
+		display: inline-block;
+		margin: 0 0 16px;
+	}
+
+	#menu-visibility .menu-header .chef-mobile-menu-contact .wrap-wa.chef-mobile-menu-whatsapp a{
+		display: block;
+		width: 50px;
+	}
+
+	#menu-visibility .menu-header .chef-mobile-menu-contact .wrap-wa.chef-mobile-menu-whatsapp .chat-wa{
+		background-color: var(--chef-whatsapp-color, hsl(142, 70%, 49%));
+	}
+
+	#menu-visibility .menu-header .chef-mobile-menu-contact .wrap-wa.chef-mobile-menu-whatsapp:hover .chat-wa,
+	#menu-visibility .menu-header .chef-mobile-menu-contact .wrap-wa.chef-mobile-menu-whatsapp:focus-within .chat-wa{
+		background-color: var(--chef-whatsapp-light-color, hsl(142, 70%, 53%));
+	}
+
+	.chef-mobile-menu-contact-title{
+		margin: 0 0 6px;
+		color: var(--txt-color);
+		font-size: 1.15rem;
+		line-height: 1.12;
+		font-weight: 820;
+	}
+
+	.chef-mobile-menu-contact-text{
+		margin-bottom: 12px;
+		color: var(--txt-color);
+		font-size: 0.98rem;
+		line-height: 1.28;
+	}
+
+	.chef-mobile-menu-contact-text p{
+		margin: 0;
+	}
+
+	.chef-mobile-menu-contact-actions{
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px 14px;
+		align-items: center;
+	}
+
+	#menu-visibility .menu-header .chef-mobile-menu-contact a.chef-mobile-menu-whatsapp-text{
+		color: var(--chef-whatsapp-color, hsl(142, 70%, 49%));
+	}
+
+	.chef-mobile-menu-hours{
+		margin: 12px 0 0;
+		color: var(--txt-color);
+		font-size: 0.92rem;
+		line-height: 1.25;
+		opacity: 0.78;
+	}
+}
+
+.icona-carrello-chef:before {
+    content: url(../img/svg/cart.svg)!important;
+    display: inline-block;
+	filter: var(--icon-color-filter);
+    vertical-align: middle;
+	width: 25px!important;
+}
+
+@media screen and (min-width: 1250px){
+
+.super-wrapper {
+	position:inherit;
+}
+}
+
+/* -----------------icone------------------ */
+
+.icona-account-chef:before {
+	content: url("../img/svg/account.svg") ;
+	display: inline-block;
+    filter: var(--icon-color-filter);
+    width: 22px;
+	vertical-align: middle;
+	margin-right: 4px;
+}
+
+.cart-container-mobile{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: var(--chef-mobile-bar-height);
+	z-index:1007;
+	top: 0;
+	right: 0;
+	position:fixed;
+	padding: 0 8px;
+}
+
+.cart-container-mobile .cart-contents-count{/* ---in alto a dx su mobile-- */
+	margin-left: -5px;
+} 
+
+.cart-contents-count{
+	margin-left: -10px;
+	color: var(--above-color);
+	background-color: var(--super-color)!important;
+	border-radius: var(--border-radius)!important;
+	padding: 3px!important;
+}
+
+.sub-menu{
+	padding-left: 10px;
+	margin-top:5px;
+}
+
+/* avvisi */ 
+.avviso-contenitore{
+	text-align: center;
+}
+
+.avviso-contenitore p {
+	color: var(--sfondo-color);
+	font-size: 14px;
+	margin-bottom: 0;/*reset*/
+	/*padding-top:5px;*/
+	/*padding-bottom: 5px*/
+}
+
+.avviso-principale{
+	background-color: var(--txt-color);
+}
+
+.avviso-secondario{
+	background-color: var(--secondary-color);
+}
+
+.logo-desktop{
+	display: none;
+}
+
+@media screen and (min-width: 1250px){
+	
+html,body{
+	height:auto;/* per fare la barra stycky */
+}
+
+:root{
+	--chef-desktop-menu-height: 80px;
+}
+	
+.super-wrapper {
+	/*position:inherit;*/
+	margin-top: 0;
+}
+	
+#menu-visibility{
+	height: var(--chef-desktop-menu-height);
+	margin-top: 0;/*reset*/
+	padding-bottom:0;/*reset*/;
+	padding-top:0;/*reset*/
+}
+	
+#hamburger:checked ~ .super-wrapper  {
+position:inherit;/* ----resetto--- */
+}
+	
+#bar{
+	display: none;
+	/*position: sticky;
+	top: 0;
+	background-color: blue;*/
+}
+	
+.cart-container-mobile{
+	display: none;
+}
+	
+.parola-account-nel-menu{
+	display: none;
+}
+	
+/*.cart-contents:before {
+    content: "\e01d";
+}*/
+	
+/*#menu-visibility .cart-contents:before {
+    content: "\e01d";
+}*/
+	
+/*.cart-contents::first-letter {
+	margin-right:0;
+}*/
+	
+#menu-visibility .icona-carrello-chef:before{
+    content: url(../img/svg/cart.svg)!important;
+    display: inline-block;
+	filter: var(--icon-color-filter);
+    vertical-align: middle;
+    padding-right: 0;
+	width: 22px!important;
+}
+	
+.icona-account-chef:before {
+	margin-right: 0;
+}
+
+.cart-contents-count{
+	margin-left: -5px;
+}
+
+.menuicon{
+	display:none; /* togliere icona hambuger icon */
+}
+	
+#bar #logo{
+	display: none;
+	float:left;
+	/*margin-left:10px;*/
+}
+
+#menu-visibility{
+	z-index:1008;
+	background-color: var(--menu-bar-desktop);
+	visibility:visible;
+	overflow:visible;
+	position: sticky;/* potrei mettere fixed ma poi dovrei aggiungere il padding al contentore */
+	top: 0;	
+	width:100%;
+	/* box-shadow: 1px 3px 4px 0px rgb(0 0 0 / 10%);*/
+	display: block;
+	transition: top 0.3s;/* menù che compare quando scrolli su*/;
+	height: var(--chef-desktop-menu-height);
+		/*box-shadow: 1px 3px 4px 0px rgb(0 0 0 / 10%);*/
+}
+	
+#menu-visibility{
+	max-width: 100%;
+}
+	
+#menu-visibility ul li a:hover, #menu-visibility ul li a:focus{
+	color: var(--txt-menu-desktop);
+	border: var(--border-style) var(--txt-menu-desktop);
+}
+	
+#menu-visibility ul ul li  a:hover, #menu-visibility ul ul li a:focus{
+	color: var(--txt-menu-tendina-desktop);
+}
+	
+.logo-desktop{
+	max-width: var(--site-width);
+	margin: auto;
+	display: block;
+}
+	
+.logo-desktop img, .logo-desktop span {
+	width: 200px;
+	margin-top: 7px;
+	margin-left: 10px;
+	position: absolute;
+	font-size: 30px;
+}
+	
+.menu-header{
+	max-width: var(--site-width);
+	text-align: right;
+	margin: auto;
+}
+
+#menu-visibility ul li a:before {/*togliere freccette*/
+	display: none;
+}
+	
+#menu-visibility ul ul li a:before {
+	content: url("../img/svg/arrow-right.svg");
+	display: inline-block;
+	width: 16px;
+}
+
+#menu-visibility ul{
+	margin:0;
+	display: inline-block;
+	height: 40px;
+	margin-bottom: 0!important;
+	margin-top: 0;
+}
+	
+#menu-visibility ul ul{
+	height: auto;
+}
+	
+#menu-visibility ul ul{
+	display:block;/*nego questa per far andare al 100 le voci del menu*/
+}
+	
+#menu-visibility ul li {	
+	margin: 0;
+	float:left;
+	position:relative;
+	height: var(--chef-desktop-menu-height);
+}
+	
+	#menu-visibility ul li a {
+		display: block;
+		font-size:18px;
+		background-color: transparent;
+		transition: all 0.3s ease;
+	color: var(--txt-menu-desktop);
+	padding:5px 10px;
+	margin: 0 0 0 5px;
+	border-radius: var(--border-radius); 
+	border: var(--border-style) transparent;
+	/*height: 40px;*/
+	-moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+	    box-sizing: border-box;	
+		margin-top: 22px;/*dovrebbe essere 20 per la tendina ma va bene a 22*/
+	}
+
+	#menu-visibility .menu-header > ul > li.chef-mobile-contact-menu-item > a,
+	#menu-visibility .menu-header > ul > li:last-child:not(.chef-mobile-menu-contact-item) > a {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 18px;
+		min-height: 50px;
+		padding: 13px 24px!important;
+		margin-top: 15px;
+		margin-left: 18px;
+		border-radius: 100px!important;
+		border: 2px solid var(--super-color)!important;
+		outline: none!important;
+		background-color: var(--super-color)!important;
+		color: var(--txt-color)!important;
+		line-height: 1;
+		box-shadow: 0 8px 22px rgba(39, 13, 23, 0.12);
+	}
+
+	#menu-visibility .menu-header > ul > li.chef-mobile-contact-menu-item > a:hover,
+	#menu-visibility .menu-header > ul > li.chef-mobile-contact-menu-item > a:focus,
+	#menu-visibility .menu-header > ul > li:last-child:not(.chef-mobile-menu-contact-item) > a:hover,
+	#menu-visibility .menu-header > ul > li:last-child:not(.chef-mobile-menu-contact-item) > a:focus {
+		border-color: var(--super-light-color)!important;
+		border-radius: 100px!important;
+		outline: none!important;
+		background-color: var(--super-light-color)!important;
+		color: var(--txt-color)!important;
+		box-shadow: 0 10px 26px rgba(39, 13, 23, 0.16);
+		transform: translateY(-1px);
+	}
+
+		#menu-visibility .menu-header > ul > li.chef-mobile-contact-menu-item > a::after,
+		#menu-visibility .menu-header > ul > li:last-child:not(.chef-mobile-menu-contact-item) > a::after {
+			content: "";
+			position: relative;
+			display: inline-block;
+			width: 26px;
+			height: 14px;
+			flex: 0 0 26px;
+			background: linear-gradient(currentColor, currentColor) left 50% / 26px 2px no-repeat;
+			transform: translateX(0);
+			transition: transform 0.15s ease-out;
+		}
+
+		#menu-visibility .menu-header > ul > li.chef-mobile-contact-menu-item > a::before,
+		#menu-visibility .menu-header > ul > li:last-child:not(.chef-mobile-menu-contact-item) > a::before {
+			content: "";
+			position: absolute;
+		right: 25px;
+		top: 50%;
+		display: block;
+		width: 9px;
+			height: 9px;
+			border-top: 2px solid currentColor;
+			border-right: 2px solid currentColor;
+			transform: translate(0, -50%) rotate(45deg);
+			transition: transform 0.15s ease-out;
+			filter: none;
+		}
+
+		#menu-visibility .menu-header > ul > li.chef-mobile-contact-menu-item > a:hover::after,
+		#menu-visibility .menu-header > ul > li.chef-mobile-contact-menu-item > a:focus::after,
+		#menu-visibility .menu-header > ul > li:last-child:not(.chef-mobile-menu-contact-item) > a:hover::after,
+		#menu-visibility .menu-header > ul > li:last-child:not(.chef-mobile-menu-contact-item) > a:focus::after {
+			transform: translateX(8px);
+		}
+
+		#menu-visibility .menu-header > ul > li.chef-mobile-contact-menu-item > a:hover::before,
+		#menu-visibility .menu-header > ul > li.chef-mobile-contact-menu-item > a:focus::before,
+		#menu-visibility .menu-header > ul > li:last-child:not(.chef-mobile-menu-contact-item) > a:hover::before,
+		#menu-visibility .menu-header > ul > li:last-child:not(.chef-mobile-menu-contact-item) > a:focus::before {
+			transform: translate(8px, -50%) rotate(45deg);
+		}
+
+	#menu-visibility ul ul li {	
+		height: auto;
+	}
+
+#menu-visibility ul ul li a {
+	margin-top: 0;/*dovrebbe essere 20 per la tendina ma va bene a 22*/
+}
+	
+#menu-visibility ul ul li a {
+	height: auto;
+	padding: 8px 10px;
+}	
+	
+#menu-visibility ul li li a:hover {
+	/*color: var(--txt-menu-desktop);*/
+	border: var(--border-style) var(--menu-back-desktop);
+	background-color: transparent;
+}
+
+/* animazione tendina*/
+#menu-visibility ul li li a {
+	color: var(--txt-menu-tendina-desktop);
+	transition: all 0.3s ease;
+}	
+	
+#menu-visibility ul li li a:hover {
+	background-color: var(--bonus-color);
+}	
+	
+#menu-visibility ul li li a:before {
+	transition: all 0.3s ease;
+}
+
+#menu-visibility ul li li a:hover:before {
+	margin-left: -3px;
+	margin-right: 3px;
+}
+	
+/*#menu-visibility ul:hover ul ul ul li a{ 
+	border: var(--border-style) var(--txt-menu-tendina-desktop);
+}*/
+	
+/* ----------------- dropdown - attivare il menu a tendina con hover ------------------ */
+	
+#menu-visibility ul li .sub-menu { 
+	display: none;
+  	position: fixed;
+	background-color: var(--menu-back-desktop);
+	padding: 10px 10px 5px 0;
+	z-index:1001!important;
+	top: var(--chef-desktop-menu-height); /* contollare sempre*/
+  	left: 0;
+  	width: 100%;
+  	height: auto;
+}
+	
+#menu-visibility .menu-header > ul > li:hover > .sub-menu,
+#menu-visibility .menu-header > ul > li:focus-within > .sub-menu,
+#menu-visibility .menu-header > ul > li.chef-desktop-submenu-open > .sub-menu{
+	display: block;
+}	
+
+#menu-visibility .menu-header > ul > li.has-children::after,
+#menu-visibility .menu-header > ul > li.menu-item-has-children::after{
+	content: "";
+	display: none;
+	position: fixed;
+	top: calc(var(--chef-desktop-menu-height) - 12px);
+	left: 0;
+	width: 100%;
+	height: 18px;
+	z-index: 1000;
+}
+
+#menu-visibility .menu-header > ul > li.has-children:hover::after,
+#menu-visibility .menu-header > ul > li.has-children:focus-within::after,
+#menu-visibility .menu-header > ul > li.has-children.chef-desktop-submenu-open::after,
+#menu-visibility .menu-header > ul > li.menu-item-has-children:hover::after,
+#menu-visibility .menu-header > ul > li.menu-item-has-children:focus-within::after,
+#menu-visibility .menu-header > ul > li.menu-item-has-children.chef-desktop-submenu-open::after{
+	display: block;
+}	
+	
+
+	/*resetto gli ul per liv 2 3 e 4*/
+#menu-visibility ul ul .sub-menu { 
+	display: block;
+  	position:relative;
+	background-color: transparent;
+	/*left: 0;verso della tendina*/
+	border-top: none; 
+	z-index:1001!important;
+	padding: 0;
+	top: 0;
+  	left: 0;
+  	width: auto;
+  	height: auto;
+	box-shadow: none;
+}
+
+/*#menu-visibility ul ul ul .sub-menu{	
+	display: flex!important;
+    flex-wrap: wrap;
+}	
+/*fine reset gli ul per liv 2 3 e 4*/
+	
+.sub-menu{
+	padding-left: 0px;
+	margin-top:0;
+}
+
+#menu-visibility ul ul li {
+	font-size: 14px;
+	font-weight: normal;
+	float:none;
+	/*border-top: 1px solid var(--secondary-light-color);*/
+	margin-top:0;
+	max-width: var(--site-width);
+	margin: auto;
+	background-color: var(--menu-back-desktop);
+}	
+	
+#menu-visibility ul ul ul li {
+	margin: 0;	
+}
+	
+.menu li.has-children > a:after, .menu li.menu-item-has-children > a:after  {
+    content: url("../img/svg/arrow-down.svg");
+    display: inline-block;
+	margin-left: 6px;
+	filter: var(--menu-arrow-filter);
+	width: 12px;
+	transition: all 0.2s ease;
+}
+	
+.menu li:hover.has-children:hover > a:after {
+  will-change: transform;
+  transform: rotate(180deg);
+}
+	
+.menu li li.has-children > a:after {
+	display: none;
+}
+	
+.avviso-contenitore {
+	padding-top: 0px;
+}
+	
+
+}

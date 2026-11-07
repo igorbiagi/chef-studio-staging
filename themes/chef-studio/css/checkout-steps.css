@@ -1,0 +1,113 @@
+.cs-checkout-steps {
+           background-color: #fafafa;
+           padding: 2.3vw 0;
+           text-align: center;
+    }
+
+.cs-checkout-steps ul li {
+        font-size: 24px;
+    }
+        
+      .cs-checkout-steps ul li {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    .cs-checkout-steps ul li span:after {
+        display: none;
+    }
+    .cs-checkout-steps ul li:not(.step-active) {
+        display: none;
+    }
+    .cs-checkout-steps ul li:after {
+        content: none;
+    }
+    
+ 
+
+
+
+@media screen and (min-width: 769px){
+    
+    .step-active a {
+        border-bottom: 2px solid #ffce2b;
+        padding-bottom: 3px;
+    }
+    
+    .step-inactive {
+        color: #a8a8a8!important;
+        font-weight: normal!important;
+    }
+    
+    .step-inactive a {
+        color: #a8a8a8!important;
+        font-weight: normal!important;
+    }
+    
+    .cs-checkout-steps ul li:not(.step-active) {
+        display: inline-block;
+    }
+
+
+.cs-checkout-steps ul li {
+    font-size: 18px;
+}
+
+.cs-checkout-steps ul {
+    color: #2d2a2a;
+}
+.cs-checkout-steps ul li {
+    display: inline-block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    line-height: 1.2;
+}
+.cs-checkout-steps ul li a {
+    display: inline-block;
+    color: inherit;
+    opacity: 0.7;
+}
+.cs-checkout-steps ul li a:focus,
+.cs-checkout-steps ul li a:hover {
+    color: inherit;
+    opacity: 1;
+}
+.cs-checkout-steps ul li > span {
+    opacity: 0.7;
+}
+.cs-checkout-steps ul li span {
+    position: relative;
+    display: block;
+}
+.cs-checkout-steps ul li:after {
+    content: '';
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    border-bottom: 1px solid #999999;
+    min-width: 120px;
+    vertical-align: middle;
+    margin: 0 20px;
+    display: inline-block;
+}
+.cs-checkout-steps ul li:last-child:after {
+    content: none;
+}
+.cs-checkout-steps ul .step-active a,
+.cs-checkout-steps ul .step-active > span {
+    opacity: 1;
+}
+.color-scheme-light .cs-checkout-steps ul {
+    color: #fff;
+}
+
+
+
+.cs-checkout-steps ul  {
+    width: 100%;
+}
+
+
+.cs-checkout-steps ul li {
+        font-size: 18px;
+    } 
+   }
