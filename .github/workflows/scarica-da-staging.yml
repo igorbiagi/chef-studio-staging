@@ -49,7 +49,9 @@ jobs:
           } > scarica.lftp
           lftp -f scarica.lftp
           # Nessun file di configurazione con password nel repository
-          find . -path ./.git -prune -o \( -name 'wp-config.php' -o -name '.htpasswd' -o -name '*.sql' -o -name '*.sql.gz' \) -print -delete
+          find themes plugins mu-plugins -type f \( -name 'wp-config.php' -o -name '.htpasswd' -o -name '*.sql' -o -name '*.sql.gz' \) -print -delete 2>/dev/null || true
+          # GitHub rifiuta i file oltre 100 MB
+          find themes plugins mu-plugins -type f -size +90M -print -delete 2>/dev/null || true
 
       - name: Salva nel repository
         run: |
