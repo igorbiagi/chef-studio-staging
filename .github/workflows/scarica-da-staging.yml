@@ -1,0 +1,61 @@
+# Scarica themes, plugins e mu-plugins dallo staging via FTPS e li salva nel repository.
+# Solo lettura sul server: non carica e non cancella nulla sull'hosting.
+# Avvio manuale: Actions > "Scarica wp-content dallo staging" > Run workflow.
+name: Scarica wp-content dallo staging
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scarica-staging
+  cancel-in-progress: false
+
+jobs:
+  scarica:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Installa lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp > /dev/null
+
+      - name: Scarica le cartelle dallo staging
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          LFTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          WP_CONTENT_DIR: ${{ secrets.STAGING_WP_CONTENT_DIR }}
+        run: |
+          set -euo pipefail
+          if [ -z "$FTP_SERVER" ] || [ -z "$FTP_USERNAME" ] || [ -z "$LFTP_PASSWORD" ] || [ -z "$WP_CONTENT_DIR" ]; then
+            echo "Mancano uno o piu' secret: FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, STAGING_WP_CONTENT_DIR"; exit 1
+          fi
+          {
+            echo "set ftp:ssl-force true"
+            echo "set ftp:ssl-protect-data true"
+            echo "set ftp:passive-mode true"
+            echo "set net:max-retries 3"
+            echo "set net:timeout 30"
+            echo "open --env-password -u \"$FTP_USERNAME\" \"$FTP_SERVER\""
+            echo "cd \"$WP_CONTENT_DIR\""
+            for d in themes plugins mu-plugins; do
+              echo "mirror --parallel=4 --delete --exclude-glob .git/ --exclude-glob node_modules/ --exclude-glob '*.log' $d ./$d || echo 'cartella $d assente'"
+            done
+            echo "bye"
+          } > scarica.lftp
+          lftp -f scarica.lftp
+          # Nessun file di configurazione con password nel repository
+          find . -path ./.git -prune -o \( -name 'wp-config.php' -o -name '.htpasswd' -o -name '*.sql' -o -name '*.sql.gz' \) -print -delete
+
+      - name: Salva nel repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add -A themes plugins mu-plugins 2>/dev/null || git add -A
+          if git diff --cached --quiet; then echo "Nessuna modifica"; exit 0; fi
+          git commit -q -m "Aggiorna wp-content dallo staging ($(date -u +%Y-%m-%d))"
+          git push
