@@ -1,0 +1,19 @@
+# Solo themes/, plugins/, mu-plugins/ di wp-content
+wp-config.php
+.htaccess
+.htpasswd
+*.sql
+*.sql.gz
+uploads/
+cache/
+upgrade/
+upgrade-temp-backup/
+backups/
+backup*/
+updraft/
+ai1wm-backups/
+wflogs/
+litespeed/
+*.log
+.DS_Store
+node_modules/
