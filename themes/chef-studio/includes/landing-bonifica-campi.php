@@ -242,6 +242,7 @@ add_action('acf/init', function () {
 
     acf_add_local_field_group([
         'key' => 'group_lbh_landing_bonifica',
+        'show_in_rest' => 1,
         'title' => 'Testi landing bonifica',
         'position' => 'acf_after_title',
         'style' => 'default',

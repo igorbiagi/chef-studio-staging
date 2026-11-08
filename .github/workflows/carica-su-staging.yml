@@ -1,0 +1,82 @@
+# Carica sullo staging SOLO i file indicati (tema, mu-plugin o plugin Chef Studio).
+# Prima di sovrascrivere salva la copia attuale del server come artifact "backup-staging".
+# Non cancella nulla sul server. Avvio manuale: Actions > "Carica file sullo staging" > Run workflow.
+name: Carica file sullo staging
+
+on:
+  workflow_dispatch:
+    inputs:
+      file:
+        description: "Percorsi separati da spazio, es. themes/chef-studio/functions.php"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: carica-staging
+  cancel-in-progress: false
+
+jobs:
+  carica:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Installa lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp > /dev/null
+
+      - name: Controlla i percorsi
+        env:
+          FILES: ${{ inputs.file }}
+        run: |
+          set -euo pipefail
+          for f in $FILES; do
+            case "$f" in
+              themes/*|mu-plugins/*|plugins/chef*|plugins/local-pages*) ;;
+              *) echo "Percorso non ammesso: $f"; exit 1 ;;
+            esac
+            case "$f" in *..*) echo "Percorso non ammesso: $f"; exit 1 ;; esac
+            [ -f "$f" ] || { echo "File assente nel repository: $f"; exit 1; }
+          done
+
+      - name: Backup e caricamento
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          LFTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          WP_CONTENT_DIR: ${{ secrets.STAGING_WP_CONTENT_DIR }}
+          FILES: ${{ inputs.file }}
+        run: |
+          set -euo pipefail
+          mkdir -p backup
+          {
+            echo "set ftp:ssl-force true"
+            echo "set ftp:ssl-protect-data true"
+            echo "set ftp:passive-mode true"
+            echo "set net:max-retries 3"
+            echo "set net:timeout 30"
+            echo "open --env-password -u \"$FTP_USERNAME\" \"$FTP_SERVER\""
+            echo "cd \"$WP_CONTENT_DIR\""
+            for f in $FILES; do
+              d=$(dirname "$f")
+              echo "!mkdir -p \"backup/$d\""
+              echo "get -O \"backup/$d\" \"$f\" || echo 'nuovo file: $f'"
+              echo "mkdir -p -f \"$d\""
+              echo "put -O \"$d\" \"$f\""
+            done
+            echo "bye"
+          } > carica.lftp
+          lftp -f carica.lftp
+          rm -f carica.lftp
+          echo "Caricati: $FILES"
+
+      - name: Salva il backup
+        uses: actions/upload-artifact@v4
+        with:
+          name: backup-staging
+          path: backup
+          if-no-files-found: ignore
+          retention-days: 30

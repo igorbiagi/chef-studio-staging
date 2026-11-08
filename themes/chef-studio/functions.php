@@ -2091,8 +2091,9 @@ function chefstudio_schema_pagina_locale_config($post_id) {
             'category'       => 'Consulenza SEO',
             'person'         => 'igor-biagi',
             'price'          => '450',
-            'include_product' => true,
-            'include_rating'  => true,
+            // Niente Product e stelle: Google non ammette recensioni autoreferenziali sui servizi.
+            'include_product' => false,
+            'include_rating'  => false,
             'city_prefixes'  => [
                 'SEO',
                 'Consulente SEO',
