@@ -12431,3 +12431,60 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 		grid-column: 1 / -1!important;
 	}
 }
+
+/* =========================================================
+   Pagine siti (realizzazione-siti-web e figlie)
+   Classi usate solo da queste pagine (campo "classi libere contenitore"):
+   rsw-fasi, rsw-schede, rsw-casi, rsw-recensioni. Non toccano il resto del sito.
+   ========================================================= */
+.rsw-fasi .come-lavoriamo-metodo{
+	grid-template-columns: minmax(260px, 0.4fr) minmax(0, 1fr);
+	align-items: start;
+}
+
+.rsw-fasi .come-lavoriamo-copy h2{
+	font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+	line-height: 1.1;
+}
+
+.rsw-fasi .come-lavoriamo-intro,
+.rsw-fasi .come-lavoriamo-intro p{
+	font-size: 1.05rem;
+	line-height: 1.5;
+}
+
+.rsw-fasi .come-lavoriamo-step-text{
+	grid-column: 1 / -1;
+}
+
+.rsw-fasi .come-lavoriamo-step-text,
+.rsw-fasi .come-lavoriamo-step-text p{
+	font-size: 15px;
+	line-height: 1.45;
+	color: rgba(39, 13, 23, 0.78);
+}
+
+.rsw-schede .titoletto p{
+	margin: 0 0 22px 0;
+}
+
+.rsw-schede .testo-anteprima .titolo{
+	margin-bottom: 6px;
+}
+
+.rsw-recensioni .nome-sezione{
+	margin-bottom: 10px;
+}
+
+@media screen and (max-width: 1024px){
+	.rsw-fasi .come-lavoriamo-metodo{
+		grid-template-columns: 1fr;
+	}
+}
+
+@media screen and (max-width: 700px){
+	.rsw-fasi .come-lavoriamo-step-text,
+	.rsw-fasi .come-lavoriamo-step-text p{
+		font-size: 14px;
+	}
+}
