@@ -12517,3 +12517,21 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 .rsw-schede .contenitore-img{
 	padding-top: 12px;
 }
+
+/* Icone delle schede: niente angoli arrotondati né zoom (tagliavano i bordi delle icone) */
+.rsw-schede .contenitore-img img,
+.rsw-schede a .contenitore-img,
+.rsw-schede .contenitore-img{
+	border-radius: 0!important;
+	overflow: visible!important;
+	aspect-ratio: auto!important;
+}
+
+.rsw-schede a:hover .contenitore-img img{
+	transform: none!important;
+}
+
+/* Bot e automazioni: chip allineate a destra della sezione */
+.rsw-ai .hero-chip-list{
+	justify-content: flex-start;
+}
