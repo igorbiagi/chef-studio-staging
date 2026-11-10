@@ -12531,7 +12531,7 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 	transform: none!important;
 }
 
-/* Bot e automazioni: chip allineate a destra della sezione */
+/* Bot e automazioni: chip allineate a sinistra nella colonna */
 .rsw-ai .hero-chip-list{
 	justify-content: flex-start;
 }
