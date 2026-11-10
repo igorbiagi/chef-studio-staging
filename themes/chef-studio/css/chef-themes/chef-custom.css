@@ -12535,3 +12535,15 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 .rsw-ai .hero-chip-list{
 	justify-content: flex-start;
 }
+
+/* Icone delle schede: un po' più piccole e allineate al margine del testo */
+.rsw-schede .contenitore-img img{
+	width: 32px!important;
+	height: 32px!important;
+}
+
+.rsw-schede .contenitore-img{
+	padding-left: 8px;
+	padding-right: 8px;
+	text-align: left;
+}
