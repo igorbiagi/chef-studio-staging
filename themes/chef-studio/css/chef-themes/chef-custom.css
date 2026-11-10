@@ -12488,3 +12488,32 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 		font-size: 14px;
 	}
 }
+
+/* Icone delle schede: stesso colore per tutto il gruppo e mai tagliate */
+.rsw-schede .contenitore-img img{
+	filter: var(--primary-color-filter);
+	object-fit: contain;
+	height: 40px!important;
+	width: 40px!important;
+}
+
+.rsw-schede .contenitore-img,
+.rsw-schede figure{
+	overflow: visible!important;
+}
+
+/* Casi senza pagina progetto: niente freccia */
+.rsw-casi article > .testo-anteprima .freccia{
+	display: none;
+}
+
+/* Bottoni CTA dentro la pagina */
+.rsw-bottone .btn{
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.rsw-schede .contenitore-img{
+	padding-top: 12px;
+}
