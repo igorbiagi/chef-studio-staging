@@ -13277,10 +13277,6 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 }
 .cta-form-trust-line img{ width:18px!important; height:18px!important; margin:0!important; flex:none; }
 .chef-cta-form-section .local-seo-form-card .gform_footer{ margin-top:6px!important; padding-bottom:0!important; }
-@media (min-width:1100px){
-  .chef-cta-form-section .local-seo-gravity-form .gform_fields{ grid-template-columns:repeat(3, minmax(0, 1fr))!important; }
-  .chef-cta-form-section .local-seo-gravity-form .gform_fields > #field_1_13{ display:none!important; } /* Sito web: da togliere in Gravity Forms */
-}
 
 /* thank-you: hero più bassa */
 .rsw-grazie header.struttura-container{ min-height:min(640px, calc(100svh - 110px)); }
@@ -13292,3 +13288,21 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
   background:url(../../img/svg/whatsapp.svg) center/contain no-repeat; filter:brightness(0);
 }
 .rsw-persone .chi-siamo-home-cta-note{ margin:0!important; }
+
+/* thank-you: conferma standard, senza immagine, centrata */
+.rsw-grazie header.struttura-container{ min-height:0!important; display:block!important; text-align:center; }
+.rsw-grazie header .div-2{ display:none!important; }
+.rsw-grazie header .div-1{ align-items:center!important; max-width:760px; margin:0 auto; padding:70px 0 60px!important; text-align:center; }
+.rsw-grazie header .div-1::before{
+  content:"✓"; order:0; display:grid; place-items:center; width:84px; height:84px; margin:0 auto 22px;
+  border-radius:50%; background:#25d366; color:#fff; font-size:44px; font-weight:700; line-height:1;
+  box-shadow:0 0 0 10px rgba(37,211,102,.18);
+}
+.rsw-grazie .rsw-lead{ margin-left:auto; margin-right:auto; }
+.rsw-grazie header .hero-actions,
+.rsw-grazie header .local-container{ justify-content:center!important; }
+.rsw-grazie .rsw-proof{ justify-content:center!important; text-align:left; }
+@media (max-width:1024px){
+  .rsw-grazie header .div-1{ padding:40px 0 30px!important; }
+  .rsw-grazie .rsw-proof{ text-align:left; }
+}
