@@ -13321,3 +13321,111 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
  .contenitore .testo-largo table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;font-size:14px}
  .contenitore .testo-largo table th,.contenitore .testo-largo table td{min-width:150px}
 }
+
+/* =========================================================
+   rsw6 11/11 sera: hero più basse, pulsanti hero che si invertono in hover,
+   tabelle ridisegnate (colonna evidenziata, tabella stretta),
+   schede informative come elenco a due colonne senza scatola
+========================================================= */
+/* hero: altezza contenuta */
+@media (min-width:1025px){
+  .rsw-hero header.struttura-container{ min-height:min(calc(100svh - 110px), 620px); max-height:660px; }
+  .rsw-hero header .div-1{ padding:28px 0; }
+  .rsw-hero header h1{ font-size:clamp(38px, 3.7vw, 56px); margin:12px 0 16px; }
+  .rsw-hero .rsw-lead{ font-size:18.5px; margin-bottom:22px; }
+  .rsw-proof{ margin-top:20px; padding-top:16px; }
+  .rsw-hero header .div-2{ min-height:440px; }
+  .rsw-hero header figure.hero-img{ height:min(78svh, 640px); }
+  .rsw-hero header .div-2::before{ width:min(60vh, 520px); }
+}
+@media (min-width:1025px) and (max-width:1360px){
+  .rsw-hero header figure.hero-img{ height:min(78svh, 50vw); }
+}
+
+/* pulsanti hero: in hover si invertono (pieno <-> vuoto) */
+.rsw-hero header .hero-actions .btn{ transition:background-color .18s ease, color .18s ease, border-color .18s ease, transform .15s ease-in-out, box-shadow .15s ease-in-out!important; }
+.rsw-hero header .hero-action-link-primary:hover,
+.rsw-hero header .hero-action-link-primary:focus-visible{
+  background-color:transparent!important;
+  color:var(--super-color)!important;
+  border:1.5px solid var(--super-color)!important;
+}
+.rsw-hero header .hero-action-link-primary:hover *,
+.rsw-hero header .hero-action-link-primary:focus-visible *{ color:var(--super-color)!important; }
+.rsw-hero header .hero-action-link-secondary:hover,
+.rsw-hero header .hero-action-link-secondary:focus-visible{
+  background-color:#fff!important;
+  color:var(--txt-color)!important;
+  border-color:#fff!important;
+}
+.rsw-hero header .hero-action-link-secondary:hover span,
+.rsw-hero header .hero-action-link-secondary:focus-visible span{ color:var(--txt-color)!important; }
+
+/* tabelle: linee sottili, intestazione leggera, colonna evidenziata */
+.contenitore .testo-largo table.rsw-tab{ background:transparent; box-shadow:none; border-radius:0; overflow:visible; font-size:15.5px; margin:22px 0 26px; }
+.contenitore .testo-largo table.rsw-tab th{ background:transparent; color:var(--txt-color); font-size:12.5px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:14px 16px 12px; border-bottom:2px solid var(--txt-color); vertical-align:bottom; }
+.contenitore .testo-largo table.rsw-tab td{ padding:14px 16px; border-top:0; border-bottom:1px solid rgba(39,13,23,.12); background:transparent!important; }
+.contenitore .testo-largo table.rsw-tab tbody tr:last-child td{ border-bottom:0; }
+.contenitore .testo-largo table.rsw-tab td:first-child{ font-weight:700; color:var(--txt-color); }
+.contenitore .testo-largo table.rsw-tab tbody th{ text-transform:none; letter-spacing:0; font-size:15.5px; border-bottom:1px solid rgba(39,13,23,.12); vertical-align:top; padding:14px 16px; }
+/* colonna "nostra": ultima colonna su fondo giallo, come una scheda */
+.contenitore .testo-largo table.rsw-tab-evid th:last-child,
+.contenitore .testo-largo table.rsw-tab-evid td:last-child{ background:hsla(39,94%,58%,.16)!important; }
+.contenitore .testo-largo table.rsw-tab-evid thead th:last-child{ background:var(--super-color)!important; color:var(--txt-color); border-radius:14px 14px 0 0; border-bottom-color:var(--super-color); font-size:14px; }
+.contenitore .testo-largo table.rsw-tab-evid tbody tr:last-child td:last-child{ border-radius:0 0 14px 14px; }
+.contenitore .testo-largo table.rsw-tab-evid td:last-child{ font-weight:600; color:var(--txt-color); }
+.contenitore .testo-largo table.rsw-tab th small{ display:block; font-size:11px; font-weight:600; letter-spacing:.5px; opacity:.75; margin-top:2px; }
+/* tabella stretta (Core Web Vitals) */
+.contenitore .testo-largo table.rsw-tab-stretta{ width:auto; max-width:760px; }
+@media (max-width:768px){
+  .contenitore .testo-largo table.rsw-tab{ display:block; overflow-x:auto; font-size:14.5px; }
+  .contenitore .testo-largo table.rsw-tab-stretta{ max-width:none; }
+}
+
+/* schede informative (senza link): elenco a due colonne, icona a lato, divisori */
+.rsw-schede:not(.rsw-tipi):not(.rsw-numerata):not(:has(article > a)) .anteprime-sezione ul{
+  display:grid!important;
+  grid-template-columns:1fr 1fr;
+  gap:0 56px;
+  overflow:visible!important;
+  flex-wrap:wrap;
+}
+.rsw-schede:not(.rsw-tipi):not(.rsw-numerata):not(:has(article > a)) .anteprime-sezione li{
+  width:auto!important; max-width:none!important; min-width:0!important; margin:0!important; padding:0!important;
+  background:none!important; box-shadow:none!important;
+  border-top:1px solid rgba(39,13,23,.14);
+}
+.rsw-schede:not(.rsw-tipi):not(.rsw-numerata):not(:has(article > a)) .anteprime-sezione article{
+  display:grid!important;
+  grid-template-columns:44px 1fr;
+  gap:0 16px;
+  align-items:start;
+  background:none!important; box-shadow:none!important; border:0!important; border-radius:0!important;
+  padding:24px 0 26px!important; height:auto!important; transform:none!important;
+}
+.rsw-schede:not(.rsw-tipi):not(.rsw-numerata):not(:has(article > a)) .contenitore-img{
+  margin:0!important; padding:4px 0 0!important; width:44px!important; height:44px!important;
+  display:flex; align-items:center; justify-content:center;
+  border-radius:50%!important; background:hsla(39,94%,58%,.18);
+}
+.rsw-schede:not(.rsw-tipi):not(.rsw-numerata):not(:has(article > a)) .contenitore-img img{ width:24px!important; height:24px!important; }
+.rsw-schede:not(.rsw-tipi):not(.rsw-numerata):not(:has(article > a)) .testo-anteprima{ padding:0!important; text-align:left!important; display:block!important; }
+.rsw-schede:not(.rsw-tipi):not(.rsw-numerata):not(:has(article > a)) .testo-anteprima .titolo{ font-size:19px; line-height:1.25; margin:0 0 6px!important; width:auto!important; }
+.rsw-schede:not(.rsw-tipi):not(.rsw-numerata):not(:has(article > a)) .testo-anteprima .testo,
+.rsw-schede:not(.rsw-tipi):not(.rsw-numerata):not(:has(article > a)) .testo-anteprima .testo p{ font-size:15.5px; line-height:1.55; margin:0; }
+.rsw-schede:not(.rsw-tipi):not(.rsw-numerata):not(:has(article > a)) .freccia{ display:none!important; }
+@media (max-width:768px){
+  .rsw-schede:not(.rsw-tipi):not(.rsw-numerata):not(:has(article > a)) .anteprime-sezione ul{ grid-template-columns:1fr; }
+  .rsw-schede:not(.rsw-tipi):not(.rsw-numerata):not(:has(article > a)) .anteprime-sezione article{ grid-template-columns:38px 1fr; gap:0 12px; padding:18px 0 20px!important; }
+  .rsw-schede:not(.rsw-tipi):not(.rsw-numerata):not(:has(article > a)) .contenitore-img{ width:38px!important; height:38px!important; }
+  .rsw-schede:not(.rsw-tipi):not(.rsw-numerata):not(:has(article > a)) .testo-anteprima .titolo{ font-size:17.5px; }
+}
+.contenitore .testo-largo table.rsw-tab thead,
+.contenitore .testo-largo table.rsw-tab thead tr,
+.contenitore .testo-largo table.rsw-tab thead th:not(:last-child),
+.contenitore .testo-largo table.rsw-tab-stretta thead th{ background:transparent!important; }
+/* striscia di prove della hero: una sola riga su desktop */
+@media (min-width:1025px){
+  .rsw-hero .rsw-proof{ flex-wrap:nowrap; gap:26px; max-width:640px; }
+  .rsw-hero .rsw-proof > div:nth-child(n+4){ display:none; }
+}
