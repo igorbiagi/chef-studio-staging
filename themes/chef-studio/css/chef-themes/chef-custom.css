@@ -13306,3 +13306,7 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
   .rsw-grazie header .div-1{ padding:40px 0 30px!important; }
   .rsw-grazie .rsw-proof{ text-align:left; }
 }
+.rsw-grazie header h1,
+.rsw-grazie header .rsw-lead,
+.rsw-grazie header .rsw-kicker{ text-align:center!important; }
+@media (max-width:1024px){ .rsw-grazie header .hero-actions .btn{ font-size:16px!important; padding-left:16px!important; padding-right:16px!important; } }
