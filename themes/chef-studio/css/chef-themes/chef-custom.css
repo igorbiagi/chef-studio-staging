@@ -13234,3 +13234,24 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
   .rsw-numerata .testo-anteprima .testo p{ margin:0; font-size:15px; line-height:1.5; }
   .rsw-numerata .freccia{ display:none; }
 }
+
+/* persone: punti senza altezza minima, bottone come gli altri */
+.rsw-persone .chi-siamo-home-punto{ min-height:0!important; }
+.rsw-persone .chi-siamo-home-button{
+  min-width:0!important; min-height:52px!important; padding:14px 22px!important;
+  gap:18px!important; justify-content:space-between!important; align-self:flex-start;
+  box-shadow:0 8px 22px rgba(39,13,23,.12)!important;
+}
+@media (max-width:768px){
+  .rsw-persone .chi-siamo-home .nome-sezione{ margin-bottom:10px!important; }
+  .rsw-persone .chi-siamo-home-title h2{ font-size:30px!important; line-height:1.12; }
+  .rsw-persone .chi-siamo-home-text{ margin-bottom:18px!important; font-size:16px!important; }
+  .rsw-persone .chi-siamo-home-punti{ grid-template-columns:1fr!important; gap:10px!important; margin-bottom:24px!important; }
+  .rsw-persone .chi-siamo-home-punto{ padding:8px 0 0!important; gap:2px!important; }
+  .rsw-persone .chi-siamo-home-persone{ margin-bottom:20px!important; }
+  .rsw-persone .chi-siamo-home-cta{ align-items:center; }
+  .rsw-persone .chi-siamo-home-button{ align-self:center; }
+  /* tipi di sito: schede meno alte */
+  .rsw-tipi .anteprime-sezione ul{ gap:12px!important; }
+  .rsw-tipi .anteprime-sezione article{ padding:16px!important; }
+}
