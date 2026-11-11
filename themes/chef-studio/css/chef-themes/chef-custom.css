@@ -13285,3 +13285,7 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
   .chef-cta-form-section #field_1_3{ grid-column:span 4!important; }
   .chef-cta-form-section #field_1_13{ display:none!important; } /* Sito web: da togliere in Gravity Forms */
 }
+
+/* thank-you: hero più bassa */
+.rsw-grazie header.struttura-container{ min-height:min(640px, calc(100svh - 110px)); }
+@media (max-width:1024px){ .rsw-grazie header.struttura-container{ min-height:0; } }
