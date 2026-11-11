@@ -1425,6 +1425,8 @@ function chefstudio_schema_person($person_slug) {
                 'Google Analytics',
                 'Google Search Console',
                 'SEO per AI',
+                'Automazioni',
+                'Intelligenza artificiale',
             ],
         ],
         'andrea-biagi' => [
@@ -1825,7 +1827,7 @@ function chefstudio_schema_pagine_servizio_standard() {
             'name'        => 'Web Agency',
             'serviceType' => 'Web agency',
             'category'    => 'Web design e marketing digitale',
-            'person'      => 'andrea-biagi',
+            'person'      => ['andrea-biagi', 'igor-biagi'],
             'image'       => get_stylesheet_directory_uri() . '/img/realizzazione-siti-web/chef-studio-consulenza-seo-web-agency-siti.svg',
             'description' => 'Web agency per siti web, identita visiva, SEO, contenuti e strategie digitali su misura.',
         ],
@@ -1833,7 +1835,7 @@ function chefstudio_schema_pagine_servizio_standard() {
             'name'        => 'Realizzazione siti web',
             'serviceType' => 'Realizzazione siti web',
             'category'    => 'Sviluppo siti web',
-            'person'      => 'andrea-biagi',
+            'person'      => ['andrea-biagi', 'igor-biagi'],
             'image'       => get_stylesheet_directory_uri() . '/img/realizzazione-siti-web/chef-studio-consulenza-seo-web-agency-siti.svg',
             'description' => 'Realizzazione siti web su misura, responsive e ottimizzati per comunicare meglio e generare contatti.',
         ],
@@ -1841,7 +1843,7 @@ function chefstudio_schema_pagine_servizio_standard() {
             'name'        => 'Realizzazione siti WordPress',
             'serviceType' => 'Realizzazione siti WordPress',
             'category'    => 'Sviluppo siti web',
-            'person'      => 'andrea-biagi',
+            'person'      => ['andrea-biagi', 'igor-biagi'],
             'image'       => get_stylesheet_directory_uri() . '/img/realizzazione-siti-web/chef-studio-consulenza-seo-web-agency-siti.svg',
             'description' => 'Realizzazione siti WordPress personalizzati, gestibili e progettati per performance, contenuti e SEO.',
         ],
@@ -1849,7 +1851,7 @@ function chefstudio_schema_pagine_servizio_standard() {
             'name'        => 'Realizzazione E-Commerce',
             'serviceType' => 'Realizzazione e-commerce',
             'category'    => 'Sviluppo e-commerce',
-            'person'      => 'andrea-biagi',
+            'person'      => ['andrea-biagi', 'igor-biagi'],
             'image'       => home_url('/wp-content/uploads/2025/11/realizzazione-e-commerce.png'),
             'description' => 'Realizzazione ecommerce veloci e sicuri per aumentare le vendite. Soluzioni personalizzate per brand che vogliono crescere online.',
         ],
@@ -1857,7 +1859,7 @@ function chefstudio_schema_pagine_servizio_standard() {
             'name'        => 'Realizzazione E-Commerce',
             'serviceType' => 'Realizzazione e-commerce',
             'category'    => 'Sviluppo e-commerce',
-            'person'      => 'andrea-biagi',
+            'person'      => ['andrea-biagi', 'igor-biagi'],
             'image'       => home_url('/wp-content/uploads/2025/11/realizzazione-e-commerce.png'),
             'description' => 'Realizzazione ecommerce veloci e sicuri per aumentare le vendite. Soluzioni personalizzate per brand che vogliono crescere online.',
         ],
@@ -1865,7 +1867,7 @@ function chefstudio_schema_pagine_servizio_standard() {
             'name'        => 'Realizzazione siti web aziendali',
             'serviceType' => 'Realizzazione siti web aziendali',
             'category'    => 'Sviluppo siti web',
-            'person'      => 'andrea-biagi',
+            'person'      => ['andrea-biagi', 'igor-biagi'],
             'image'       => get_stylesheet_directory_uri() . '/img/realizzazione-siti-web/chef-studio-consulenza-seo-web-agency-siti.svg',
             'description' => 'Realizzazione siti web aziendali pensati per presentare servizi, posizionare il brand e generare richieste qualificate.',
         ],
@@ -1873,7 +1875,7 @@ function chefstudio_schema_pagine_servizio_standard() {
             'name'        => 'Realizzazione siti web professionali',
             'serviceType' => 'Realizzazione siti web professionali',
             'category'    => 'Sviluppo siti web',
-            'person'      => 'andrea-biagi',
+            'person'      => ['andrea-biagi', 'igor-biagi'],
             'image'       => get_stylesheet_directory_uri() . '/img/realizzazione-siti-web/chef-studio-consulenza-seo-web-agency-siti.svg',
             'description' => 'Realizzazione siti web professionali per freelance, studi e aziende che vogliono comunicare con chiarezza e autorevolezza.',
         ],
@@ -1962,7 +1964,8 @@ function chefstudio_schema_pagine_servizio_standard() {
     $offer_id = trailingslashit($url) . '#offer';
     $organization_id = chefstudio_schema_organization_id();
     $brand_id = chefstudio_schema_brand_id();
-    $person_id = chefstudio_schema_person_id($config['person']);
+    // Una o più persone (pagine siti: Andrea e Igor, come nel blocco "chi siamo")
+    $person_slugs = array_values(array_filter((array) $config['person']));
 
     $description = '';
 
@@ -1998,9 +2001,6 @@ function chefstudio_schema_pagine_servizio_standard() {
             [
                 '@id' => $organization_id,
             ],
-            [
-                '@id' => $person_id,
-            ],
         ],
         'offers'           => [
             '@id' => $offer_id,
@@ -2011,6 +2011,10 @@ function chefstudio_schema_pagine_servizio_standard() {
             'name'  => 'Italia',
         ],
     ];
+
+    foreach ($person_slugs as $person_slug) {
+        $service['provider'][] = ['@id' => chefstudio_schema_person_id($person_slug)];
+    }
 
     if (!empty($config['parentServiceId'])) {
         $service['isRelatedTo'] = [
@@ -2038,9 +2042,15 @@ function chefstudio_schema_pagine_servizio_standard() {
             chefstudio_schema_brand(),
             $service,
             $offer,
-            chefstudio_schema_person($config['person']),
         ],
     ];
+
+    foreach ($person_slugs as $person_slug) {
+        $person = chefstudio_schema_person($person_slug);
+        if (!empty($person)) {
+            $schema['@graph'][] = $person;
+        }
+    }
 
     echo "\n<script type=\"application/ld+json\">" .
         wp_json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) .
