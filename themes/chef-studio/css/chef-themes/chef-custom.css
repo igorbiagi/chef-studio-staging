@@ -13310,3 +13310,14 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 .rsw-grazie header .rsw-lead,
 .rsw-grazie header .rsw-kicker{ text-align:center!important; }
 @media (max-width:1024px){ .rsw-grazie header .hero-actions .btn{ font-size:16px!important; padding-left:16px!important; padding-right:16px!important; } }
+
+/* rsw5 11/11: tabelle nei blocchi testo delle pagine servizio */
+.contenitore .testo-largo table{width:100%;border-collapse:collapse;margin:18px 0 22px;font-size:15px;line-height:1.45;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 0 0 1px rgba(60,20,30,.10)}
+.contenitore .testo-largo table th{background:#2b0d18;color:#fff;font-weight:600;text-align:left;padding:12px 14px;border:0}
+.contenitore .testo-largo table td{padding:11px 14px;border:0;border-top:1px solid rgba(60,20,30,.10);vertical-align:top;background:transparent}
+.contenitore .testo-largo table tbody tr:nth-child(even) td{background:rgba(249,180,52,.07)}
+.contenitore .testo-largo table td:first-child{font-weight:600}
+@media (max-width:768px){
+ .contenitore .testo-largo table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;font-size:14px}
+ .contenitore .testo-largo table th,.contenitore .testo-largo table td{min-width:150px}
+}
