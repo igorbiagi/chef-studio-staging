@@ -1767,7 +1767,8 @@ function chefstudio_schema_pagine_locali_servizi() {
 add_action('wp_head', 'chefstudio_schema_pagine_servizio_standard', 42);
 
 function chefstudio_schema_pagine_servizio_standard() {
-    if (!is_page()) {
+    $articolo_a_blocchi = is_single() && !empty(get_post_meta(get_queried_object_id(), 'layout_flessibile_1', true));
+    if (!is_page() && !$articolo_a_blocchi) {
         return;
     }
 
@@ -1838,6 +1839,14 @@ function chefstudio_schema_pagine_servizio_standard() {
             'person'      => ['andrea-biagi', 'igor-biagi'],
             'image'       => get_stylesheet_directory_uri() . '/img/realizzazione-siti-web/chef-studio-consulenza-seo-web-agency-siti.svg',
             'description' => 'Realizzazione siti web su misura, responsive e ottimizzati per comunicare meglio e generare contatti.',
+        ],
+        'restyling-siti-web' => [
+            'name'        => 'Restyling sito web',
+            'serviceType' => 'Restyling e rifacimento siti web',
+            'category'    => 'Sviluppo siti web',
+            'person'      => ['andrea-biagi', 'igor-biagi'],
+            'image'       => get_stylesheet_directory_uri() . '/img/realizzazione-siti-web/chef-studio-consulenza-seo-web-agency-siti.svg',
+            'description' => 'Restyling e rifacimento di siti web esistenti con migrazione degli URL, redirect 301 e controllo in Search Console per non perdere le posizioni.',
         ],
         'realizzazione-siti-wordpress' => [
             'name'        => 'Realizzazione siti WordPress',

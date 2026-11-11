@@ -4,6 +4,11 @@
  * Template Post Type: post
  */
 
+if (!empty(get_post_meta(get_queried_object_id(), 'layout_flessibile_1', true))) {
+  get_template_part('pagine/articolo-a-blocchi');
+  return;
+}
+
 get_header();
 $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 ?>
