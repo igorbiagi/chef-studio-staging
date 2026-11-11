@@ -13285,3 +13285,10 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 /* thank-you: hero più bassa */
 .rsw-grazie header.struttura-container{ min-height:min(640px, calc(100svh - 110px)); }
 @media (max-width:1024px){ .rsw-grazie header.struttura-container{ min-height:0; } }
+/* thank-you: WhatsApp è il bottone principale, "Guarda i progetti" senza icona */
+.rsw-grazie header .hero-action-link-secondary::before{ display:none!important; }
+.rsw-grazie header .hero-actions .btn:not(.hero-action-link-secondary)::before{
+  content:""; width:30px; height:30px; flex:none; margin:-6px 0 -6px -6px;
+  background:url(../../img/svg/whatsapp.svg) center/contain no-repeat; filter:brightness(0);
+}
+.rsw-persone .chi-siamo-home-cta-note{ margin:0!important; }
