@@ -13278,12 +13278,8 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 .cta-form-trust-line img{ width:18px!important; height:18px!important; margin:0!important; flex:none; }
 .chef-cta-form-section .local-seo-form-card .gform_footer{ margin-top:6px!important; padding-bottom:0!important; }
 @media (min-width:1100px){
-  .chef-cta-form-section .gform_fields{ display:grid!important; grid-template-columns:repeat(12,1fr)!important; column-gap:16px!important; }
-  .chef-cta-form-section .gform_fields > .gfield{ grid-column:1 / -1!important; width:auto!important; float:none!important; }
-  .chef-cta-form-section #field_1_5,
-  .chef-cta-form-section #field_1_2,
-  .chef-cta-form-section #field_1_3{ grid-column:span 4!important; }
-  .chef-cta-form-section #field_1_13{ display:none!important; } /* Sito web: da togliere in Gravity Forms */
+  .chef-cta-form-section .local-seo-gravity-form .gform_fields{ grid-template-columns:repeat(3, minmax(0, 1fr))!important; }
+  .chef-cta-form-section .local-seo-gravity-form .gform_fields > #field_1_13{ display:none!important; } /* Sito web: da togliere in Gravity Forms */
 }
 
 /* thank-you: hero più bassa */
