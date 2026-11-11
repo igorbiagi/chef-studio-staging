@@ -13130,3 +13130,65 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 .chef-cta-form-section.back-color-scuro .local-seo-form-card label,
 .chef-cta-form-section.back-color-scuro .local-seo-form-card li{ color:var(--txt-color)!important; }
 .chef-cta-form-section.back-color-scuro .local-seo-form-card a{ color:var(--primary-color)!important; }
+
+/* =========================================================
+   rsw4 (11/11): bottoni a pillola come .faq-intro-button, titolo AI sfumato,
+   chat allineata, form finale più compatto, box cliccabili con hover
+========================================================= */
+.rsw-bottone .btn{
+  border-radius:100px!important;
+  padding:14px 22px!important;
+  font-size:18px!important;
+  gap:18px;
+  justify-content:space-between;
+}
+.rsw-bottone .btn:hover{ transform:translateY(-2px); box-shadow:-4px 5px 23px rgba(39,13,23,.24)!important; }
+
+/* hero: icona WhatsApp più grande */
+.rsw-hero header .hero-action-link-secondary::before{ width:28px; height:28px; margin-right:10px; }
+
+/* titolo AI: sfumatura oro-rosa (ferma) */
+.rsw-ai .rsw-grad{
+  background:linear-gradient(90deg,#f9b434 0%,#ff9a8b 45%,#ff7eb6 75%,#c99bff 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent!important;
+  -webkit-text-fill-color:transparent;
+}
+
+/* chat: "disponibile" allineato al nome */
+.rsw-prod > span{ padding:0 8px 6px!important; }
+.rsw-prod i{ margin:0 -8px 6px; }
+.rsw-prod b{ padding:0!important; }
+
+/* box cliccabili: stesso movimento dei bottoni (solo transform, nessun effetto sui CWV) */
+.rsw-tipi .anteprime-sezione article,
+.rsw-casi .anteprime-sezione article{
+  transition:transform .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+.rsw-tipi .anteprime-sezione article:has(> a):hover,
+.rsw-casi .anteprime-sezione article:has(> a):hover{
+  transform:translateY(-4px);
+  box-shadow:0 18px 40px -18px rgba(39,13,23,.45)!important;
+}
+.rsw-tipi .anteprime-sezione article:has(> a):hover .hero-btn-arrow,
+.rsw-tipi .anteprime-sezione article:has(> a):hover [class*="freccia"],
+.rsw-casi .anteprime-sezione article:has(> a):hover [class*="freccia"]{ transform:translateX(6px); transition:transform .15s ease-out; }
+@media (prefers-reduced-motion:reduce){
+  .rsw-tipi .anteprime-sezione article:hover,
+  .rsw-casi .anteprime-sezione article:hover{ transform:none; }
+}
+
+/* form finale scuro: niente riquadro intorno alla foto, modulo più compatto */
+.chef-cta-form-section.back-color-scuro .local-seo-consultant-card{
+  background:none!important;
+  border:0!important;
+  padding:0!important;
+}
+.chef-cta-form-section.back-color-scuro .local-seo-consultant-photo{ background:none!important; border-radius:18px; overflow:hidden; }
+.chef-cta-form-section.back-color-scuro .local-seo-consultant-photo img{ border-radius:18px; }
+.chef-cta-form-section.back-color-scuro .local-seo-form-card{ padding-top:34px!important; padding-bottom:30px!important; }
+.chef-cta-form-section.back-color-scuro .local-seo-form-card h2{ font-size:30px!important; margin-bottom:10px!important; }
+.chef-cta-form-section.back-color-scuro .local-seo-form-card textarea{ height:110px!important; min-height:110px!important; }
+.chef-cta-form-section.back-color-scuro .local-seo-form-card .gfield{ margin-bottom:0!important; }
+.chef-cta-form-section.back-color-scuro .local-seo-form-card .gform_fields{ row-gap:14px!important; }
