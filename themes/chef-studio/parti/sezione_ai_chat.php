@@ -23,7 +23,7 @@ $ok_testo         = (string) get_sub_field('conferma_testo');
     <div class="nome-sezione"><?php echo esc_html($nome_sezione); ?></div>
   <?php endif; ?>
 
-  <div class="struttura-container">
+  <div class="struttura-container struttura-2-standard">
     <div class="div-1">
       <?php if ($titolo || $titolo_evidenza) : ?>
         <h2><?php echo esc_html($titolo); ?><?php if ($titolo_evidenza) : ?> <span class="rsw-grad"><?php echo esc_html($titolo_evidenza); ?></span><?php endif; ?></h2>

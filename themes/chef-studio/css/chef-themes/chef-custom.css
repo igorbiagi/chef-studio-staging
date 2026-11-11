@@ -13169,7 +13169,6 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 .rsw-tipi .anteprime-sezione article:has(> a):hover,
 .rsw-casi .anteprime-sezione article:has(> a):hover{
   transform:translateY(-4px);
-  box-shadow:0 18px 40px -18px rgba(39,13,23,.45)!important;
 }
 .rsw-tipi .anteprime-sezione article:has(> a):hover .hero-btn-arrow,
 .rsw-tipi .anteprime-sezione article:has(> a):hover [class*="freccia"],
