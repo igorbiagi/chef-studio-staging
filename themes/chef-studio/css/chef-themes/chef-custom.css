@@ -13449,3 +13449,24 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 .rsw-cwv-c small{ font-size:12.5px; line-height:1.4; color:rgba(39,13,23,.6); margin-top:auto; }
 @media (max-width:1024px){ .rsw-cwv{ grid-template-columns:1fr 1fr; } }
 @media (max-width:560px){ .rsw-cwv{ grid-template-columns:1fr; } .rsw-cwv-c b{ font-size:34px; } }
+/* schede velocità: schermata originale sotto il numero */
+.rsw-cwv-img{ display:block; margin-top:14px; border-radius:10px; overflow:hidden; box-shadow:0 0 0 1px rgba(39,13,23,.10); }
+.rsw-cwv-img img{ display:block; width:100%; height:auto; border-radius:0!important; transition:transform .2s ease; }
+.rsw-cwv-img:hover img{ transform:scale(1.03); }
+.rsw-cwv-c small{ margin-top:0; }
+/* soglie dei Core Web Vitals come barre */
+.rsw-bar{ max-width:860px; margin:20px 0 28px; display:grid; gap:18px; }
+.rsw-bar-r{ display:grid; grid-template-columns:220px 1fr; gap:20px; align-items:center; }
+.rsw-bar-n b{ display:block; font-size:20px; color:var(--txt-color); }
+.rsw-bar-n span{ font-size:14.5px; color:rgba(39,13,23,.7); }
+.rsw-bar-s{ display:grid; grid-template-columns:5fr 3fr 2fr; gap:3px; }
+.rsw-bar-s i{ font-style:normal; font-size:12.5px; font-weight:600; padding:9px 10px; color:#fff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.rsw-bar-s i.b{ background:#1e8e3e; border-radius:8px 0 0 8px; }
+.rsw-bar-s i.m{ background:#f29900; }
+.rsw-bar-s i.p{ background:#d93025; border-radius:0 8px 8px 0; }
+.rsw-bar-g small{ display:block; margin-top:6px; font-size:13px; font-weight:600; color:#188038; }
+@media (max-width:640px){
+  .rsw-bar-r{ grid-template-columns:1fr; gap:8px; }
+  .rsw-bar-s i{ font-size:11.5px; padding:8px 6px; }
+}
+.contenitore .testo-largo table.rsw-tab th small{ font-weight:800; opacity:1; }
