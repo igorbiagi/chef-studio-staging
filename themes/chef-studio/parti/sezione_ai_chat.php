@@ -13,7 +13,17 @@ $testo            = get_sub_field('testo');
 $chip             = array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', (string) get_sub_field('chip'))));
 $chat_titolo      = get_sub_field('chat_titolo');
 $chat_sottotitolo = get_sub_field('chat_sottotitolo');
-$messaggi         = get_sub_field('messaggi') ?: [];
+$messaggi         = [];
+if (have_rows('messaggi')) {
+  while (have_rows('messaggi')) {
+    the_row();
+    $messaggi[] = [
+      'chi'      => get_sub_field('chi'),
+      'testo'    => get_sub_field('testo'),
+      'prodotti' => get_sub_field('prodotti'),
+    ];
+  }
+}
 $ok_titolo        = (string) get_sub_field('conferma_titolo');
 $ok_testo         = (string) get_sub_field('conferma_testo');
 ?>
