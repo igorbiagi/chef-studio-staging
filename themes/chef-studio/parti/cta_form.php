@@ -119,7 +119,14 @@ $has_consultant_card = !empty($consultant_image['url']) || $consultant_name !== 
 $cta_form_step_label = in_array($cta_form_id, $cta_form_landing_ids, true) ? '1 di 2' : '';
 ?>
 
-<div class="contenitore local-seo-contact-section chef-cta-form-section">
+<?php
+// Sfondi della tendina ACF che il form può usare (gli altri valori restano ignorati come prima)
+$cta_form_contenitore = get_sub_field('blocco_contenitore') ?: [];
+$cta_form_colore = is_array($cta_form_contenitore) ? ($cta_form_contenitore['colore_contenitore'] ?? '') : '';
+$cta_form_colore = is_array($cta_form_colore) ? ($cta_form_colore['value'] ?? '') : (string) $cta_form_colore;
+$cta_form_colore = in_array($cta_form_colore, ['back-color-scuro', 'back-color-crema', 'back-color-bianco'], true) ? ' ' . $cta_form_colore : '';
+?>
+<div class="contenitore local-seo-contact-section chef-cta-form-section<?php echo esc_attr($cta_form_colore); ?>">
   <div class="contenuto-standard pad-x-standard local-seo-contact-wrap">
     <span id="form-ancora" class="local-seo-anchor" aria-hidden="true"></span>
     <span id="form-anchor" class="local-seo-anchor" aria-hidden="true"></span>

@@ -13118,3 +13118,8 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
   box-shadow:0 40px 80px -30px #000!important;
 }
 .rsw-confronto .div-2{ background:#fff!important; }
+.rsw-persone .contenuto-standard{ padding-bottom:120px!important; }
+.chef-cta-form-section.back-color-scuro .local-seo-consultant-photo{ background:rgba(255,255,255,.08); }
+.chef-cta-form-section.back-color-scuro .local-seo-trust-note,
+.chef-cta-form-section.back-color-scuro .local-seo-trust-note *,
+.chef-cta-form-section.back-color-scuro [class*="fiducia"]{ background:rgba(255,255,255,.06)!important; color:#fff!important; border-color:rgba(255,255,255,.14)!important; }
