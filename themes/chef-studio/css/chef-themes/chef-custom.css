@@ -13255,3 +13255,11 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
   .rsw-tipi .anteprime-sezione ul{ gap:12px!important; }
   .rsw-tipi .anteprime-sezione article{ padding:16px!important; }
 }
+
+/* hero tra 1025 e 1360 px: la donna non viene tagliata a destra */
+@media (min-width:1025px) and (max-width:1360px){
+  .rsw-hero header figure.hero-img{ right:-10px; height:min(86svh, 54vw); }
+  .rsw-hero header .div-2::before{ width:min(68vh, 44vw); right:0; }
+  .rsw-fc-b{ right:0; }
+  .rsw-proof{ gap:12px 22px!important; }
+}
