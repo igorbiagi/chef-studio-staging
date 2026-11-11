@@ -12974,3 +12974,147 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 .rsw-confronto .div-1 .colore-check-verde{ color:var(--super-color)!important; }
 .rsw-confronto .div-2{ background:var(--bonus-color); }
 .rsw-confronto p{ line-height:2; }
+
+/* =========================================================
+   Sfondi nella tendina "colore contenitore" (vedi functions.php)
+========================================================= */
+.back-color-bianco{ background-color:#fff!important; }
+.back-color-crema{ background-color:#efe4da!important; }
+.back-color-scuro{
+  background:radial-gradient(900px 600px at 78% 55%, hsl(338,60%,24%), #14070c 70%)!important;
+  color:#fff;
+}
+.back-color-scuro h1,
+.back-color-scuro h2,
+.back-color-scuro h3,
+.back-color-scuro p,
+.back-color-scuro li{ color:#fff; }
+.back-color-scuro .nome-sezione{ color:var(--super-color)!important; }
+.back-color-scuro a:not(.btn){ color:var(--super-color); }
+.back-color-scuro::before,
+.back-color-scuro::after{ display:none!important; }
+
+/* ---------- hero: prove allineate a sinistra ---------- */
+.rsw-proof{ justify-content:flex-start!important; flex-wrap:wrap; gap:16px 34px!important; }
+@media (max-width:1024px){
+  .rsw-proof{ display:grid!important; grid-template-columns:1fr 1fr; gap:14px 20px!important; width:100%; }
+  .rsw-proof > div:nth-child(3){ display:block!important; grid-column:1 / -1; }
+}
+
+/* ---------- bottoni dei blocchi "bottone": come quelli della hero ---------- */
+.rsw-bottone .btn{
+  display:inline-flex!important;
+  align-items:center;
+  gap:16px;
+  min-height:52px;
+  padding:13px 24px!important;
+  border-radius:16px!important;
+  font-size:17px!important;
+  line-height:1.1;
+  box-shadow:0 8px 22px rgba(39,13,23,.12)!important;
+  transition:transform .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+.rsw-bottone .btn::after{
+  content:"";
+  width:26px;
+  height:14px;
+  flex:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 14'%3E%3Cpath d='M0 7h24M18 1l6 6-6 6' fill='none' stroke='%23270d17' stroke-width='2'/%3E%3C/svg%3E") center/contain no-repeat;
+  transition:transform .15s ease-out;
+}
+.rsw-bottone .btn:hover{ transform:translateY(-3px); box-shadow:-4px 5px 23px rgba(39,13,23,.3)!important; }
+.rsw-bottone .btn:hover::after{ transform:translateX(6px); }
+
+/* ---------- chat: conferma finale ---------- */
+.rsw-phone{ position:relative; }
+.rsw-ok{
+  position:absolute;
+  left:50%;
+  bottom:84px;
+  width:calc(100% - 44px);
+  transform:translateX(-50%);
+  background:#fff;
+  color:#111b21;
+  border-radius:22px;
+  padding:22px 20px 20px;
+  text-align:center;
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.6);
+  animation:rsw-pop .5s cubic-bezier(.2,1.4,.4,1) both;
+}
+.rsw-ok i{
+  display:grid;
+  place-items:center;
+  width:64px;
+  height:64px;
+  margin:-54px auto 12px;
+  border-radius:50%;
+  background:#25d366;
+  color:#fff;
+  font-style:normal;
+  font-size:34px;
+  font-weight:700;
+  box-shadow:0 0 0 8px rgba(37,211,102,.22);
+}
+.rsw-ok b{ display:block; font-size:22px; letter-spacing:-.5px; line-height:1.15; }
+.rsw-ok span{ display:block; margin-top:6px; font-size:14px; color:#54656f; line-height:1.4; }
+@keyframes rsw-pop{ from{ opacity:0; transform:translate(-50%, 30px) scale(.9); } }
+@media (prefers-reduced-motion:reduce){ .rsw-ok{ animation:none; } }
+
+/* ---------- persone: foto sfalsate, senza riquadri ---------- */
+.rsw-persone .chi-siamo-home-persone{ gap:22px; align-items:start; }
+.rsw-persone .chi-siamo-home-persona{
+  background:none!important;
+  border:0!important;
+  box-shadow:none!important;
+  padding:0!important;
+}
+.rsw-persone .chi-siamo-home-persona + .chi-siamo-home-persona{ margin-top:56px; }
+.rsw-persone .chi-siamo-home-persona-img{ margin:0; }
+.rsw-persone .chi-siamo-home-persona-img img{
+  width:100%;
+  aspect-ratio:4 / 5;
+  height:auto;
+  object-fit:cover;
+  border-radius:20px!important;
+  display:block;
+}
+.rsw-persone .chi-siamo-home-persona-body{ padding:16px 4px 0!important; }
+.rsw-persone .chi-siamo-home-persona-body h3{ font-size:22px; margin:0; }
+.rsw-persone .chi-siamo-home-persona-role p{ margin:2px 0 8px; color:var(--primary-color); font-weight:700; font-size:15px; }
+.rsw-persone .chi-siamo-home-persona-body hr,
+.rsw-persone .chi-siamo-home-persona-role::after{ display:none!important; }
+.rsw-persone .chi-siamo-home-persona-text p{ font-size:14.5px; line-height:1.5; opacity:.8; }
+.rsw-persone .chi-siamo-home-punti{ gap:18px; }
+.rsw-persone .chi-siamo-home-punto{
+  background:none!important;
+  border:0!important;
+  box-shadow:none!important;
+  border-top:3px solid var(--super-color)!important;
+  border-radius:0!important;
+  padding:12px 0 0!important;
+}
+.rsw-persone .chi-siamo-home-punto-icon{ display:none; }
+.rsw-persone .chi-siamo-home-punto strong{ font-size:17px; }
+@media (max-width:768px){
+  .rsw-persone .chi-siamo-home-persona + .chi-siamo-home-persona{ margin-top:36px; }
+}
+
+/* ---------- form finale su fondo scuro ---------- */
+.chef-cta-form-section.back-color-scuro .local-seo-contact-copy h2,
+.chef-cta-form-section.back-color-scuro .local-seo-contact-text,
+.chef-cta-form-section.back-color-scuro .local-seo-contact-text *,
+.chef-cta-form-section.back-color-scuro .local-seo-consultant-info *,
+.chef-cta-form-section.back-color-scuro .local-seo-phone-row,
+.chef-cta-form-section.back-color-scuro .local-seo-phone-row a,
+.chef-cta-form-section.back-color-scuro .local-seo-contact-copy li{ color:#fff!important; }
+.chef-cta-form-section.back-color-scuro .local-seo-contact-text .testo-arancio{ color:rgba(255,255,255,.8)!important; }
+.chef-cta-form-section.back-color-scuro .local-seo-consultant-card{
+  background:rgba(255,255,255,.06)!important;
+  border:1px solid rgba(255,255,255,.14)!important;
+  box-shadow:none!important;
+}
+.chef-cta-form-section.back-color-scuro .local-seo-contact-copy li img{ filter:brightness(0) invert(1); opacity:.9; }
+.chef-cta-form-section.back-color-scuro .local-seo-form-card{
+  box-shadow:0 40px 80px -30px #000!important;
+}
+.rsw-confronto .div-2{ background:#fff!important; }

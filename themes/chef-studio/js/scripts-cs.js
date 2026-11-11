@@ -1334,8 +1334,14 @@ document.querySelectorAll('.articolo code').forEach(function (source) {
   var dots = document.createElement('span');
   dots.className = 'rsw-dots';
   dots.innerHTML = '<b></b><b></b><b></b>';
+  function done() {
+    var ok = document.createElement('div');
+    ok.className = 'rsw-ok';
+    ok.innerHTML = '<i>✓</i><b>Cliente servito, ordine chiuso</b><span>Ha risposto l\'assistente AI, in pochi secondi. Anche di notte.</span>';
+    feed.closest('.rsw-phone').appendChild(ok);
+  }
   function play(i) {
-    if (i >= msgs.length) return;
+    if (i >= msgs.length) { setTimeout(done, 900); return; }
     var m = msgs[i];
     var bot = m.classList.contains('rsw-bot');
     if (bot) {

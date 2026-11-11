@@ -2803,6 +2803,20 @@ add_action('init', 'crea_cpt_blocchi_riutilizzabili');
 
 
 // =====================================================
+// Sfondi aggiuntivi nella tendina "colore contenitore" dei blocchi ACF
+// (le classi sono in css/chef-themes/chef-custom.css)
+// =====================================================
+add_filter('acf/load_field/name=colore_contenitore', function ($field) {
+  if (!isset($field['choices']) || !is_array($field['choices'])) {
+    return $field;
+  }
+  $field['choices']['back-color-scuro'] = 'Scuro bordeaux (testi bianchi)';
+  $field['choices']['back-color-crema'] = 'Crema (più staccato del bonus)';
+  $field['choices']['back-color-bianco'] = 'Bianco pieno';
+  return $field;
+});
+
+// =====================================================
 // Popola il campo dei CPT per farli scegliere da backend come nella struttura delle anteprime
 // =====================================================
 add_filter('acf/load_field/name=scegli_cpt', function ($field) {
