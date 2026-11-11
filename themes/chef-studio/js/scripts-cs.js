@@ -1335,10 +1335,16 @@ document.querySelectorAll('.articolo code').forEach(function (source) {
   dots.className = 'rsw-dots';
   dots.innerHTML = '<b></b><b></b><b></b>';
   function done() {
+    var phone = feed.closest('.rsw-phone');
+    var titolo = phone.hasAttribute('data-ok-titolo') ? phone.getAttribute('data-ok-titolo') : 'Cliente servito, ordine chiuso';
+    var testo = phone.hasAttribute('data-ok-testo') ? phone.getAttribute('data-ok-testo') : 'Ha risposto l\'assistente AI, in pochi secondi. Anche di notte.';
+    if (!titolo && !testo) return;
     var ok = document.createElement('div');
     ok.className = 'rsw-ok';
-    ok.innerHTML = '<i>✓</i><b>Cliente servito, ordine chiuso</b><span>Ha risposto l\'assistente AI, in pochi secondi. Anche di notte.</span>';
-    feed.closest('.rsw-phone').appendChild(ok);
+    var i = document.createElement('i'); i.textContent = '✓'; ok.appendChild(i);
+    if (titolo) { var b = document.createElement('b'); b.textContent = titolo; ok.appendChild(b); }
+    if (testo) { var sp = document.createElement('span'); sp.textContent = testo; ok.appendChild(sp); }
+    phone.appendChild(ok);
   }
   function play(i) {
     if (i >= msgs.length) { setTimeout(done, 900); return; }

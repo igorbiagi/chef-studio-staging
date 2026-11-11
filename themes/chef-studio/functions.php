@@ -2817,6 +2817,112 @@ add_filter('acf/load_field/name=colore_contenitore', function ($field) {
 });
 
 // =====================================================
+// Layout "Sezione AI con chat" nel flessibile layout_flessibile_1
+// Definito qui (non nel DB) così viaggia con il tema. Contenitore e contenuto
+// sono gli stessi cloni del layout "struttura_a_due" (sfondo, classi, padding).
+// Template: parti/sezione_ai_chat.php
+// =====================================================
+add_filter('acf/load_field/name=layout_flessibile_1', function ($field) {
+  if (empty($field['layouts']) || !is_array($field['layouts'])) {
+    return $field;
+  }
+  foreach ($field['layouts'] as $l) {
+    if (($l['name'] ?? '') === 'sezione_ai_chat') {
+      return $field;
+    }
+  }
+
+  $layout_key = 'layout_rsw_ai_chat';
+  $cloni = [];
+  foreach ($field['layouts'] as $l) {
+    if (($l['name'] ?? '') !== 'struttura_a_due' || empty($l['sub_fields'])) {
+      continue;
+    }
+    foreach ($l['sub_fields'] as $sf) {
+      if (($sf['type'] ?? '') === 'clone' || in_array($sf['name'] ?? '', ['blocco_contenitore', 'blocco_contenuto'], true)) {
+        $sf['parent_layout'] = $layout_key;
+        $cloni[] = $sf;
+      }
+    }
+  }
+
+  $campo = function ($nome, $etichetta, $tipo, $extra = []) use ($layout_key, $field) {
+    return array_merge([
+      'key'           => 'field_rswai_' . $nome,
+      'label'         => $etichetta,
+      'name'          => $nome,
+      'type'          => $tipo,
+      'parent'        => $field['key'] ?? '',
+      'parent_layout' => $layout_key,
+      'instructions'  => '',
+      'required'      => 0,
+      'wrapper'       => ['width' => '', 'class' => '', 'id' => ''],
+    ], $extra);
+  };
+
+  $sotto = function ($nome, $etichetta, $tipo, $extra = []) {
+    return array_merge([
+      'key'          => 'field_rswai_msg_' . $nome,
+      'label'        => $etichetta,
+      'name'         => $nome,
+      'type'         => $tipo,
+      'instructions' => '',
+      'required'     => 0,
+      'wrapper'      => ['width' => '', 'class' => '', 'id' => ''],
+    ], $extra);
+  };
+
+  $sub_fields = array_merge($cloni, [
+    $campo('tab_testi', 'Testi', 'tab', ['placement' => 'top']),
+    $campo('nome_sezione', 'Nome sezione', 'text'),
+    $campo('titolo', 'Titolo (prima parte)', 'text', ['instructions' => 'Es. "Bot e automazioni con"']),
+    $campo('titolo_evidenza', 'Titolo (parte colorata)', 'text', ['instructions' => 'Es. "l\'intelligenza artificiale": esce con la sfumatura']),
+    $campo('testo', 'Testo', 'wysiwyg', ['tabs' => 'all', 'toolbar' => 'basic', 'media_upload' => 0]),
+    $campo('chip', 'Etichette sotto il testo', 'textarea', ['instructions' => 'Una per riga', 'rows' => 5, 'new_lines' => '']),
+    $campo('tab_chat', 'Chat', 'tab', ['placement' => 'top']),
+    $campo('chat_titolo', 'Nome in alto nella chat', 'text', ['default_value' => 'Assistente AI del negozio']),
+    $campo('chat_sottotitolo', 'Riga sotto il nome', 'text', ['default_value' => 'risponde in automatico, anche di notte']),
+    $campo('messaggi', 'Messaggi', 'repeater', [
+      'layout'       => 'block',
+      'button_label' => 'Aggiungi messaggio',
+      'min'          => 0,
+      'max'          => 0,
+      'sub_fields'   => [
+        $sotto('chi', 'Chi scrive', 'select', [
+          'choices'       => ['cliente' => 'Cliente', 'ai' => 'Assistente AI'],
+          'default_value' => 'cliente',
+          'return_format' => 'value',
+          'ui'            => 0,
+          'multiple'      => 0,
+          'allow_null'    => 0,
+          'wrapper'       => ['width' => '25', 'class' => '', 'id' => ''],
+        ]),
+        $sotto('testo', 'Messaggio', 'textarea', ['rows' => 2, 'new_lines' => '', 'wrapper' => ['width' => '45', 'class' => '', 'id' => '']]),
+        $sotto('prodotti', 'Schede prodotto (facoltative)', 'textarea', [
+          'rows'         => 2,
+          'new_lines'    => '',
+          'instructions' => 'Una per riga: Nome | stato. Es. Trail Grip | disponibile',
+          'wrapper'      => ['width' => '30', 'class' => '', 'id' => ''],
+        ]),
+      ],
+    ]),
+    $campo('conferma_titolo', 'Conferma finale: titolo', 'text', ['instructions' => 'Compare quando la chat finisce. Vuoto (anche il testo) = nessuna conferma']),
+    $campo('conferma_testo', 'Conferma finale: testo', 'text'),
+  ]);
+
+  $field['layouts'][$layout_key] = [
+    'key'        => $layout_key,
+    'name'       => 'sezione_ai_chat',
+    'label'      => 'Sezione AI con chat',
+    'display'    => 'block',
+    'sub_fields' => $sub_fields,
+    'min'        => '',
+    'max'        => '',
+  ];
+  return $field;
+}, 20);
+
+// =====================================================
 // Popola il campo dei CPT per farli scegliere da backend come nella struttura delle anteprime
 // =====================================================
 add_filter('acf/load_field/name=scegli_cpt', function ($field) {
