@@ -13192,3 +13192,45 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 .chef-cta-form-section.back-color-scuro .local-seo-form-card textarea{ height:110px!important; min-height:110px!important; }
 .chef-cta-form-section.back-color-scuro .local-seo-form-card .gfield{ margin-bottom:0!important; }
 .chef-cta-form-section.back-color-scuro .local-seo-form-card .gform_fields{ row-gap:14px!important; }
+
+/* ---------- mobile (Igor 11/11) ---------- */
+@media (max-width:1024px){
+  /* prove hero: elenco su una colonna, compatto */
+  .rsw-proof{ display:flex!important; flex-direction:column; gap:0!important; }
+  .rsw-proof > div,
+  .rsw-proof > div:nth-child(3){
+    display:flex!important; flex-wrap:wrap; align-items:baseline; gap:2px 8px;
+    padding:9px 0; border-top:1px solid rgba(255,255,255,.12);
+  }
+  .rsw-proof > div:first-child{ border-top:0; }
+  .rsw-proof .rsw-stelle{ order:-1; font-size:14px; }
+  .rsw-proof b{ font-size:16px; }
+  .rsw-proof small{ font-size:14px; }
+}
+@media (max-width:768px){
+  /* bottoni gialli dei blocchi centrati */
+  .rsw-bottone .contenuto-standard{ text-align:center; }
+  .rsw-bottone .btn{ margin-left:auto; margin-right:auto; }
+
+  /* persone: meno spazio */
+  .rsw-persone .contenuto-standard{ padding-top:44px!important; padding-bottom:20px!important; }
+  .rsw-persone .chi-siamo-home{ padding:0!important; margin:0!important; }
+  .rsw-persone .chi-siamo-home-grid{ gap:26px!important; }
+  .rsw-persone .chi-siamo-home-punti{ gap:12px!important; margin-top:18px!important; }
+  .rsw-persone .chi-siamo-home-persone{ gap:14px!important; display:grid!important; grid-template-columns:1fr 1fr; }
+  .rsw-persone .chi-siamo-home-persona + .chi-siamo-home-persona{ margin-top:28px!important; }
+  .rsw-persone .chi-siamo-home-persona-body{ padding-top:10px!important; }
+  .rsw-persone .chi-siamo-home-persona-body h3{ font-size:19px; }
+  .rsw-persone .chi-siamo-home-persona-role p{ font-size:13.5px; margin-bottom:4px; }
+  .rsw-persone .chi-siamo-home-persona-text p{ font-size:14px; }
+
+  /* prima di iniziare: schede più strette */
+  .rsw-numerata .contenuto-standard{ padding-top:44px!important; padding-bottom:10px!important; }
+    .rsw-numerata .anteprime-sezione li{ margin:0!important; padding:0!important; }
+  .rsw-numerata .anteprime-sezione article{ padding:16px 0!important; margin:0!important; }
+  .rsw-numerata .testo-anteprima{ padding-left:48px!important; }
+  .rsw-numerata .testo-anteprima::before{ font-size:24px; }
+  .rsw-numerata .testo-anteprima .titolo{ font-size:19px; margin-bottom:4px; }
+  .rsw-numerata .testo-anteprima .testo p{ margin:0; font-size:15px; line-height:1.5; }
+  .rsw-numerata .freccia{ display:none; }
+}
