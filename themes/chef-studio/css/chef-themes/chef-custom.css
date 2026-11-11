@@ -13484,3 +13484,13 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 .rsw-m-cls::after{ left:10px; transform:none; }
 .rsw-bar-leg{ font-size:13.5px; color:rgba(39,13,23,.7); margin:0; }
 .rsw-bar-leg span{ color:var(--txt-color); font-size:12px; }
+/* ingrandimento delle schermate */
+#rsw-zoom-dialog{ border:0; padding:0; background:transparent; max-width:min(1200px, 94vw); max-height:92vh; overflow:visible; }
+#rsw-zoom-dialog::backdrop{ background:rgba(20,8,12,.82); }
+#rsw-zoom-dialog img{ display:block; max-width:100%; max-height:88vh; width:auto; height:auto; border-radius:12px; box-shadow:0 30px 80px rgba(0,0,0,.5); }
+.rsw-zoom-chiudi{ position:absolute; top:-16px; right:-16px; width:40px; height:40px; border-radius:50%; border:0; background:#fff; color:var(--txt-color); font-size:26px; line-height:1; cursor:pointer; box-shadow:0 6px 18px rgba(0,0,0,.3); }
+.rsw-cwv-img{ cursor:zoom-in; }
+/* marcatori sulle barre: tutti centrati sulla punta */
+.rsw-bar-m{ transform:translateX(-50%)!important; margin-bottom:9px; line-height:1.2; }
+.rsw-bar-m::after{ left:50%!important; transform:translateX(-50%)!important; top:calc(100% - 1px); border-width:6px 6px 0; border-style:solid; border-color:var(--txt-color) transparent transparent; }
+.rsw-m-cls{ left:6%; }

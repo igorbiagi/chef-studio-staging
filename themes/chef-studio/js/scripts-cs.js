@@ -1366,3 +1366,23 @@ document.querySelectorAll('.articolo code').forEach(function (source) {
   }, { threshold: 0.4 });
   io.observe(feed);
 })();
+
+/* Ingrandimento immagini nella pagina (link con classe rsw-cwv-img o rsw-zoom): si apre sopra la pagina, non in una nuova scheda */
+document.addEventListener('click', function (e) {
+  var a = e.target.closest ? e.target.closest('a.rsw-cwv-img, a.rsw-zoom') : null;
+  if (!a || typeof HTMLDialogElement === 'undefined') return;
+  e.preventDefault();
+  var d = document.getElementById('rsw-zoom-dialog');
+  if (!d) {
+    d = document.createElement('dialog');
+    d.id = 'rsw-zoom-dialog';
+    d.innerHTML = '<button type="button" class="rsw-zoom-chiudi" aria-label="Chiudi">×</button><img alt="">';
+    document.body.appendChild(d);
+    d.addEventListener('click', function (ev) { if (ev.target === d || ev.target.classList.contains('rsw-zoom-chiudi')) d.close(); });
+  }
+  var img = a.querySelector('img');
+  var big = d.querySelector('img');
+  big.src = a.getAttribute('href');
+  big.alt = img ? img.alt : '';
+  d.showModal();
+});
