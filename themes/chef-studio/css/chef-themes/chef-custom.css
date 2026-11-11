@@ -13161,21 +13161,18 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 .rsw-prod i{ margin:0 -8px 6px; }
 .rsw-prod b{ padding:0!important; }
 
-/* box cliccabili: stesso movimento dei bottoni (solo transform, nessun effetto sui CWV) */
+/* box cliccabili: si alza tutta la scheda (li), solo transform, nessun effetto sui CWV */
+.rsw-tipi .anteprime-sezione li,
+.rsw-casi .anteprime-sezione li{ transition:transform .15s ease-in-out; }
 .rsw-tipi .anteprime-sezione article,
-.rsw-casi .anteprime-sezione article{
-  transition:transform .15s ease-in-out, box-shadow .15s ease-in-out;
-}
-.rsw-tipi .anteprime-sezione article:has(> a):hover,
-.rsw-casi .anteprime-sezione article:has(> a):hover{
-  transform:translateY(-4px);
-}
-.rsw-tipi .anteprime-sezione article:has(> a):hover .hero-btn-arrow,
-.rsw-tipi .anteprime-sezione article:has(> a):hover [class*="freccia"],
-.rsw-casi .anteprime-sezione article:has(> a):hover [class*="freccia"]{ transform:translateX(6px); transition:transform .15s ease-out; }
+.rsw-casi .anteprime-sezione article{ transform:none!important; }
+.rsw-tipi .anteprime-sezione li:has(article > a):hover,
+.rsw-casi .anteprime-sezione li:has(article > a):hover{ transform:translateY(-4px); }
+.rsw-tipi .anteprime-sezione li:has(article > a):hover .freccia,
+.rsw-casi .anteprime-sezione li:has(article > a):hover .freccia{ transform:translateX(6px); transition:transform .15s ease-out; }
 @media (prefers-reduced-motion:reduce){
-  .rsw-tipi .anteprime-sezione article:hover,
-  .rsw-casi .anteprime-sezione article:hover{ transform:none; }
+  .rsw-tipi .anteprime-sezione li:hover,
+  .rsw-casi .anteprime-sezione li:hover{ transform:none; }
 }
 
 /* form finale scuro: niente riquadro intorno alla foto, modulo più compatto */
@@ -13265,4 +13262,26 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 @media (max-width:768px){
   .rsw-persone .chi-siamo-home-button{ width:auto!important; }
   .rsw-persone .chi-siamo-home-cta-note{ text-align:center; justify-content:center; }
+}
+
+/* persone: freccia del bottone nel flusso, non sopra il testo */
+.rsw-persone .chi-siamo-home-button .hero-btn-arrow{ position:static!important; right:auto!important; }
+
+/* =========================================================
+   Form finale (tutte le pagine): nota "valutazione gratuita" sotto il bottone,
+   Nome / Telefono / Email sulla stessa riga su desktop
+========================================================= */
+.cta-form-trust-line{
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  margin:12px 0 0!important; font-size:14px!important; line-height:1.35; color:rgba(39,13,23,.7)!important; text-align:center;
+}
+.cta-form-trust-line img{ width:18px!important; height:18px!important; margin:0!important; flex:none; }
+.chef-cta-form-section .local-seo-form-card .gform_footer{ margin-top:6px!important; padding-bottom:0!important; }
+@media (min-width:1100px){
+  .chef-cta-form-section .gform_fields{ display:grid!important; grid-template-columns:repeat(12,1fr)!important; column-gap:16px!important; }
+  .chef-cta-form-section .gform_fields > .gfield{ grid-column:1 / -1!important; width:auto!important; float:none!important; }
+  .chef-cta-form-section #field_1_5,
+  .chef-cta-form-section #field_1_2,
+  .chef-cta-form-section #field_1_3{ grid-column:span 4!important; }
+  .chef-cta-form-section #field_1_13{ display:none!important; } /* Sito web: da togliere in Gravity Forms */
 }

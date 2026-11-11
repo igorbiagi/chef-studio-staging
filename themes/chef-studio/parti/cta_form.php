@@ -183,13 +183,6 @@ $cta_form_colore = in_array($cta_form_colore, ['back-color-scuro', 'back-color-c
           </div>
         <?php endif; ?>
 
-        <?php if ($trust_enabled && $trust_text !== '') : ?>
-          <div class="local-seo-trust-note">
-            <img src="<?php echo esc_url($trust_icon['url']); ?>" alt="<?php echo esc_attr($trust_icon['alt']); ?>" aria-hidden="true">
-            <span><?php echo wp_kses_post($trust_text); ?></span>
-          </div>
-        <?php endif; ?>
-
         <?php if (!empty($telefono_link)) : ?>
           <div class="local-seo-phone-row">
             <a class="local-seo-whatsapp-inline-icon" href="https://wa.me/<?php echo esc_attr($telefono_link); ?>" target="_blank" rel="noopener noreferrer" aria-label="Scrivici su WhatsApp">
@@ -219,6 +212,13 @@ $cta_form_colore = in_array($cta_form_colore, ['back-color-scuro', 'back-color-c
 	        <div class="contatti local-seo-gravity-form cta-form-gravity-form cta-form-gravity-form-<?php echo esc_attr($cta_form_id); ?>" data-chef-cta-form-id="<?php echo esc_attr($cta_form_id); ?>">
 	          <?php gravity_form($cta_form_id, false, false, false, '', $cta_form_ajax, 0); ?>
 	        </div>
+
+	        <?php if ($trust_enabled && $trust_text !== '') : ?>
+	          <p class="cta-form-trust-line">
+	            <img src="<?php echo esc_url($trust_icon['url']); ?>" alt="" aria-hidden="true" width="18" height="18">
+	            <span><?php echo wp_kses_post($trust_text); ?></span>
+	          </p>
+	        <?php endif; ?>
 
 	        <?php if (in_array($cta_form_id, $cta_form_landing_ids, true)) : ?>
 	          <style>
