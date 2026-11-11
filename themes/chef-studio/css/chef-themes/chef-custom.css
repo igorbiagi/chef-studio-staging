@@ -13262,3 +13262,7 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
   .rsw-fc-b{ right:0; }
   .rsw-proof{ gap:12px 22px!important; }
 }
+@media (max-width:768px){
+  .rsw-persone .chi-siamo-home-button{ width:auto!important; }
+  .rsw-persone .chi-siamo-home-cta-note{ text-align:center; justify-content:center; }
+}
