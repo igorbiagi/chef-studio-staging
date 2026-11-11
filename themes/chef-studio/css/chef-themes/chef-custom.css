@@ -13429,3 +13429,13 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
   .rsw-hero .rsw-proof{ flex-wrap:nowrap; gap:26px; max-width:640px; }
   .rsw-hero .rsw-proof > div:nth-child(n+4){ display:none; }
 }
+/* tabelle su smartphone: prima colonna ferma mentre scorri, colonne non troppo strette */
+@media (max-width:768px){
+  .contenitore .testo-largo table.rsw-tab td:first-child,
+  .contenitore .testo-largo table.rsw-tab th:first-child{ position:sticky; left:0; z-index:1; background:#fbf7f2!important; min-width:118px; box-shadow:6px 0 8px -6px rgba(39,13,23,.18); }
+  .contenitore .testo-largo table.rsw-tab td,
+  .contenitore .testo-largo table.rsw-tab th{ min-width:150px; }
+}
+/* link leggibili nel box bordeaux dei confronti */
+.rsw-confronto .div-1 a{ color:#fff!important; text-decoration:underline; text-underline-offset:3px; }
+.rsw-confronto .div-1 a:hover{ color:var(--super-color)!important; }
