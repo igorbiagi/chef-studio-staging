@@ -13439,3 +13439,13 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 /* link leggibili nel box bordeaux dei confronti */
 .rsw-confronto .div-1 a{ color:#fff!important; text-decoration:underline; text-underline-offset:3px; }
 .rsw-confronto .div-1 a:hover{ color:var(--super-color)!important; }
+/* numeri di velocità dei siti seguiti */
+.rsw-cwv{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin:18px 0 26px; }
+.rsw-cwv-c{ background:#fff; border-radius:16px; padding:20px 20px 18px; box-shadow:0 0 0 1px rgba(39,13,23,.08); display:flex; flex-direction:column; }
+.rsw-cwv-k{ font-size:11.5px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--primary-color); }
+.rsw-cwv-c b{ font-size:40px; line-height:1.05; letter-spacing:-1px; color:#188038; margin:8px 0 10px; }
+.rsw-cwv-bar{ display:block; height:8px; border-radius:8px; background:#1e8e3e; margin:0 0 12px; }
+.rsw-cwv-c p{ font-size:15px; line-height:1.45; margin:0 0 10px; color:var(--txt-color); }
+.rsw-cwv-c small{ font-size:12.5px; line-height:1.4; color:rgba(39,13,23,.6); margin-top:auto; }
+@media (max-width:1024px){ .rsw-cwv{ grid-template-columns:1fr 1fr; } }
+@media (max-width:560px){ .rsw-cwv{ grid-template-columns:1fr; } .rsw-cwv-c b{ font-size:34px; } }
