@@ -1323,3 +1323,34 @@ document.querySelectorAll('.articolo code').forEach(function (source) {
 });
 
 }); 
+
+/////// chat dimostrativa (pagine siti, sezione .rsw-phone): i messaggi compaiono uno alla volta quando la sezione è visibile
+(function () {
+  var feed = document.querySelector('.rsw-phone .rsw-feed');
+  if (!feed || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var msgs = Array.prototype.slice.call(feed.querySelectorAll('.rsw-msg'));
+  msgs.forEach(function (m) { m.hidden = true; });
+  var dots = document.createElement('span');
+  dots.className = 'rsw-dots';
+  dots.innerHTML = '<b></b><b></b><b></b>';
+  function play(i) {
+    if (i >= msgs.length) return;
+    var m = msgs[i];
+    var bot = m.classList.contains('rsw-bot');
+    if (bot) {
+      feed.appendChild(dots);
+      dots.hidden = false;
+    }
+    setTimeout(function () {
+      dots.hidden = true;
+      m.hidden = false;
+      feed.appendChild(m);
+      setTimeout(function () { play(i + 1); }, bot ? 1500 : 700);
+    }, bot ? 1200 : 0);
+  }
+  var io = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting) { io.disconnect(); setTimeout(function () { play(0); }, 400); }
+  }, { threshold: 0.4 });
+  io.observe(feed);
+})();

@@ -108,7 +108,7 @@ $chef_header_is_enhanced = $chef_header_has_primary_button || $chef_header_has_s
   <div class="div-1">
 
     <?php if (get_sub_field('titolo_1')): ?>
-      <h1><?php echo esc_html(get_sub_field('titolo_1')); ?></h1>
+      <h1><?php echo wp_kses(get_sub_field('titolo_1'), ['em' => [], 'strong' => []]); ?></h1>
     <?php endif; ?>
 
     <?php if (get_sub_field('sottotitolo_1')): ?>
