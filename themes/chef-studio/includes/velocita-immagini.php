@@ -49,3 +49,29 @@ add_action('template_redirect', function () {
   }
   ob_start('chef_immagini_pigre');
 }, 99);
+
+/**
+ * Immagine delle anteprime (schede) con le misure ridotte di WordPress (srcset):
+ * prima usciva il file originale, anche 400 KB per una scheda larga 400 px.
+ * Niente width/height: la scheda decide le proporzioni con il CSS, come prima.
+ */
+function chef_img_scheda($img, $sizes = '(max-width: 700px) 92vw, (max-width: 1200px) 46vw, 560px') {
+  if (!is_array($img) || empty($img['url'])) {
+    return '';
+  }
+  $id = (int) ($img['ID'] ?? ($img['id'] ?? 0));
+  $src = $img['url'];
+  $srcset = '';
+  if ($id && wp_attachment_is_image($id) && !preg_match('/\.svg$/i', $src)) {
+    $grande = wp_get_attachment_image_src($id, 'large');
+    if ($grande) {
+      $src = $grande[0];
+    }
+    $srcset = (string) wp_get_attachment_image_srcset($id, 'large');
+  }
+  $html = '<img src="' . esc_url($src) . '"';
+  if ($srcset !== '') {
+    $html .= ' srcset="' . esc_attr($srcset) . '" sizes="' . esc_attr($sizes) . '"';
+  }
+  return $html . ' alt="' . esc_attr($img['alt'] ?? '') . '">';
+}

@@ -141,7 +141,7 @@ $ha_elementi_anteprime = false;
 
             <?php if ($mostra_img && !empty($data['immagine'])): ?>
               <figure class="contenitore-img">
-                <img src="<?php echo esc_url($data['immagine']['url']); ?>" alt="<?php echo esc_attr($data['immagine']['alt']); ?>">
+                <?php echo chef_img_scheda($data['immagine']); ?>
               </figure>
             <?php endif; ?>
 
@@ -208,7 +208,7 @@ $ha_elementi_anteprime = false;
 
             <?php if ($mostra_img && !empty($data['immagine'])): ?>
               <figure class="contenitore-img">
-                <img src="<?php echo esc_url($data['immagine']['url']); ?>" alt="<?php echo esc_attr($data['immagine']['alt']); ?>">
+                <?php echo chef_img_scheda($data['immagine']); ?>
               </figure>
             <?php endif; ?>
 
@@ -283,7 +283,7 @@ $ha_elementi_anteprime = false;
 
             <?php if ($mostra_img && !empty($img)): ?>
               <figure class="contenitore-img">
-                <img src="<?php echo esc_url($img['url']); ?>" alt="<?php echo esc_attr($img['alt']); ?>">
+                <?php echo chef_img_scheda($img); ?>
               </figure>
             <?php endif; ?>
 

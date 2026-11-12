@@ -3092,6 +3092,7 @@ function chef_get_card_categoria($post_id) {
 
 function get_contenuto_card($post_id) {
   $immagine = has_post_thumbnail($post_id) ? [
+    'ID'  => (int) get_post_thumbnail_id($post_id),
     'url' => get_the_post_thumbnail_url($post_id, 'large'),
     'alt' => get_the_title($post_id)
   ] : null;
