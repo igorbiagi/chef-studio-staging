@@ -13779,3 +13779,6 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
   .contenitore .testo-largo table.rsw-tab-evid tbody td:last-child{ background:hsla(39,94%,58%,.2)!important; border-radius:12px!important; padding:10px 12px!important; margin:2px -4px 10px; }
   .contenitore .testo-largo table.rsw-tab-evid tbody td:last-child::before{ color:var(--primary-color); }
 }
+
+/* --- casi: se c'è un solo caso occupa tutta la riga --- */
+.rsw-casi .anteprime-sezione li:only-child{ grid-column:1 / -1; }
