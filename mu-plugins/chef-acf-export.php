@@ -44,6 +44,12 @@ add_action('rest_api_init', function () {
         'callback'            => function (WP_REST_Request $req) {
             $id = (int) $req->get_param('id');
             $filtro = sanitize_text_field((string) $req->get_param('filtro'));
+            if ($req->get_param('campo')) {
+                $righe = get_field(sanitize_text_field((string) $req->get_param('campo')), $id);
+                $riga = (int) $req->get_param('riga');
+                $f = acf_get_field('layout_flessibile_1');
+                return ['riga' => $righe[$riga] ?? null, 'layouts' => array_map(function ($l) { return $l['name'] . ':' . count($l['sub_fields']); }, array_values($f['layouts'] ?? [])), 'acf' => defined('ACF_VERSION') ? ACF_VERSION : ''];
+            }
             $out = [];
             foreach (get_post_meta($id) as $k => $v) {
                 if ($filtro === '' || strpos($k, $filtro) !== false) {
