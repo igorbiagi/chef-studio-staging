@@ -13850,7 +13850,7 @@ html, body{ overflow-x:clip; }
 
 /* --- rsw8 12/11: barre dei Core Web Vitals centrate, a scheda, animate --- */
 .rsw-bar{ max-width:900px; margin:28px auto 8px; gap:0; background:#fff; border-radius:20px; padding:26px 34px 10px; box-shadow:0 0 0 1px rgba(39,13,23,.08), 0 18px 40px -24px rgba(39,13,23,.35); }
-.rsw-bar-leg{ text-align:center; padding-bottom:6px; }
+.rsw-bar .rsw-bar-leg{ padding-bottom:6px; }
 .rsw-bar-r{ grid-template-columns:230px 1fr; gap:28px; padding:20px 0 18px; }
 .rsw-bar-r + .rsw-bar-r{ border-top:1px solid rgba(39,13,23,.08); }
 .rsw-bar-n b{ font-size:24px; font-weight:800; letter-spacing:.02em; line-height:1.1; }
@@ -13867,7 +13867,8 @@ html, body{ overflow-x:clip; }
   .rsw-bar{ padding:16px 16px 4px; border-radius:16px; margin-top:20px; }
   .rsw-bar-r{ grid-template-columns:1fr; gap:4px; padding:16px 0 14px; }
   .rsw-bar-n b{ font-size:20px; }
-  .rsw-bar-s i{ padding:9px 4px; }
+  .rsw-bar-s{ grid-template-columns:4fr 3fr 3fr; }
+  .rsw-bar-s i{ padding:9px 4px; font-size:11px; }
 }
 @media (prefers-reduced-motion:no-preference){
   .js-rsw .rsw-bar-s i{ transform:scaleX(0); transform-origin:left; transition:transform .6s cubic-bezier(.2,.7,.2,1); }
