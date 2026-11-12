@@ -1372,6 +1372,9 @@ document.addEventListener('click', function (e) {
   var a = e.target.closest ? e.target.closest('a.rsw-cwv-img, a.rsw-zoom') : null;
   if (!a || typeof HTMLDialogElement === 'undefined') return;
   e.preventDefault();
+  // griglie con due sole schermate: sono già grandi, il link non fa niente
+  var g = a.closest('.rsw-cwv');
+  if (g && g.querySelectorAll(':scope > .rsw-cwv-c').length === 2) return;
   // su smartphone le schermate si vedono già grandi: niente finestra
   if (window.matchMedia('(max-width: 768px)').matches) return;
   var d = document.getElementById('rsw-zoom-dialog');
@@ -1398,7 +1401,7 @@ document.addEventListener('click', function (e) {
 // Solo transform e opacity (niente CLS); con "riduci animazioni" restano ferme e già accese.
 (function () {
   // Si osserva ogni scheda da sola: su telefono sono in colonna e si accendono una alla volta mentre scorri
-  var el = document.querySelectorAll('.rsw-tl, .rsw-cwv-c, .rsw-mappa-c, .rsw-mappa-n, .rsw-mappa-giu');
+  var el = document.querySelectorAll('.rsw-tl, .rsw-cwv-c, .rsw-mappa-c, .rsw-mappa-n, .rsw-mappa-giu, .rsw-bar-r');
   if (!el.length || !('IntersectionObserver' in window)) return;
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   document.documentElement.classList.add('js-rsw');
