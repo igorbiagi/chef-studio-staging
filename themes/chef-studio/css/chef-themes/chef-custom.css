@@ -13672,3 +13672,6 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 /* immagine allineata a destra nel testo (scelta dall'editor) */
 .contenitore .testo-largo img.alignright{ float:right; width:min(38%,380px); height:auto; margin:4px 0 18px 36px; border-radius:18px; }
 @media (max-width:900px){ .contenitore .testo-largo img.alignright{ float:none; width:100%; margin:0 0 20px; } }
+
+/* Caso in tappe: su tablet e smartphone niente frecce laterali (uscivano dal bordo) */
+@media (max-width:900px){ .rsw-percorso .anteprime-sezione li:not(:last-child)::after{ display:none!important; } }
