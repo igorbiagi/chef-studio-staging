@@ -1372,6 +1372,8 @@ document.addEventListener('click', function (e) {
   var a = e.target.closest ? e.target.closest('a.rsw-cwv-img, a.rsw-zoom') : null;
   if (!a || typeof HTMLDialogElement === 'undefined') return;
   e.preventDefault();
+  // su smartphone le schermate si vedono già grandi: niente finestra
+  if (window.matchMedia('(max-width: 768px)').matches) return;
   var d = document.getElementById('rsw-zoom-dialog');
   if (!d) {
     d = document.createElement('dialog');

@@ -13668,3 +13668,4 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 .rsw-fb-asse{ display:block!important; padding-left:248px; }
 .rsw-fb-asse-v{ display:flex; justify-content:space-between; font-size:12px; color:rgba(39,13,23,.6); }
 @media (max-width:700px){ .rsw-fb-asse{ padding-left:0; } }
+@media (max-width:768px){ .rsw-cwv-img{ cursor:default; pointer-events:none; } }
