@@ -13494,3 +13494,104 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 .rsw-bar-m{ transform:translateX(-50%)!important; margin-bottom:9px; line-height:1.2; }
 .rsw-bar-m::after{ left:50%!important; transform:translateX(-50%)!important; top:calc(100% - 1px); border-width:6px 6px 0; border-style:solid; border-color:var(--txt-color) transparent transparent; }
 .rsw-m-cls{ left:6%; }
+
+/* =========================================================
+   rsw7 12/11: blocchi firma delle pagine servizio
+   rsw-tl (percorso a tappe), rsw-mappa (schema sito aziendale),
+   rsw-percorso (caso in tappe), rsw-migra (schema migrazione),
+   rsw-forbici (forbici di prezzo a barre)
+========================================================= */
+/* --- percorso a tappe (pagina pilastro) --- */
+.rsw-tl{ position:relative; display:grid; grid-template-columns:repeat(4,1fr); gap:22px; margin:34px 0 10px; }
+.rsw-tl::before{ content:""; position:absolute; left:28px; right:28px; top:27px; height:3px; background:linear-gradient(90deg,var(--super-color),var(--primary-color)); border-radius:3px; }
+.rsw-tl-s{ position:relative; }
+.rsw-tl-n{ position:relative; z-index:1; width:56px; height:56px; border-radius:50%; background:var(--txt-color); color:var(--super-color); font-weight:800; font-size:20px; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 6px #fff; }
+.back-color-crema .rsw-tl-n{ box-shadow:0 0 0 6px var(--crema, #f6efe6); }
+.rsw-tl-s h3{ font-size:20px; line-height:1.2; margin:18px 0 8px; }
+.rsw-tl-s p{ font-size:15px; line-height:1.55; margin:0 0 12px; }
+.rsw-tl-out{ display:inline-flex; gap:8px; align-items:center; font-size:13px; font-weight:700; color:var(--txt-color); background:hsla(39,94%,58%,.22); border-radius:100px; padding:6px 12px; }
+.rsw-tl-out::before{ content:"✓"; color:#188038; }
+.rsw-tl-fine{ display:flex; justify-content:space-between; font-size:13px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:rgba(39,13,23,.6); margin-top:22px; padding-top:14px; border-top:1px dashed rgba(39,13,23,.25); }
+.rsw-tl-fine b{ color:var(--primary-color); }
+@media (max-width:900px){
+  .rsw-tl{ grid-template-columns:1fr; gap:0; }
+  .rsw-tl::before{ left:27px; right:auto; top:28px; bottom:28px; width:3px; height:auto; background:linear-gradient(180deg,var(--super-color),var(--primary-color)); }
+  .rsw-tl-s{ padding:0 0 26px 76px; }
+  .rsw-tl-n{ position:absolute; left:0; top:0; }
+  .rsw-tl-s h3{ margin-top:12px; }
+  .rsw-tl-fine{ flex-direction:column; gap:4px; }
+}
+
+/* --- mappa del sito aziendale --- */
+.rsw-mappa{ display:grid; grid-template-columns:1fr 1.1fr 1fr; grid-template-rows:auto auto; gap:18px 26px; align-items:center; margin:30px 0 8px; }
+.rsw-mappa-c{ grid-column:2; grid-row:1 / span 2; align-self:stretch; display:flex; flex-direction:column; justify-content:center; text-align:center; background:var(--txt-color); color:#fff; border-radius:24px; padding:34px 26px; position:relative; }
+.rsw-mappa-c b{ font-size:26px; line-height:1.15; color:#fff; }
+.rsw-mappa-c span{ display:block; margin-top:10px; font-size:15px; color:rgba(255,255,255,.75); }
+.rsw-mappa-c::after{ content:"WordPress · tema su misura"; display:block; margin:18px auto 0; font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--super-color); }
+.rsw-mappa-n{ background:#fff; border-radius:16px; padding:18px 18px 16px; box-shadow:0 0 0 1px rgba(39,13,23,.08); position:relative; }
+.rsw-mappa-n h3{ font-size:18px; margin:0 0 6px; }
+.rsw-mappa-n p{ font-size:14.5px; line-height:1.5; margin:0; }
+.rsw-mappa-n code{ font-family:inherit; font-weight:700; background:hsla(39,94%,58%,.22); padding:1px 6px; border-radius:6px; }
+.rsw-mappa-n.l::after, .rsw-mappa-n.r::after{ content:""; position:absolute; top:50%; width:26px; height:2px; background:var(--super-color); }
+.rsw-mappa-n.l::after{ right:-26px; } .rsw-mappa-n.r::after{ left:-26px; }
+.rsw-mappa-n.l{ grid-column:1; } .rsw-mappa-n.r{ grid-column:3; }
+.rsw-mappa-giu{ grid-column:1 / -1; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+.rsw-mappa-giu span{ font-size:14px; font-weight:700; background:#fff; border:1.5px solid rgba(39,13,23,.15); border-radius:100px; padding:8px 14px; }
+@media (max-width:900px){
+  .rsw-mappa{ grid-template-columns:1fr; }
+  .rsw-mappa-c{ grid-column:1; grid-row:auto; order:-1; }
+  .rsw-mappa-n.l, .rsw-mappa-n.r{ grid-column:1; }
+  .rsw-mappa-n.l::after, .rsw-mappa-n.r::after{ display:none; }
+}
+
+/* --- caso raccontato a tappe (e-commerce) --- */
+.rsw-percorso .anteprime-sezione ul{ display:grid!important; grid-template-columns:repeat(4,1fr); gap:0!important; counter-reset:rsw-p; }
+.rsw-percorso .anteprime-sezione li{ width:auto!important; max-width:none!important; margin:0!important; padding:0 10px!important; counter-increment:rsw-p; position:relative; }
+.rsw-percorso .anteprime-sezione li:not(:last-child)::after{ content:"→"; position:absolute; right:-12px; top:88px; z-index:2; width:28px; height:28px; border-radius:50%; background:var(--super-color); color:var(--txt-color); font-weight:800; display:flex; align-items:center; justify-content:center; font-size:15px; }
+.rsw-percorso .anteprime-sezione article{ display:flex!important; flex-direction:column!important; height:100%; padding:0!important; overflow:hidden; }
+.rsw-percorso .anteprime-sezione article > a{ display:flex!important; flex-direction:column!important; height:100%; }
+.rsw-percorso .contenitore-img{ width:100%!important; height:200px!important; margin:0!important; }
+.rsw-percorso .contenitore-img img{ width:100%!important; height:200px!important; object-fit:cover!important; object-position:top center!important; border-radius:0!important; }
+.rsw-percorso .testo-anteprima{ padding:18px 18px 20px!important; width:auto!important; }
+.rsw-percorso .testo-anteprima .titolo::before{ content:"0" counter(rsw-p); display:block; font-size:13px; font-weight:800; letter-spacing:1px; color:var(--primary-color); margin-bottom:4px; }
+@media (max-width:900px){
+  .rsw-percorso .anteprime-sezione ul{ grid-template-columns:1fr 1fr; gap:16px!important; }
+  .rsw-percorso .anteprime-sezione li::after{ display:none; }
+}
+@media (max-width:560px){ .rsw-percorso .anteprime-sezione ul{ grid-template-columns:1fr; } }
+
+/* --- schema della migrazione (restyling) --- */
+.rsw-migra{ display:grid; grid-template-columns:1fr auto 1fr; gap:14px 18px; align-items:center; max-width:900px; margin:26px 0 10px; }
+.rsw-migra-h{ font-size:12.5px; font-weight:800; letter-spacing:1px; text-transform:uppercase; color:rgba(39,13,23,.6); }
+.rsw-migra-u{ font-family:ui-monospace,Menlo,Consolas,monospace; font-size:14px; background:#fff; border-radius:10px; padding:10px 14px; box-shadow:0 0 0 1px rgba(39,13,23,.1); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.rsw-migra-u.old{ color:rgba(39,13,23,.6); text-decoration:line-through; text-decoration-color:rgba(217,48,37,.6); }
+.rsw-migra-u.new{ color:var(--txt-color); font-weight:700; box-shadow:0 0 0 2px #1e8e3e; }
+.rsw-migra-a{ font-size:12px; font-weight:800; color:#fff; background:#1e8e3e; border-radius:100px; padding:5px 12px; white-space:nowrap; }
+.rsw-migra-a::after{ content:" →"; }
+.rsw-migra-tot{ grid-column:1 / -1; display:flex; align-items:baseline; gap:14px; margin-top:12px; padding:18px 20px; background:var(--txt-color); color:#fff; border-radius:16px; }
+.rsw-migra-tot b{ font-size:38px; line-height:1; color:var(--super-color); white-space:nowrap; }
+.rsw-migra-tot span{ font-size:15px; line-height:1.45; color:rgba(255,255,255,.85); }
+@media (max-width:640px){
+  .rsw-migra{ grid-template-columns:1fr; gap:6px; }
+  .rsw-migra-h:nth-child(2), .rsw-migra-h:nth-child(3){ display:none; }
+  .rsw-migra-a{ justify-self:start; }
+  .rsw-migra-u.new{ margin-bottom:12px; }
+  .rsw-migra-tot{ flex-direction:column; gap:6px; }
+}
+
+/* --- forbici di prezzo (guida costi) --- */
+.rsw-forbici{ max-width:900px; margin:24px 0 12px; }
+.rsw-fb-r{ display:grid; grid-template-columns:230px 1fr; gap:18px; align-items:center; padding:14px 0; border-bottom:1px solid rgba(39,13,23,.12); }
+.rsw-fb-n b{ display:block; font-size:16px; }
+.rsw-fb-n span{ font-size:13px; color:rgba(39,13,23,.65); }
+.rsw-fb-t{ position:relative; height:34px; background:repeating-linear-gradient(90deg, rgba(39,13,23,.06) 0 1px, transparent 1px calc(100% / 8)); border-radius:8px; }
+.rsw-fb-b{ position:absolute; top:5px; bottom:5px; border-radius:6px; background:var(--primary-color); color:#fff; font-size:12.5px; font-weight:800; display:flex; align-items:center; justify-content:center; white-space:nowrap; }
+.rsw-fb-b.chiaro{ background:hsla(39,94%,58%,.45); color:var(--txt-color); justify-content:flex-start; padding-left:8px; }
+.rsw-fb-b.scuro{ background:var(--txt-color); color:var(--super-color); z-index:1; }
+.rsw-fb-asse{ display:grid; grid-template-columns:230px 1fr; gap:18px; margin-top:8px; }
+.rsw-fb-asse div{ display:flex; justify-content:space-between; font-size:12px; color:rgba(39,13,23,.6); }
+.rsw-fb-nota{ font-size:13px; color:rgba(39,13,23,.65); margin-top:10px; }
+@media (max-width:700px){
+  .rsw-fb-r, .rsw-fb-asse{ grid-template-columns:1fr; gap:8px; }
+  .rsw-fb-asse > span{ display:none; }
+}
