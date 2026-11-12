@@ -1393,3 +1393,21 @@ document.addEventListener('click', function (e) {
   big.src = a.getAttribute('href');
   if (big.complete && big.naturalWidth) big.classList.remove('carica');
 });
+
+// Percorso a tappe delle pagine servizio: si accende quando entra nello schermo.
+(function () {
+  var tl = document.querySelectorAll('.rsw-tl');
+  if (!tl.length || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.documentElement.classList.add('js-rsw');
+  var io = new IntersectionObserver(function (voci) {
+    voci.forEach(function (v) {
+      if (!v.isIntersecting) return;
+      v.target.classList.add('rsw-vivo');
+      var f = v.target.nextElementSibling;
+      if (f && f.classList.contains('rsw-tl-fine')) f.classList.add('rsw-vivo');
+      io.unobserve(v.target);
+    });
+  }, { threshold: 0.3 });
+  tl.forEach(function (el) { io.observe(el); });
+})();

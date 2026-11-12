@@ -200,6 +200,15 @@ function chef_rsw_definizioni_layout() {
     ], ['layout' => 'table']),
     chef_rsw_campo($p, 'totale_numero', 'Riquadro scuro: numero', 'text', chef_rsw_larghezza(30)),
     chef_rsw_campo($p, 'totale_testo', 'Riquadro scuro: testo', 'textarea', chef_rsw_larghezza(70) + ['rows' => 2, 'new_lines' => '']),
+    chef_rsw_ripetitore($p, 'casi', 'Schede dei casi sotto lo schema', 'Aggiungi caso', [
+      chef_rsw_campo($p . '_c', 'etichetta', 'Etichetta', 'text', chef_rsw_larghezza(30)),
+      chef_rsw_campo($p . '_c', 'titolo', 'Titolo', 'text', chef_rsw_larghezza(50)),
+      chef_rsw_campo($p . '_c', 'scuro', 'Scheda scura', 'true_false', chef_rsw_larghezza(20) + ['ui' => 1]),
+      chef_rsw_campo($p . '_c', 'numero', 'Numero grande (facoltativo)', 'text', chef_rsw_larghezza(30)),
+      chef_rsw_campo($p . '_c', 'barra', 'Barra piena sotto il numero', 'true_false', chef_rsw_larghezza(20) + ['ui' => 1]),
+      chef_rsw_campo($p . '_c', 'testo', 'Testo', 'textarea', chef_rsw_larghezza(50) + ['rows' => 3, 'new_lines' => '']),
+      chef_rsw_campo($p . '_c', 'punti', 'Punti con la spunta (uno per riga)', 'textarea', ['rows' => 3, 'new_lines' => '']),
+    ], ['instructions' => 'Se ci sono schede, il riquadro scuro qui sopra può restare vuoto.']),
     chef_rsw_wysiwyg($p, 'testo_dopo', 'Testo dopo lo schema'),
   ]];
 

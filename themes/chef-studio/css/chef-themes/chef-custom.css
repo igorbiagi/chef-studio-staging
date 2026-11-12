@@ -13675,3 +13675,79 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 
 /* Caso in tappe: su tablet e smartphone niente frecce laterali (uscivano dal bordo) */
 @media (max-width:900px){ .rsw-percorso .anteprime-sezione li:not(:last-child)::after{ display:none!important; } }
+
+/* =========================================================
+   rsw9 12/11: schema redirect a righe, schede casi migrazione,
+   percorso a tappe animato, foto a destra nei testi
+========================================================= */
+
+/* --- schema redirect: centrato, una riga per coppia --- */
+.rsw-migra{ display:block; max-width:980px; margin:30px auto 10px; }
+.rsw-migra-r{ display:grid; grid-template-columns:minmax(0,1fr) 150px minmax(0,1fr); gap:16px; align-items:center; margin-bottom:12px; }
+.rsw-migra-testa{ margin-bottom:8px; }
+.rsw-migra-a{ justify-self:center; position:relative; }
+.rsw-migra-a::after{ content:" →"; }
+.rsw-migra-tot{ margin-top:18px; }
+@media (max-width:900px){
+  .rsw-migra-r{ grid-template-columns:1fr; gap:0; background:rgba(255,255,255,.55); border-radius:14px; padding:12px; margin-bottom:16px; box-shadow:0 0 0 1px rgba(39,13,23,.08); }
+  .rsw-migra-testa{ display:none; }
+  .rsw-migra-a{ justify-self:start; margin:8px 0 8px 14px; }
+  .rsw-migra-a::after{ content:" ↓"; }
+  .rsw-migra-u.new{ margin-bottom:0!important; }
+  .rsw-migra-u{ white-space:normal; word-break:break-all; }
+}
+
+/* --- schede casi sotto lo schema --- */
+.rsw-migra-casi{ display:grid; grid-template-columns:1.35fr 1fr; gap:20px; max-width:980px; margin:26px auto 10px; }
+.rsw-migra-caso{ background:#fff; border-radius:20px; padding:26px 26px 24px; box-shadow:0 1px 0 rgba(39,13,23,.06), 0 12px 30px -18px rgba(39,13,23,.35); display:flex; flex-direction:column; }
+.rsw-migra-caso.scuro{ background:radial-gradient(120% 140% at 0% 0%, #4a1428 0%, #1d0b12 60%); color:#fff; }
+.rsw-migra-et{ align-self:flex-start; font-size:11.5px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--primary-color); background:hsla(39,94%,58%,.22); border-radius:100px; padding:5px 11px; margin-bottom:14px; }
+.rsw-migra-caso.scuro .rsw-migra-et{ color:var(--super-color); background:rgba(255,255,255,.08); }
+.rsw-migra-caso h3{ font-size:22px; line-height:1.2; margin:0 0 10px; }
+.rsw-migra-caso.scuro h3{ color:#fff; }
+.rsw-migra-caso p{ font-size:15.5px; line-height:1.55; margin:0 0 14px; }
+.rsw-migra-caso.scuro p{ color:rgba(255,255,255,.85); }
+.rsw-migra-caso ul{ list-style:none; margin:auto 0 0; padding:0; display:flex; flex-wrap:wrap; gap:8px; }
+.rsw-migra-caso li{ margin:0; font-size:13.5px; font-weight:700; border-radius:100px; padding:7px 13px 7px 11px; background:hsla(39,94%,58%,.18); }
+.rsw-migra-caso li::before{ content:"✓ "; color:#1e8e3e; }
+.rsw-migra-caso.scuro li{ background:rgba(255,255,255,.08); color:#fff; }
+.rsw-migra-caso.scuro li::before{ color:#7ee2a0; }
+.rsw-migra-num{ font-size:52px; line-height:1; font-weight:800; color:#1e8e3e; letter-spacing:-1px; margin-bottom:12px; }
+.rsw-migra-caso.scuro .rsw-migra-num{ color:var(--super-color); }
+.rsw-migra-barra{ display:block; height:8px; border-radius:8px; background:rgba(30,142,62,.15); overflow:hidden; margin:0 0 16px; }
+.rsw-migra-barra i{ display:block; height:100%; width:100%; border-radius:8px; background:linear-gradient(90deg,#34a853,#1e8e3e); transform-origin:left; }
+@media (max-width:900px){ .rsw-migra-casi{ grid-template-columns:1fr; } .rsw-migra-num{ font-size:44px; } }
+
+/* --- foto a destra dentro un testo: resta nella sua sezione --- */
+.contenitore .testo-largo{ display:flow-root; }
+.contenitore .testo-largo img.alignright{ float:right; width:min(40%,440px)!important; max-width:none; height:auto!important; aspect-ratio:4/3; object-fit:cover; object-position:50% 0; margin:6px 0 18px 36px; border-radius:18px; }
+@media (max-width:900px){ .contenitore .testo-largo img.alignright{ float:none; width:100%!important; margin:0 0 20px; } }
+
+/* --- percorso a tappe: si accende quando entra nello schermo --- */
+.rsw-tl-fine{ position:relative; border-top:0!important; }
+.rsw-tl-fine::before{ content:""; position:absolute; left:0; right:0; top:0; border-top:1px dashed rgba(39,13,23,.25); }
+.rsw-tl-fine::after{ content:""; position:absolute; left:0; right:0; top:-1px; height:3px; border-radius:3px; background:linear-gradient(90deg,var(--super-color),var(--primary-color)); transform-origin:left; }
+.rsw-tl-fine b{ position:relative; padding:4px 10px; margin:-4px -10px; border-radius:100px; }
+.rsw-tl-fine b::before{ content:""; position:absolute; left:-8px; top:50%; width:8px; height:8px; margin-top:-4px; border-radius:50%; background:#1e8e3e; opacity:0; }
+@media (prefers-reduced-motion: no-preference){
+  .js-rsw .rsw-tl::before{ transform:scaleX(0); transform-origin:left; transition:transform 1.3s cubic-bezier(.2,.7,.2,1) .1s; }
+  .js-rsw .rsw-tl-n{ transform:scale(.6); opacity:0; transition:transform .5s cubic-bezier(.3,1.6,.5,1), opacity .3s ease; }
+  .js-rsw .rsw-tl-out{ opacity:0; transform:translateY(6px); transition:opacity .4s ease, transform .4s ease; }
+  .js-rsw .rsw-tl-s:nth-child(1) .rsw-tl-n{ transition-delay:.1s; }  .js-rsw .rsw-tl-s:nth-child(1) .rsw-tl-out{ transition-delay:.35s; }
+  .js-rsw .rsw-tl-s:nth-child(2) .rsw-tl-n{ transition-delay:.4s; }  .js-rsw .rsw-tl-s:nth-child(2) .rsw-tl-out{ transition-delay:.65s; }
+  .js-rsw .rsw-tl-s:nth-child(3) .rsw-tl-n{ transition-delay:.7s; }  .js-rsw .rsw-tl-s:nth-child(3) .rsw-tl-out{ transition-delay:.95s; }
+  .js-rsw .rsw-tl-s:nth-child(4) .rsw-tl-n{ transition-delay:1s; }   .js-rsw .rsw-tl-s:nth-child(4) .rsw-tl-out{ transition-delay:1.25s; }
+  .js-rsw .rsw-tl.rsw-vivo::before{ transform:none; }
+  .js-rsw .rsw-tl.rsw-vivo .rsw-tl-n{ transform:none; opacity:1; }
+  .js-rsw .rsw-tl.rsw-vivo .rsw-tl-out{ transform:none; opacity:1; }
+  .js-rsw .rsw-tl-fine::after{ transform:scaleX(0); transition:transform 1.1s cubic-bezier(.4,0,.2,1) 1.3s; }
+  .js-rsw .rsw-tl-fine.rsw-vivo::after{ transform:none; }
+  .js-rsw .rsw-tl-fine b{ transition:background-color .5s ease 2.35s; }
+  .js-rsw .rsw-tl-fine.rsw-vivo b{ background-color:hsla(39,94%,58%,.25); }
+  .js-rsw .rsw-tl-fine.rsw-vivo b::before{ animation:rsw-arrivo 1.6s ease-out 2.4s 2 both; }
+  @media (max-width:900px){
+    .js-rsw .rsw-tl::before{ transform:scaleY(0); transform-origin:top; }
+  }
+}
+@keyframes rsw-arrivo{ 0%{ opacity:1; box-shadow:0 0 0 0 rgba(30,142,62,.45); } 70%{ opacity:1; box-shadow:0 0 0 10px rgba(30,142,62,0); } 100%{ opacity:1; box-shadow:0 0 0 0 rgba(30,142,62,0); } }
+@media (max-width:900px){ .rsw-tl-fine b{ margin:0 -10px; align-self:flex-start; } }
