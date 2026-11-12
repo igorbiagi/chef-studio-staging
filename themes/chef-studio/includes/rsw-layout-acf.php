@@ -371,3 +371,8 @@ function chef_rsw_chiudi() {
   echo chef_rsw_html(get_sub_field('testo_dopo'));
   echo '</div>';
 }
+
+// Testo semplice con apostrofi e virgolette tipografiche, come nei campi wysiwyg.
+function chef_rsw_t($testo) {
+  return esc_html(wptexturize((string) $testo));
+}

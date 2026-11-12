@@ -20,7 +20,7 @@ if (in_array('stretta', $opzioni, true)) {
 chef_rsw_apri();
 
 if ($colonne && $righe) : ?>
-<table class="<?php echo esc_attr(implode(' ', $classi)); ?>"><thead><tr><?php foreach ($colonne as $c) : ?><th><?php echo esc_html($c['intestazione'] ?? ''); ?><?php if (!empty($c['nota'])) : ?><small><strong><?php echo esc_html($c['nota']); ?></strong></small><?php endif; ?></th><?php endforeach; ?></tr></thead><tbody>
+<table class="<?php echo esc_attr(implode(' ', $classi)); ?>"><thead><tr><?php foreach ($colonne as $c) : ?><th><?php echo chef_rsw_t($c['intestazione'] ?? ''); ?><?php if (!empty($c['nota'])) : ?><small><strong><?php echo chef_rsw_t($c['nota']); ?></strong></small><?php endif; ?></th><?php endforeach; ?></tr></thead><tbody>
 <?php foreach ($righe as $r) :
   $celle = chef_rsw_righe($r['celle'] ?? '');
   if (!$celle) {

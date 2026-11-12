@@ -303,7 +303,7 @@ $ha_elementi_anteprime = false;
 
               <?php if ($mostra_testo && (!empty($txt) || $num_ev !== '')): ?>
                 <div class="testo">
-                  <?php if ($num_ev !== ''): ?><p class="rsw-num"><?php echo esc_html($num_ev); ?><?php if ($num_txt !== ''): ?><span><?php echo esc_html($num_txt); ?></span><?php endif; ?></p><?php endif; ?>
+                  <?php if ($num_ev !== ''): ?><p class="rsw-num"><?php echo chef_rsw_t($num_ev); ?><?php if ($num_txt !== ''): ?><span><?php echo chef_rsw_t($num_txt); ?></span><?php endif; ?></p><?php endif; ?>
                   <?php echo wp_kses_post($txt); ?>
                 </div>
               <?php endif; ?>

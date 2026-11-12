@@ -125,10 +125,10 @@ $chef_header_is_enhanced = $chef_header_has_primary_button || $chef_header_has_s
       <div class="hero-text">
         <?php echo get_sub_field('paragrafo'); ?>
         <?php if ($chef_header_punti): ?>
-          <div class="rsw-proof"><?php foreach ($chef_header_punti as $chef_pf): ?><div><?php if (!empty($chef_pf['stelle'])): ?><span class="rsw-stelle" aria-hidden="true">★★★★★</span><?php endif; ?><b><?php echo esc_html($chef_pf['titolo'] ?? ''); ?></b><small><?php echo esc_html($chef_pf['sotto'] ?? ''); ?></small></div><?php endforeach; ?></div>
+          <div class="rsw-proof"><?php foreach ($chef_header_punti as $chef_pf): ?><div><?php if (!empty($chef_pf['stelle'])): ?><span class="rsw-stelle" aria-hidden="true">★★★★★</span><?php endif; ?><b><?php echo chef_rsw_t($chef_pf['titolo'] ?? ''); ?></b><small><?php echo chef_rsw_t($chef_pf['sotto'] ?? ''); ?></small></div><?php endforeach; ?></div>
         <?php endif; ?>
         <?php foreach ($chef_header_schede as $chef_fc): $chef_fc_pos = (($chef_fc['posizione'] ?? 'a') === 'b') ? 'b' : 'a'; ?>
-          <div class="rsw-fc rsw-fc-<?php echo esc_attr($chef_fc_pos); ?>"><span><?php echo esc_html($chef_fc['etichetta'] ?? ''); ?></span><b><?php echo esc_html($chef_fc['titolo'] ?? ''); ?></b><?php echo esc_html($chef_fc['testo'] ?? ''); ?></div>
+          <div class="rsw-fc rsw-fc-<?php echo esc_attr($chef_fc_pos); ?>"><span><?php echo chef_rsw_t($chef_fc['etichetta'] ?? ''); ?></span><b><?php echo chef_rsw_t($chef_fc['titolo'] ?? ''); ?></b><?php echo chef_rsw_t($chef_fc['testo'] ?? ''); ?></div>
         <?php endforeach; ?>
       </div>
     <?php endif; ?>
