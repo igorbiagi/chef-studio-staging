@@ -39,10 +39,10 @@ add_action('wp_head', function () {
 // perché la prima schermata è già disegnata dal CSS critico qui sopra.
 // (Un solo file asincrono invece di tanti: meno ricalcoli dello stile mentre arrivano.)
 add_filter('litespeed_buffer_after', function ($html) {
-  if (!chef_critico_attivo() || strpos($html, 'id="chef-critico"') === false) {
+  if (!chef_critico_attivo() || strpos($html, 'chef-critico') === false) {
     return $html;
   }
-  return preg_replace_callback('#<link data-optimized="2" rel="stylesheet" href="([^"]+/litespeed/css/[^"]+)"\s*/?>#', function ($m) {
+  return preg_replace_callback('#<link data-optimized="?2"? rel="?stylesheet"? href="?([^" >]+/litespeed/css/[^" >]+)"?\s*/?>#', function ($m) {
     $href = $m[1];
     return '<link rel="preload" as="style" href="' . $href . '" onload="this.onload=null;this.rel=\'stylesheet\'"><noscript><link rel="stylesheet" href="' . $href . '"></noscript>';
   }, $html);
