@@ -52,7 +52,7 @@ add_filter('acf/load_field/name=classe_extra_2_contenitore', function ($field) {
  * Helper per definire i campi
  * ----------------------------------------------------------------- */
 function chef_rsw_campo($pref, $nome, $etichetta, $tipo, $extra = []) {
-  return array_merge([
+  $campo = array_merge([
     'key'          => 'field_rswc_' . $pref . '_' . $nome,
     'label'        => $etichetta,
     'name'         => $nome,
@@ -61,6 +61,14 @@ function chef_rsw_campo($pref, $nome, $etichetta, $tipo, $extra = []) {
     'required'     => 0,
     'wrapper'      => ['width' => '', 'class' => '', 'id' => ''],
   ], $extra);
+  // ACF legge i valori tramite '_name' e i sottocampi tramite 'parent':
+  // senza validazione i campi si salvano ma in pagina tornano vuoti.
+  if (!empty($campo['sub_fields'])) {
+    foreach ($campo['sub_fields'] as $i => $sf) {
+      $campo['sub_fields'][$i]['parent'] = $campo['key'];
+    }
+  }
+  return function_exists('acf_get_valid_field') ? acf_get_valid_field($campo) : $campo + ['_name' => $nome, '_valid' => 1];
 }
 
 function chef_rsw_wysiwyg($pref, $nome, $etichetta, $istruzioni = '') {
