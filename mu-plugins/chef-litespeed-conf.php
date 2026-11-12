@@ -12,7 +12,7 @@ if ($chef_lsc_host !== 'staging.chefstudio.it') {
     return;
 }
 
-const CHEF_LSC_VERSIONE = '8';
+const CHEF_LSC_VERSIONE = '9';
 
 add_action('init', function () {
     if (get_option('chef_lsc_versione') === CHEF_LSC_VERSIONE) {
@@ -34,7 +34,7 @@ add_action('init', function () {
         // JS dei moduli (Gravity Forms) caricato al primo gesto del visitatore: il modulo è in fondo
         // alla pagina. Restano subito attivi banner cookie, script del tema, recensioni e jQuery.
         'optm-js_defer'         => 2,
-        'optm-js_defer_exc'     => ['cookiebanner', 'complianz', 'cmplz', 'scripts-cs', 'google-reviews', 'jquery.min.js', 'jquery-core', 'wp-dom-ready', 'hooks.min.js', 'i18n.min.js', 'a11y', 'chef-turnstile-pigro', 'cfturnstile'],
+        'optm-js_defer_exc'     => ['cookiebanner', 'complianz', 'cmplz', 'scripts-cs', 'google-reviews', 'jquery.min.js', 'jquery-core', 'dom-ready', 'hooks.min.js', 'i18n.min.js', 'a11y', 'chef-turnstile-pigro', 'cfturnstile'],
     ];
     \LiteSpeed\Conf::cls()->update_confs($conf);
     update_option('chef_lsc_versione', CHEF_LSC_VERSIONE, false);
