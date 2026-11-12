@@ -51,3 +51,15 @@ add_filter('litespeed_buffer_after', function ($html) {
     return '<link rel="preload" as="style" href="' . $href . '" onload="this.onload=null;this.rel=\'stylesheet\'"><noscript><link rel="stylesheet" href="' . $href . '"></noscript>';
   }, $html);
 }, 50);
+
+// Prova 12/11/2026: sulle pagine servizi chef-custom.css resta bloccante (e LiteSpeed lo unisce
+// al resto). Asincrono, arrivava dopo il primo disegno e la pagina si ridisegnava con le
+// immagini delle schede già in caricamento.
+add_action('wp_enqueue_scripts', function () {
+  if (is_admin() || !is_singular()) {
+    return;
+  }
+  if (in_array((int) get_queried_object_id(), [2697, 2801, 2865, 2850, 2783, 2700, 90052, 2290], true)) {
+    wp_style_add_data('chef-custom', 'chef_nonblocking', false);
+  }
+}, 20);
