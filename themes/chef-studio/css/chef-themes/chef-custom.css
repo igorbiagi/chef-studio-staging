@@ -13789,33 +13789,55 @@ html:not(.chef-snap) .chef-google-reviews-track,
 html:not(.chef-snap) .chef-proposta-mobile-scroll{ scroll-snap-type:none!important; scroll-behavior:auto!important; }
 
 /* --- schede con numeri e mappa: si accendono quando entrano nello schermo (js/scripts-cs.js) ---
+   Ogni scheda è osservata da sola (su telefono si accendono una alla volta mentre scorri).
    Solo transform e opacity; senza JS o con "riduci animazioni" restano ferme e già visibili. */
 .rsw-cwv-c > b{ font-variant-numeric:tabular-nums; }
 @media (prefers-reduced-motion: no-preference){
-  .js-rsw .rsw-cwv .rsw-cwv-c{ opacity:0; transform:translateY(16px); transition:opacity .55s ease, transform .55s cubic-bezier(.2,.7,.2,1); }
-  .js-rsw .rsw-cwv .rsw-cwv-bar{ transform:scaleX(0); transform-origin:left; transition:transform 1.1s cubic-bezier(.2,.7,.2,1); }
-  .js-rsw .rsw-cwv .rsw-cwv-c:nth-child(2){ transition-delay:.12s; } .js-rsw .rsw-cwv .rsw-cwv-c:nth-child(2) .rsw-cwv-bar{ transition-delay:.3s; }
-  .js-rsw .rsw-cwv .rsw-cwv-c:nth-child(3){ transition-delay:.24s; } .js-rsw .rsw-cwv .rsw-cwv-c:nth-child(3) .rsw-cwv-bar{ transition-delay:.45s; }
-  .js-rsw .rsw-cwv .rsw-cwv-c:nth-child(4){ transition-delay:.36s; } .js-rsw .rsw-cwv .rsw-cwv-c:nth-child(4) .rsw-cwv-bar{ transition-delay:.6s; }
-  .js-rsw .rsw-cwv .rsw-cwv-c:nth-child(1) .rsw-cwv-bar{ transition-delay:.15s; }
-  .js-rsw .rsw-cwv.rsw-vivo .rsw-cwv-c, .js-rsw .rsw-cwv.rsw-vivo .rsw-cwv-bar{ opacity:1; transform:none; }
+  .js-rsw .rsw-cwv-c{ opacity:0; transform:translateY(16px); transition:opacity .55s ease, transform .55s cubic-bezier(.2,.7,.2,1); }
+  .js-rsw .rsw-cwv-c .rsw-cwv-bar{ transform:scaleX(0); transform-origin:left; transition:transform 1.2s cubic-bezier(.2,.7,.2,1) .25s; }
+  .js-rsw .rsw-cwv-c.rsw-vivo, .js-rsw .rsw-cwv-c.rsw-vivo .rsw-cwv-bar{ opacity:1; transform:none; }
 
   .js-rsw .rsw-mappa-c{ opacity:0; transform:scale(.94); transition:opacity .5s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
-  .js-rsw .rsw-mappa-n{ opacity:0; transition:opacity .5s ease, transform .5s cubic-bezier(.2,.7,.2,1); }
-  .js-rsw .rsw-mappa-n.l{ transform:translateX(-18px); } .js-rsw .rsw-mappa-n.r{ transform:translateX(18px); }
-  .js-rsw .rsw-mappa-n::after{ transform:scaleX(0); transition:transform .4s ease; }
+  .js-rsw .rsw-mappa-n{ opacity:0; transform:translateY(14px); transition:opacity .5s ease, transform .5s cubic-bezier(.2,.7,.2,1); }
+  .js-rsw .rsw-mappa-n::after{ transform:scaleX(0); transition:transform .4s ease .35s; }
   .js-rsw .rsw-mappa-n.l::after{ transform-origin:left; } .js-rsw .rsw-mappa-n.r::after{ transform-origin:right; }
+  .js-rsw .rsw-mappa-giu span{ opacity:.25; transform:translateY(6px); transition:opacity .35s ease, transform .35s ease; }
+  .js-rsw .rsw-mappa-c.rsw-vivo, .js-rsw .rsw-mappa-n.rsw-vivo, .js-rsw .rsw-mappa-n.rsw-vivo::after,
+  .js-rsw .rsw-mappa-giu.rsw-vivo span{ opacity:1; transform:none; }
+  .js-rsw .rsw-mappa-giu span:nth-child(2){ transition-delay:.1s; }  .js-rsw .rsw-mappa-giu span:nth-child(3){ transition-delay:.2s; }
+  .js-rsw .rsw-mappa-giu span:nth-child(4){ transition-delay:.3s; }  .js-rsw .rsw-mappa-giu span:nth-child(5){ transition-delay:.4s; }
+  .js-rsw .rsw-mappa-giu span:nth-child(6){ transition-delay:.5s; }  .js-rsw .rsw-mappa-giu span:nth-child(7){ transition-delay:.6s; }
+  .js-rsw .rsw-mappa-giu span:nth-child(8){ transition-delay:.7s; }  .js-rsw .rsw-mappa-giu span:nth-child(9){ transition-delay:.8s; }
+  .js-rsw .rsw-mappa-giu span:nth-child(10){ transition-delay:.9s; } .js-rsw .rsw-mappa-giu span:nth-child(11){ transition-delay:1s; }
+  .js-rsw .rsw-mappa-giu span:nth-child(12){ transition-delay:1.1s; }
+}
+/* Su computer le schede entrano insieme: le scaglioniamo (desktop come prima, approvato da Igor) */
+@media (prefers-reduced-motion: no-preference) and (min-width:1025px){
+  .js-rsw .rsw-mappa-n.l{ transform:translateX(-18px); } .js-rsw .rsw-mappa-n.r{ transform:translateX(18px); }
+  .js-rsw .rsw-cwv-c:nth-child(2){ transition-delay:.12s; } .js-rsw .rsw-cwv-c:nth-child(2) .rsw-cwv-bar{ transition-delay:.4s; }
+  .js-rsw .rsw-cwv-c:nth-child(3){ transition-delay:.24s; } .js-rsw .rsw-cwv-c:nth-child(3) .rsw-cwv-bar{ transition-delay:.55s; }
+  .js-rsw .rsw-cwv-c:nth-child(4){ transition-delay:.36s; } .js-rsw .rsw-cwv-c:nth-child(4) .rsw-cwv-bar{ transition-delay:.7s; }
   .js-rsw .rsw-mappa-n:nth-of-type(1){ transition-delay:.25s; } .js-rsw .rsw-mappa-n:nth-of-type(2){ transition-delay:.35s; }
   .js-rsw .rsw-mappa-n:nth-of-type(3){ transition-delay:.45s; } .js-rsw .rsw-mappa-n:nth-of-type(4){ transition-delay:.55s; }
   .js-rsw .rsw-mappa-n:nth-of-type(5){ transition-delay:.65s; } .js-rsw .rsw-mappa-n:nth-of-type(6){ transition-delay:.75s; }
   .js-rsw .rsw-mappa-n::after{ transition-delay:.9s; }
-  .js-rsw .rsw-mappa-giu span{ opacity:.25; transform:translateY(6px); transition:opacity .35s ease, transform .35s ease; }
-  .js-rsw .rsw-mappa.rsw-vivo .rsw-mappa-c, .js-rsw .rsw-mappa.rsw-vivo .rsw-mappa-n, .js-rsw .rsw-mappa.rsw-vivo .rsw-mappa-n::after,
-  .js-rsw .rsw-mappa.rsw-vivo .rsw-mappa-giu span{ opacity:1; transform:none; }
-  .js-rsw .rsw-mappa-giu span:nth-child(1){ transition-delay:1.1s; }  .js-rsw .rsw-mappa-giu span:nth-child(2){ transition-delay:1.2s; }
-  .js-rsw .rsw-mappa-giu span:nth-child(3){ transition-delay:1.3s; }  .js-rsw .rsw-mappa-giu span:nth-child(4){ transition-delay:1.4s; }
-  .js-rsw .rsw-mappa-giu span:nth-child(5){ transition-delay:1.5s; }  .js-rsw .rsw-mappa-giu span:nth-child(6){ transition-delay:1.6s; }
-  .js-rsw .rsw-mappa-giu span:nth-child(7){ transition-delay:1.7s; }  .js-rsw .rsw-mappa-giu span:nth-child(8){ transition-delay:1.8s; }
-  .js-rsw .rsw-mappa-giu span:nth-child(9){ transition-delay:1.9s; }  .js-rsw .rsw-mappa-giu span:nth-child(10){ transition-delay:2s; }
-  .js-rsw .rsw-mappa-giu span:nth-child(11){ transition-delay:2.1s; } .js-rsw .rsw-mappa-giu span:nth-child(12){ transition-delay:2.2s; }
+}
+
+/* --- niente scorrimento orizzontale della pagina (iPhone): clip non crea un contenitore di scroll, lo sticky resta --- */
+html, body{ overflow-x:clip; }
+
+/* --- telefono: bottoni centrati e "chi siamo" più compatto --- */
+@media (max-width:767px){
+  .rsw-persone .chi-siamo-home-cta, .rsw-fasi .rsw-cl-cta, .faq-intro, .rsw-bottone .button-container{ text-align:center; }
+  .rsw-persone .chi-siamo-home-button, .rsw-fasi .rsw-cl-cta .btn, .faq-intro .faq-intro-button, .rsw-bottone .btn{ display:flex!important; width:fit-content; margin-left:auto!important; margin-right:auto!important; }
+  .rsw-persone .chi-siamo-home-cta-note{ text-align:center; }
+  .rsw-persone .chi-siamo-home-grid{ row-gap:0; }
+  .rsw-persone .nome-sezione{ margin-bottom:8px; }
+  .rsw-persone .chi-siamo-home-title h2{ margin-bottom:12px; }
+  .rsw-persone .chi-siamo-home-text{ margin-bottom:0; }
+  .rsw-persone .chi-siamo-home-punti{ grid-template-columns:repeat(3,1fr); gap:10px; margin:18px 0 24px; }
+  .rsw-persone .chi-siamo-home-punto strong{ font-size:15px; line-height:1.2; }
+  .rsw-persone .chi-siamo-home-punto-text{ font-size:13px; line-height:1.3; }
+  .rsw-persone .chi-siamo-home-persone{ gap:18px; margin-bottom:22px; }
+  .rsw-persone .chi-siamo-home-persona-role{ margin-bottom:8px; }
 }
