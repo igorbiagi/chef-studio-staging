@@ -33,10 +33,33 @@ add_action('send_headers', function () {
     header('Cache-Control: private, no-store', true);
 });
 
-// Pagine del sito: solo per utenti collegati.
+// Misure di velocità (approvato da Igor il 12/11/2026): chi manda l'intestazione
+// X-Chef-Misura con il codice giusto vede le pagine come un visitatore, senza barra
+// di amministrazione. Nel repository c'è solo l'impronta del codice, non il codice.
+// Vale solo per leggere le pagine: API REST e pannello restano chiusi.
+function chef_staging_misura() {
+    $codice = isset($_SERVER['HTTP_X_CHEF_MISURA']) ? (string) $_SERVER['HTTP_X_CHEF_MISURA'] : '';
+    return $codice !== '' && hash_equals('98503b55ab3850f3933b8c75916be52fa2c294286a2df699a72def1a5a2279f4', hash('sha256', $codice));
+}
+
+// Pagine del sito: solo per utenti collegati (o per le misure).
 add_action('template_redirect', function () {
-    if (!is_user_logged_in()) {
-        auth_redirect();
+    if (is_user_logged_in()) {
+        return;
+    }
+    if (chef_staging_misura()) {
+        // Mai cache pubblica: la pagina misurata non deve finire a chi non ha il codice.
+        // La cache privata di LiteSpeed resta legata a chi ha fatto la richiesta.
+        do_action('litespeed_control_set_private', 'staging privato: misura');
+        return;
+    }
+    auth_redirect();
+}, 0);
+
+// Rete di sicurezza: un visitatore senza codice non riceve mai una pagina dalla cache pubblica.
+add_action('send_headers', function () {
+    if (!is_user_logged_in() && !chef_staging_misura()) {
+        do_action('litespeed_control_set_nocache', 'staging privato');
     }
 }, 0);
 
