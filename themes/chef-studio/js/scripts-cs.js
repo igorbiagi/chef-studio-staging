@@ -1411,3 +1411,18 @@ document.addEventListener('click', function (e) {
   }, { threshold: 0.3 });
   tl.forEach(function (el) { io.observe(el); });
 })();
+
+// Velocità: lo scroll-snap dei caroselli si accende solo al primo tocco, rotella o tasto
+// (se è attivo dal primo disegno Chrome smette di misurare l'LCP).
+(function () {
+  var html = document.documentElement;
+  function accendi() {
+    html.classList.add('chef-snap');
+    ['pointerdown', 'touchstart', 'wheel', 'keydown'].forEach(function (ev) {
+      window.removeEventListener(ev, accendi, true);
+    });
+  }
+  ['pointerdown', 'touchstart', 'wheel', 'keydown'].forEach(function (ev) {
+    window.addEventListener(ev, accendi, { passive: true, capture: true });
+  });
+})();

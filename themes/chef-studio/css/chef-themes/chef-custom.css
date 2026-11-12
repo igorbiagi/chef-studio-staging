@@ -13782,3 +13782,8 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 
 /* --- casi: se c'è un solo caso occupa tutta la riga --- */
 .rsw-casi .anteprime-sezione li:only-child{ grid-column:1 / -1; }
+
+/* --- velocità: lo scroll-snap dei caroselli fa uno scorrimento al primo disegno e Chrome
+   smette di misurare l'LCP. Si attiva solo quando il visitatore tocca o scorre. --- */
+html:not(.chef-snap) .chef-google-reviews-track,
+html:not(.chef-snap) .chef-proposta-mobile-scroll{ scroll-snap-type:none!important; scroll-behavior:auto!important; }
