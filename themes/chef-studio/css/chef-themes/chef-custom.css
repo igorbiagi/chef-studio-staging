@@ -13720,7 +13720,7 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 
 /* --- foto a destra dentro un testo: resta nella sua sezione --- */
 .contenitore .testo-largo{ display:flow-root; }
-.contenitore .testo-largo img.alignright{ float:right; width:min(40%,440px)!important; max-width:none; height:auto!important; aspect-ratio:4/3; object-fit:cover; object-position:50% 0; margin:6px 0 18px 36px; border-radius:18px; }
+.contenitore .testo-largo img.alignright{ float:right; width:min(40%,440px)!important; max-width:none; height:auto!important; aspect-ratio:1.56; object-fit:cover; object-position:50% 0; margin:6px 0 18px 36px; border-radius:18px; }
 @media (max-width:900px){ .contenitore .testo-largo img.alignright{ float:none; width:100%!important; margin:0 0 20px; } }
 
 /* --- percorso a tappe: si accende quando entra nello schermo --- */
@@ -13759,3 +13759,4 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 .rsw-cl-cta .btn:hover::after, .rsw-cl-cta .btn:focus::after{ transform:translateX(6px); }
 .rsw-migra-caso ul li{ list-style:none!important; }
 .rsw-migra-caso ul li::marker{ content:none; }
+@media (max-width:900px){ .contenitore .testo-largo img.alignright{ aspect-ratio:1.56; } }
