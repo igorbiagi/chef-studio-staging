@@ -12,7 +12,7 @@ if ($chef_lsc_host !== 'staging.chefstudio.it') {
     return;
 }
 
-const CHEF_LSC_VERSIONE = '2';
+const CHEF_LSC_VERSIONE = '3';
 
 add_action('init', function () {
     if (get_option('chef_lsc_versione') === CHEF_LSC_VERSIONE) {
