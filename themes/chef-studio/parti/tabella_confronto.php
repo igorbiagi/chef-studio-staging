@@ -29,7 +29,8 @@ if ($colonne && $righe) : ?>
   echo '<tr>';
   foreach ($celle as $i => $cella) {
     $tag = ($i === 0 && $prima_voce) ? 'th' : 'td';
-    echo '<' . $tag . '>' . wptexturize(wp_kses_post($cella)) . '</' . $tag . '>';
+    $et  = trim(($colonne[$i]['intestazione'] ?? '') . (!empty($colonne[$i]['nota']) ? ' · ' . $colonne[$i]['nota'] : ''));
+    echo '<' . $tag . ($et !== '' ? ' data-label="' . esc_attr(wptexturize($et)) . '"' : '') . '>' . wptexturize(wp_kses_post($cella)) . '</' . $tag . '>';
   }
   echo '</tr>';
 endforeach; ?>
