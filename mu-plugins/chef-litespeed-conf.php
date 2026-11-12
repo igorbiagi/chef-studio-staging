@@ -12,7 +12,7 @@ if ($chef_lsc_host !== 'staging.chefstudio.it') {
     return;
 }
 
-const CHEF_LSC_VERSIONE = '5';
+const CHEF_LSC_VERSIONE = '6';
 
 add_action('init', function () {
     if (get_option('chef_lsc_versione') === CHEF_LSC_VERSIONE) {
@@ -22,8 +22,7 @@ add_action('init', function () {
         return;
     }
     $conf = [
-        // CSS unito e minimizzato; il CSS critico resta nella pagina (non va unito)
-        // e il file unito lo rende non bloccante il tema (includes/velocita-critico.php).
+        // CSS unito e minimizzato (bloccante: il CSS critico in pagina è stato provato e peggiorava)
         'optm-css_min'          => true,
         'optm-css_comb'         => true,
         'optm-css_comb_ext_inl' => false,
