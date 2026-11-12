@@ -11,6 +11,10 @@ if (!defined('ABSPATH')) {
 }
 
 function chef_critico_pagine() {
+  // SPENTO il 12/11/2026: misurato su Web agency mobile, peggiorava (82-87 contro 91),
+  // perché con il CSS unito asincrono il browser ricalcola lo stile due volte.
+  // Per riaccenderlo togliere la riga qui sotto.
+  return [];
   // web agency, realizzazione siti web, aziendali, professionali, wordpress, e-commerce, restyling, quanto costa
   return [2697, 2801, 2865, 2850, 2783, 2700, 90052, 2290];
 }
