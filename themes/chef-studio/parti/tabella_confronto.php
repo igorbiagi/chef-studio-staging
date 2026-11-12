@@ -29,7 +29,7 @@ if ($colonne && $righe) : ?>
   echo '<tr>';
   foreach ($celle as $i => $cella) {
     $tag = ($i === 0 && $prima_voce) ? 'th' : 'td';
-    echo '<' . $tag . '>' . wp_kses_post($cella) . '</' . $tag . '>';
+    echo '<' . $tag . '>' . wptexturize(wp_kses_post($cella)) . '</' . $tag . '>';
   }
   echo '</tr>';
 endforeach; ?>
