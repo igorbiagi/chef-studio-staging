@@ -34,3 +34,24 @@ add_action('rest_api_init', function () {
         },
     ]);
 });
+
+add_action('rest_api_init', function () {
+    register_rest_route('chef/v1', '/acf-meta', [
+        'methods'             => 'GET',
+        'permission_callback' => function () {
+            return current_user_can('manage_options');
+        },
+        'callback'            => function (WP_REST_Request $req) {
+            $id = (int) $req->get_param('id');
+            $filtro = sanitize_text_field((string) $req->get_param('filtro'));
+            $out = [];
+            foreach (get_post_meta($id) as $k => $v) {
+                if ($filtro === '' || strpos($k, $filtro) !== false) {
+                    $out[$k] = maybe_unserialize($v[0]);
+                }
+            }
+            ksort($out);
+            return $out;
+        },
+    ]);
+});
