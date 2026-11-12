@@ -385,3 +385,12 @@ function chef_rsw_chiudi() {
 function chef_rsw_t($testo) {
   return esc_html(wptexturize((string) $testo));
 }
+
+// Anteprime: la scelta "2 colonne" (usata nei casi) mancava nella tendina, e salvando la pagina
+// dal pannello tornava a 3 colonne.
+add_filter('acf/load_field/key=field_68f794b0586e6', function ($field) {
+  if (is_array($field['choices'] ?? null) && !isset($field['choices']['anteprime-2'])) {
+    $field['choices'] = ['anteprime-2' => '2 colonne'] + $field['choices'];
+  }
+  return $field;
+});
