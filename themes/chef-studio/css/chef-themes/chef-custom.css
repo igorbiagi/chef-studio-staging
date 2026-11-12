@@ -13595,3 +13595,76 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
   .rsw-fb-r, .rsw-fb-asse{ grid-template-columns:1fr; gap:8px; }
   .rsw-fb-asse > span{ display:none; }
 }
+/* =========================================================
+   rsw8 12/11 notte: correzioni di Igor
+========================================================= */
+/* hero: la scheda in basso sta dentro la colonna immagine, mai sopra i testi */
+@media (min-width:1025px){
+  .rsw-fc-a{ right:auto!important; left:calc(50% + 28px)!important; }
+}
+/* barra di scorrimento: nelle schede informative non c'è niente da scorrere */
+.rsw-schede .anteprime-scroll-progress{ display:none!important; }
+/* metodo: bottone nella colonna sinistra */
+.come-lavoriamo-intro .rsw-cl-cta{ margin:26px 0 0; }
+.come-lavoriamo-intro .rsw-cl-cta .btn{ white-space:normal; text-align:left; line-height:1.3; padding:13px 24px!important; border-radius:30px; }
+.rsw-fasi .come-lavoriamo-metodo{ align-items:start; }
+/* tabella WordPress: "il nostro metodo" ben visibile */
+.contenitore .testo-largo table.rsw-tab th small strong{ font-weight:800; }
+/* finestra immagini: X centrata */
+.rsw-zoom-chiudi{ display:flex; align-items:center; justify-content:center; padding:0; font-size:0; }
+.rsw-zoom-chiudi::before{ content:""; display:block; width:16px; height:16px; background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 3l10 10M13 3L3 13' stroke='%23270d17' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E") center/16px 16px no-repeat; }
+#rsw-zoom-dialog img.carica{ visibility:hidden; }
+#rsw-zoom-dialog{ min-width:120px; min-height:120px; }
+
+/* persone: niente riquadri vuoti su tablet e smartphone */
+@media (max-width:1024px){
+  .rsw-persone .chi-siamo-home-persone{ display:grid!important; grid-template-columns:1fr 1fr!important; gap:22px!important; }
+  .rsw-persone .chi-siamo-home-persona{ display:block!important; }
+  .rsw-persone .chi-siamo-home-persona + .chi-siamo-home-persona{ margin-top:0!important; }
+  .rsw-persone .chi-siamo-home-persona-img{ background:none!important; }
+  .rsw-persone .chi-siamo-home-persona-img img{ height:auto!important; aspect-ratio:4 / 5!important; }
+  .rsw-persone .chi-siamo-home-persona-body{ display:block!important; padding:14px 2px 0!important; }
+}
+@media (max-width:560px){
+  .rsw-persone .chi-siamo-home-persone{ grid-template-columns:1fr!important; gap:26px!important; }
+  .rsw-persone .chi-siamo-home-persona{ display:grid!important; grid-template-columns:118px 1fr; gap:16px; align-items:start; }
+  .rsw-persone .chi-siamo-home-persona-body{ padding:0!important; }
+  .rsw-persone .chi-siamo-home-persona-body h3{ font-size:20px; }
+}
+
+/* e-commerce: perché WooCommerce, con immagine */
+.rsw-woo{ display:grid; grid-template-columns:1.05fr .95fr; gap:48px; align-items:center; }
+.rsw-woo-t h3{ margin-top:0; }
+.rsw-woo-l{ list-style:none; padding:0!important; margin:22px 0 0!important; display:grid; gap:18px; }
+.rsw-woo-l li{ list-style:none!important; position:relative; padding:0 0 0 46px!important; margin:0!important; font-size:16px; line-height:1.55; }
+.rsw-woo-l li::before{ content:"✓"; position:absolute; left:0; top:0; width:30px; height:30px; border-radius:50%; background:var(--txt-color); color:var(--super-color); font-weight:800; display:flex; align-items:center; justify-content:center; font-size:15px; }
+.rsw-woo-l li b{ display:block; font-size:18px; margin-bottom:2px; }
+.rsw-woo-img{ margin:0; }
+.rsw-woo-img img{ width:100%; height:auto; display:block; border-radius:18px; box-shadow:0 30px 60px -30px rgba(39,13,23,.45); }
+.rsw-woo-img figcaption{ font-size:13px; color:rgba(39,13,23,.65); margin-top:10px; }
+.rsw-gest{ display:grid; grid-template-columns:1.05fr .95fr; gap:48px; align-items:center; margin-top:56px; padding-top:44px; border-top:1px solid rgba(39,13,23,.12); }
+.rsw-gest-t h3{ margin-top:0; }
+.rsw-gest-s{ display:grid; grid-template-columns:1fr auto 1fr; gap:14px; align-items:center; }
+.rsw-gest-box{ background:#fff; border-radius:18px; padding:26px 16px; text-align:center; font-weight:800; font-size:19px; box-shadow:0 0 0 1px rgba(39,13,23,.1); }
+.rsw-gest-box small{ display:block; font-weight:600; font-size:13px; opacity:.65; margin-top:4px; }
+.rsw-gest-box.scuro{ background:var(--txt-color); color:#fff; box-shadow:none; }
+.rsw-gest-box.scuro small{ color:var(--super-color); opacity:1; }
+.rsw-gest-f{ display:flex; flex-direction:column; gap:7px; }
+.rsw-gest-f span{ font-size:12.5px; font-weight:800; white-space:nowrap; text-align:center; background:hsla(39,94%,58%,.3); border-radius:100px; padding:5px 12px; }
+.rsw-gest-f span:last-child{ background:rgba(30,142,62,.15); color:#1e6b34; }
+.rsw-foto-dx{ float:right; width:min(38%,380px); margin:4px 0 18px 36px; }
+.rsw-foto-dx img{ width:100%; height:auto; display:block; border-radius:18px; }
+@media (max-width:900px){
+  .rsw-woo, .rsw-gest{ grid-template-columns:1fr; gap:28px; }
+  .rsw-foto-dx{ float:none; width:100%; margin:0 0 20px; }
+}
+@media (max-width:420px){
+  .rsw-gest-s{ grid-template-columns:1fr; }
+  .rsw-gest-f{ flex-direction:row; flex-wrap:wrap; justify-content:center; }
+}
+.rsw-woo-l li::marker{ content:""; }
+.rsw-mappa-n code{ display:inline!important; white-space:nowrap; margin:0!important; padding:1px 6px!important; font-size:inherit!important; background:hsla(39,94%,58%,.22)!important; border:0!important; width:auto!important; }
+/* forbici: asse allineato alla traccia (senza elementi vuoti che WordPress spezza) */
+.rsw-fb-asse{ display:block!important; padding-left:248px; }
+.rsw-fb-asse-v{ display:flex; justify-content:space-between; font-size:12px; color:rgba(39,13,23,.6); }
+@media (max-width:700px){ .rsw-fb-asse{ padding-left:0; } }

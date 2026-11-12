@@ -1382,7 +1382,12 @@ document.addEventListener('click', function (e) {
   }
   var img = a.querySelector('img');
   var big = d.querySelector('img');
-  big.src = a.getAttribute('href');
+  // svuota l'immagine precedente e mostra la nuova solo quando è caricata
+  big.classList.add('carica');
+  big.onload = function () { big.classList.remove('carica'); };
+  big.removeAttribute('src');
   big.alt = img ? img.alt : '';
   d.showModal();
+  big.src = a.getAttribute('href');
+  if (big.complete && big.naturalWidth) big.classList.remove('carica');
 });
