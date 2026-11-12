@@ -12,7 +12,7 @@ if ($chef_lsc_host !== 'staging.chefstudio.it') {
     return;
 }
 
-const CHEF_LSC_VERSIONE = '9';
+const CHEF_LSC_VERSIONE = '10';
 
 add_action('init', function () {
     if (get_option('chef_lsc_versione') === CHEF_LSC_VERSIONE) {
@@ -31,6 +31,9 @@ add_action('init', function () {
         'optm-qs_rm'            => true,  // niente ?ver= sugli statici
         'optm-emoji_rm'         => true,
         'optm-js_min'           => true,
+        // La minimizzazione di LiteSpeed rompe dom-ready di WordPress (wp.domReady resta locale
+        // e wp-a11y va in errore): quei file restano come sono.
+        'optm-js_exc'           => ['wp-includes/js/dist/dom-ready', 'wp-includes/js/dist/a11y'],
         // JS dei moduli (Gravity Forms) caricato al primo gesto del visitatore: il modulo è in fondo
         // alla pagina. Restano subito attivi banner cookie, script del tema, recensioni e jQuery.
         'optm-js_defer'         => 2,
