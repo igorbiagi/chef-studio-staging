@@ -12,7 +12,7 @@ if ($chef_lsc_host !== 'staging.chefstudio.it') {
     return;
 }
 
-const CHEF_LSC_VERSIONE = '4';
+const CHEF_LSC_VERSIONE = '5';
 
 add_action('init', function () {
     if (get_option('chef_lsc_versione') === CHEF_LSC_VERSIONE) {
@@ -22,10 +22,11 @@ add_action('init', function () {
         return;
     }
     $conf = [
-        // CSS: lo gestisce il tema (CSS critico nella pagina, fogli non bloccanti).
-        // Se LiteSpeed unisce i CSS rimette tutto in un file che blocca la pagina.
-        'optm-css_min'          => false,
-        'optm-css_comb'         => false,
+        // CSS unito e minimizzato; il CSS critico resta nella pagina (non va unito)
+        // e il file unito lo rende non bloccante il tema (includes/velocita-critico.php).
+        'optm-css_min'          => true,
+        'optm-css_comb'         => true,
+        'optm-css_comb_ext_inl' => false,
         'optm-css_font_display' => true,  // font-display: swap
         'optm-html_min'         => true,
         'optm-qs_rm'            => true,  // niente ?ver= sugli statici

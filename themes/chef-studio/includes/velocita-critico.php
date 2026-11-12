@@ -35,13 +35,15 @@ add_action('wp_head', function () {
   echo '<style id="chef-critico">' . str_ireplace('</style', '<\/style', $css) . "</style>\n";
 }, 1);
 
-add_filter('style_loader_tag', function ($html, $handle, $href, $media) {
-  if (!chef_critico_attivo() || strpos($html, "rel='stylesheet'") === false && strpos($html, 'rel="stylesheet"') === false) {
+// I fogli li unisce LiteSpeed Cache in un solo file: qui lo rendiamo non bloccante,
+// perché la prima schermata è già disegnata dal CSS critico qui sopra.
+// (Un solo file asincrono invece di tanti: meno ricalcoli dello stile mentre arrivano.)
+add_filter('litespeed_buffer_after', function ($html) {
+  if (!chef_critico_attivo() || strpos($html, 'id="chef-critico"') === false) {
     return $html;
   }
-  if (strpos($html, '<noscript>') !== false) {
-    return $html;
-  }
-  $async = preg_replace('/rel=([\'"])stylesheet\1/', 'rel="preload" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"', $html, 1);
-  return $async . '<noscript>' . trim($html) . "</noscript>\n";
-}, 30, 4);
+  return preg_replace_callback('#<link data-optimized="2" rel="stylesheet" href="([^"]+/litespeed/css/[^"]+)"\s*/?>#', function ($m) {
+    $href = $m[1];
+    return '<link rel="preload" as="style" href="' . $href . '" onload="this.onload=null;this.rel=\'stylesheet\'"><noscript><link rel="stylesheet" href="' . $href . '"></noscript>';
+  }, $html);
+}, 50);
