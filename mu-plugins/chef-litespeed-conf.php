@@ -12,7 +12,7 @@ if ($chef_lsc_host !== 'staging.chefstudio.it') {
     return;
 }
 
-const CHEF_LSC_VERSIONE = '6';
+const CHEF_LSC_VERSIONE = '7';
 
 add_action('init', function () {
     if (get_option('chef_lsc_versione') === CHEF_LSC_VERSIONE) {
@@ -36,3 +36,17 @@ add_action('init', function () {
     update_option('chef_lsc_versione', CHEF_LSC_VERSIONE, false);
     do_action('litespeed_purge_all', 'chef: nuove impostazioni');
 }, 20);
+
+// Dopo ogni caricamento di file del tema (deploy) la cache si svuota da sola:
+// confronta la data di modifica più recente dei file del tema con quella salvata.
+add_action('init', function () {
+    $dir = get_stylesheet_directory();
+    $ultimo = 0;
+    foreach (array_merge(glob($dir . '/*.php') ?: [], glob($dir . '/{includes,parti}/*.php', GLOB_BRACE) ?: [], glob($dir . '/css/chef-themes/*.css') ?: [], glob($dir . '/js/*.js') ?: []) as $f) {
+        $ultimo = max($ultimo, (int) @filemtime($f));
+    }
+    if ($ultimo && (int) get_option('chef_lsc_tema') !== $ultimo) {
+        update_option('chef_lsc_tema', $ultimo, false);
+        do_action('litespeed_purge_all', 'chef: file del tema aggiornati');
+    }
+}, 21);
