@@ -24,7 +24,9 @@ function chef_immagini_pigre($html) {
   $prima = substr($html, 0, $inizio);
   $dopo = preg_replace_callback('/<img\b[^>]*>/i', function ($t) {
     $tag = $t[0];
-    if (preg_match('/(no-lazy|skip-lazy)/i', $tag)) {
+    // Icone SVG: pesano pochi byte e alcune stanno in elementi fissi (pulsante WhatsApp),
+    // dove il caricamento pigro le farebbe comparire in ritardo.
+    if (preg_match('/(no-lazy|skip-lazy)/i', $tag) || preg_match('/\ssrc=["\'][^"\']+\.svg/i', $tag)) {
       return $tag;
     }
     // Un'immagine pigra non deve chiedere priorità alta (WordPress a volte mette entrambe).
