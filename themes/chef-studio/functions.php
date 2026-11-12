@@ -1780,9 +1780,9 @@ function chefstudio_schema_pagine_servizio_standard() {
             'name'        => 'Agenzia SEO',
             'serviceType' => 'Agenzia SEO',
             'category'    => 'SEO',
-            'person'      => 'igor-biagi',
-            'image'       => get_stylesheet_directory_uri() . '/img/seo/consulenza-seo.jpg',
-            'description' => 'Servizi SEO strategici per migliorare visibilita, contenuti, struttura tecnica e risultati organici sui motori di ricerca.',
+            'person'      => ['igor-biagi', 'andrea-biagi'],
+            'image'       => home_url('/wp-content/uploads/2026/05/agenzia-seo.png'),
+            'description' => 'Agenzia SEO dal 2012: analisi delle ricerche, decisioni pagina per pagina, interventi tecnici e contenuti fatti dallo stesso team che sviluppa i siti, per Google e per le risposte delle AI.',
         ],
         'consulente-seo' => [
             'name'        => 'Consulente SEO',

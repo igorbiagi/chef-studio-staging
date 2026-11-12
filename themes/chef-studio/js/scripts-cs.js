@@ -1394,22 +1394,39 @@ document.addEventListener('click', function (e) {
   if (big.complete && big.naturalWidth) big.classList.remove('carica');
 });
 
-// Percorso a tappe delle pagine servizio: si accende quando entra nello schermo.
+// Pagine servizio: percorso a tappe, schede con numeri e mappa si accendono quando entrano nello schermo.
+// Solo transform e opacity (niente CLS); con "riduci animazioni" restano ferme e già accese.
 (function () {
-  var tl = document.querySelectorAll('.rsw-tl');
-  if (!tl.length || !('IntersectionObserver' in window)) return;
+  var el = document.querySelectorAll('.rsw-tl, .rsw-cwv, .rsw-mappa');
+  if (!el.length || !('IntersectionObserver' in window)) return;
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   document.documentElement.classList.add('js-rsw');
+  // Numeri delle schede: la parte numerica sale da 0 al valore (es. +50%, 3 su 4)
+  function conta(b) {
+    var t = b.textContent, m = t.match(/\d+([.,]\d+)?/);
+    if (!m) return;
+    var fine = parseFloat(m[0].replace(',', '.')), dec = m[1] ? m[1].length - 1 : 0;
+    if (fine < 3) return;
+    var prima = t.slice(0, m.index), dopo = t.slice(m.index + m[0].length), t0 = null, durata = 1100;
+    function passo(ts) {
+      if (t0 === null) t0 = ts;
+      var k = Math.min(1, (ts - t0) / durata), v = fine * (1 - Math.pow(1 - k, 3));
+      b.textContent = prima + v.toFixed(dec).replace('.', ',') + dopo;
+      if (k < 1) requestAnimationFrame(passo); else b.textContent = t;
+    }
+    requestAnimationFrame(passo);
+  }
   var io = new IntersectionObserver(function (voci) {
     voci.forEach(function (v) {
       if (!v.isIntersecting) return;
       v.target.classList.add('rsw-vivo');
       var f = v.target.nextElementSibling;
       if (f && f.classList.contains('rsw-tl-fine')) f.classList.add('rsw-vivo');
+      if (v.target.classList.contains('rsw-cwv')) v.target.querySelectorAll('.rsw-cwv-c > b').forEach(conta);
       io.unobserve(v.target);
     });
-  }, { threshold: 0.3 });
-  tl.forEach(function (el) { io.observe(el); });
+  }, { threshold: 0.25 });
+  el.forEach(function (e) { io.observe(e); });
 })();
 
 // Velocità: lo scroll-snap dei caroselli si accende solo al primo tocco, rotella o tasto
