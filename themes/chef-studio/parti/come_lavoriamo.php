@@ -111,6 +111,16 @@ if (empty($steps) || !is_array($steps)) {
       <?php if (!empty($testo)): ?>
         <div class="come-lavoriamo-intro"><?php echo wp_kses_post($testo); ?></div>
       <?php endif; ?>
+
+      <?php
+      $cl_link  = get_sub_field('link_cta');
+      $cl_testo = trim((string) get_sub_field('testo_bottone'));
+      $cl_url   = is_array($cl_link) ? ($cl_link['url'] ?? '') : (string) $cl_link;
+      if ($cl_url !== '' && $cl_testo !== ''):
+        $cl_tgt = is_array($cl_link) && !empty($cl_link['target']) ? $cl_link['target'] : '';
+      ?>
+        <p class="rsw-cl-cta"><a class="btn btn-super" href="<?php echo esc_url($cl_url); ?>"<?php echo $cl_tgt ? ' target="' . esc_attr($cl_tgt) . '" rel="noopener"' : ''; ?>><?php echo esc_html($cl_testo); ?></a></p>
+      <?php endif; ?>
     </div>
 
     <div class="come-lavoriamo-steps">

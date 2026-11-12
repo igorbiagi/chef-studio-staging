@@ -12588,12 +12588,12 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 .rsw-hero header .hero-subtitle{ order:1; }
 .rsw-hero header h1{ order:2; }
 .rsw-hero header .hero-text{ display:contents; }
-.rsw-hero .rsw-lead{ order:3; }
+.rsw-hero .rsw-lead, .rsw-hero .hero-text > p{ order:3; }
 .rsw-hero header .hero-actions{ order:4; }
 .rsw-hero header .local-container{ order:5; }
 .rsw-hero .rsw-proof{ order:6; }
 
-.rsw-hero .rsw-kicker{
+.rsw-hero .rsw-kicker, .rsw-hero .hero-subtitle > p{
   margin:0;
   font-size:14px;
   font-weight:700;
@@ -12612,7 +12612,7 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
   font-style:normal;
   color:var(--super-color);
 }
-.rsw-hero .rsw-lead{
+.rsw-hero .rsw-lead, .rsw-hero .hero-text > p{
   font-size:20px;
   line-height:1.45;
   max-width:540px;
@@ -12734,8 +12734,8 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
   .rsw-hero header.struttura-container{ min-height:0; max-height:none; display:flex; flex-direction:column; align-items:stretch; }
   .rsw-hero header .div-1{ padding:20px 0 0; }
   .rsw-hero header h1{ font-size:40px; }
-  .rsw-hero .rsw-kicker{ font-size:12px; letter-spacing:1px; }
-  .rsw-hero .rsw-lead{ font-size:17.5px; }
+  .rsw-hero .rsw-kicker, .rsw-hero .hero-subtitle > p{ font-size:12px; letter-spacing:1px; }
+  .rsw-hero .rsw-lead, .rsw-hero .hero-text > p{ font-size:17.5px; }
   .rsw-hero header .hero-actions{ width:100%; flex-direction:column; }
   .rsw-hero header .hero-actions .btn{ width:100%; justify-content:center; }
   .rsw-hero header .local-container{ width:100%; justify-content:center; }
@@ -13332,7 +13332,7 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
   .rsw-hero header.struttura-container{ min-height:min(calc(100svh - 110px), 620px); max-height:660px; }
   .rsw-hero header .div-1{ padding:28px 0; }
   .rsw-hero header h1{ font-size:clamp(38px, 3.7vw, 56px); margin:12px 0 16px; }
-  .rsw-hero .rsw-lead{ font-size:18.5px; margin-bottom:22px; }
+  .rsw-hero .rsw-lead, .rsw-hero .hero-text > p{ font-size:18.5px; margin-bottom:22px; }
   .rsw-proof{ margin-top:20px; padding-top:16px; }
   .rsw-hero header .div-2{ min-height:440px; }
   .rsw-hero header figure.hero-img{ height:min(78svh, 640px); }
@@ -13527,7 +13527,7 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 .rsw-mappa-c{ grid-column:2; grid-row:1 / span 2; align-self:stretch; display:flex; flex-direction:column; justify-content:center; text-align:center; background:var(--txt-color); color:#fff; border-radius:24px; padding:34px 26px; position:relative; }
 .rsw-mappa-c b{ font-size:26px; line-height:1.15; color:#fff; }
 .rsw-mappa-c span{ display:block; margin-top:10px; font-size:15px; color:rgba(255,255,255,.75); }
-.rsw-mappa-c::after{ content:"WordPress · tema su misura"; display:block; margin:18px auto 0; font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--super-color); }
+.rsw-mappa-c .rsw-mappa-et{ font-style:normal; display:block; margin:18px auto 0; font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--super-color); }
 .rsw-mappa-n{ background:#fff; border-radius:16px; padding:18px 18px 16px; box-shadow:0 0 0 1px rgba(39,13,23,.08); position:relative; }
 .rsw-mappa-n h3{ font-size:18px; margin:0 0 6px; }
 .rsw-mappa-n p{ font-size:14.5px; line-height:1.5; margin:0; }
@@ -13584,7 +13584,7 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 .rsw-fb-r{ display:grid; grid-template-columns:230px 1fr; gap:18px; align-items:center; padding:14px 0; border-bottom:1px solid rgba(39,13,23,.12); }
 .rsw-fb-n b{ display:block; font-size:16px; }
 .rsw-fb-n span{ font-size:13px; color:rgba(39,13,23,.65); }
-.rsw-fb-t{ position:relative; height:34px; background:repeating-linear-gradient(90deg, rgba(39,13,23,.06) 0 1px, transparent 1px calc(100% / 8)); border-radius:8px; }
+.rsw-fb-t{ position:relative; height:34px; background:repeating-linear-gradient(90deg, rgba(39,13,23,.06) 0 1px, transparent 1px calc(100% / var(--fb-div, 8))); border-radius:8px; }
 .rsw-fb-b{ position:absolute; top:5px; bottom:5px; border-radius:6px; background:var(--primary-color); color:#fff; font-size:12.5px; font-weight:800; display:flex; align-items:center; justify-content:center; white-space:nowrap; }
 .rsw-fb-b.chiaro{ background:hsla(39,94%,58%,.45); color:var(--txt-color); justify-content:flex-start; padding-left:8px; }
 .rsw-fb-b.scuro{ background:var(--txt-color); color:var(--super-color); z-index:1; }
@@ -13605,8 +13605,8 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 /* barra di scorrimento: nelle schede informative non c'è niente da scorrere */
 .rsw-schede .anteprime-scroll-progress{ display:none!important; }
 /* metodo: bottone nella colonna sinistra */
-.come-lavoriamo-intro .rsw-cl-cta{ margin:26px 0 0; }
-.come-lavoriamo-intro .rsw-cl-cta .btn{ white-space:normal; text-align:left; line-height:1.3; padding:13px 24px!important; border-radius:30px; }
+.rsw-cl-cta{ margin:26px 0 0; }
+.rsw-cl-cta .btn{ white-space:normal; text-align:left; line-height:1.3; padding:13px 24px!important; border-radius:30px; }
 .rsw-fasi .come-lavoriamo-metodo{ align-items:start; }
 /* tabella WordPress: "il nostro metodo" ben visibile */
 .contenitore .testo-largo table.rsw-tab th small strong{ font-weight:800; }
@@ -13651,7 +13651,7 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 .rsw-gest-box.scuro small{ color:var(--super-color); opacity:1; }
 .rsw-gest-f{ display:flex; flex-direction:column; gap:7px; }
 .rsw-gest-f span{ font-size:12.5px; font-weight:800; white-space:nowrap; text-align:center; background:hsla(39,94%,58%,.3); border-radius:100px; padding:5px 12px; }
-.rsw-gest-f span:last-child{ background:rgba(30,142,62,.15); color:#1e6b34; }
+.rsw-gest-f span.sx{ background:rgba(30,142,62,.15); color:#1e6b34; }
 .rsw-foto-dx{ float:right; width:min(38%,380px); margin:4px 0 18px 36px; }
 .rsw-foto-dx img{ width:100%; height:auto; display:block; border-radius:18px; }
 @media (max-width:900px){
@@ -13669,3 +13669,6 @@ body.admin-bar:has(.hero-landing-ads) .hero-landing-ads-sitebar{
 .rsw-fb-asse-v{ display:flex; justify-content:space-between; font-size:12px; color:rgba(39,13,23,.6); }
 @media (max-width:700px){ .rsw-fb-asse{ padding-left:0; } }
 @media (max-width:768px){ .rsw-cwv-img{ cursor:default; pointer-events:none; } }
+/* immagine allineata a destra nel testo (scelta dall'editor) */
+.contenitore .testo-largo img.alignright{ float:right; width:min(38%,380px); height:auto; margin:4px 0 18px 36px; border-radius:18px; }
+@media (max-width:900px){ .contenitore .testo-largo img.alignright{ float:none; width:100%; margin:0 0 20px; } }

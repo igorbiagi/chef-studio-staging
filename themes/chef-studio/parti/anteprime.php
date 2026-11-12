@@ -265,6 +265,8 @@ $ha_elementi_anteprime = false;
           $txt  = $riga['testo'] ?? '';
           $cat  = $riga['categoria'] ?? $riga['etichetta'] ?? '';
           $link = $riga['link'] ?? null;
+          $num_ev  = trim((string) ($riga['numero'] ?? ''));
+          $num_txt = trim((string) ($riga['numero_testo'] ?? ''));
 
           $href = $link['url'] ?? '';
           $tgt  = !empty($link['target']) ? $link['target'] : '';
@@ -299,8 +301,9 @@ $ha_elementi_anteprime = false;
                 </div>
               <?php endif; ?>
 
-              <?php if ($mostra_testo && !empty($txt)): ?>
+              <?php if ($mostra_testo && (!empty($txt) || $num_ev !== '')): ?>
                 <div class="testo">
+                  <?php if ($num_ev !== ''): ?><p class="rsw-num"><?php echo esc_html($num_ev); ?><?php if ($num_txt !== ''): ?><span><?php echo esc_html($num_txt); ?></span><?php endif; ?></p><?php endif; ?>
                   <?php echo wp_kses_post($txt); ?>
                 </div>
               <?php endif; ?>
