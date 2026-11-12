@@ -12,7 +12,7 @@ if ($chef_lsc_host !== 'staging.chefstudio.it') {
     return;
 }
 
-const CHEF_LSC_VERSIONE = '3';
+const CHEF_LSC_VERSIONE = '4';
 
 add_action('init', function () {
     if (get_option('chef_lsc_versione') === CHEF_LSC_VERSIONE) {
@@ -22,8 +22,10 @@ add_action('init', function () {
         return;
     }
     $conf = [
-        'optm-css_min'          => true,  // CSS minimizzato
-        'optm-css_comb'         => true,  // CSS in un solo file
+        // CSS: lo gestisce il tema (CSS critico nella pagina, fogli non bloccanti).
+        // Se LiteSpeed unisce i CSS rimette tutto in un file che blocca la pagina.
+        'optm-css_min'          => false,
+        'optm-css_comb'         => false,
         'optm-css_font_display' => true,  // font-display: swap
         'optm-html_min'         => true,
         'optm-qs_rm'            => true,  // niente ?ver= sugli statici
