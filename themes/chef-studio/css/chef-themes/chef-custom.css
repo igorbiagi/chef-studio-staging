@@ -13980,3 +13980,18 @@ html, body{ overflow-x:clip; }
 .contenitore .hp-cliente .hp-vc li{margin-left:0!important}
 @media (min-width:1101px){.contenitore .hp-cliente .hp-vc li{padding-left:0!important}}
 .contenitore .hp-percorsi .hp-tab{justify-content:flex-start;text-align:left}
+/* icone delle schede: il tema arrotonda le immagini e le taglia */
+.contenitore .hp-percorsi .hp-tab img.hp-tab-ic{border-radius:0!important;object-fit:contain;overflow:visible;width:32px;height:32px}
+/* telefono: fisarmonica (classe hp-fis da scripts-cs.js) */
+@media (max-width:700px){
+ .hp-fis .hp-tabs{display:flex;flex-direction:column;gap:10px}
+ .hp-fis .hp-tab{font-size:16px;padding:14px 16px;gap:12px;width:100%}
+ .hp-fis .hp-tab small{display:block;font-size:13px}
+ .hp-fis .hp-tab:after{content:"+";margin-left:auto;font-size:22px;font-weight:400;color:var(--primary-color);line-height:1}
+ .hp-fis .hp-tab[aria-selected=true]:after{content:"−"}
+ .hp-fis .hp-tab:hover{transform:none}
+ .hp-fis .hp-pannello{display:none}
+ .hp-js .hp-fis .hp-pane.hp-on{display:block;background:#fff;border-radius:18px;padding:22px 18px;margin:-4px 0 6px;box-shadow:0 20px 50px -30px rgba(39,13,23,.35)}
+ .hp-fis .hp-pane h3{font-size:21px}
+}
+@media (max-width:700px){.hp-fis .hp-tab>span{flex:1;text-align:left}}

@@ -30,6 +30,11 @@ add_filter('chef_rsw_definizioni_layout', function ($L) {
     ], ['layout' => 'table', 'max' => 3]),
     chef_rsw_campo($p, 'ricerca', 'Tappa 1: ricerca che si scrive da sola', 'text', ['instructions' => 'Cosa chiede un possibile cliente a Google o a un\'AI.']),
     chef_rsw_campo($p, 'risposta', 'Tappa 1: risposta dell\'AI', 'textarea', ['rows' => 2, 'new_lines' => '', 'instructions' => 'Per evidenziare: <b>Chef Studio</b>.']),
+    chef_rsw_ripetitore($p, 'ricerche', 'Tappa 1 e 3: ricerche a rotazione', 'Aggiungi ricerca', [
+      chef_rsw_campo($p . '_r', 'ricerca', 'Cosa cerca il cliente', 'text', chef_rsw_larghezza(30)),
+      chef_rsw_campo($p . '_r', 'risposta', 'Risposta dell\'AI', 'text', chef_rsw_larghezza(45) + ['instructions' => 'Per evidenziare: <b>la tua azienda</b>.']),
+      chef_rsw_campo($p . '_r', 'notifica', 'Notifica (titolo)', 'text', chef_rsw_larghezza(25)),
+    ], ['layout' => 'table', 'max' => 8, 'instructions' => 'Se compilato sostituisce ricerca, risposta e titolo della notifica qui sopra. Girano in ordine, partendo da una a caso.']),
     chef_rsw_campo($p, 'tappa_2', 'Tappa 2: la pagina', 'textarea', ['rows' => 2, 'new_lines' => '']),
     chef_rsw_campo($p, 'notifica_titolo', 'Tappa 3: notifica, titolo', 'text', chef_rsw_larghezza(50)),
     chef_rsw_campo($p, 'notifica_testo', 'Tappa 3: notifica, riga sotto', 'text', chef_rsw_larghezza(50)),

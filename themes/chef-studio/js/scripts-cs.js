@@ -1462,6 +1462,16 @@ document.addEventListener('click', function (e) {
   if (hero) {
     var q = hero.querySelector('.hp-q');
     var testo = q ? q.getAttribute('data-testo') || '' : '';
+    // Più ricerche (data-ricerche): girano in ordine, partendo da una a caso.
+    var lista = [], n = 0;
+    try { lista = JSON.parse(hero.getAttribute('data-ricerche') || '[]'); } catch (e) { lista = []; }
+    if (lista.length > 1) n = Math.floor(Math.random() * lista.length);
+    var aiT = hero.querySelector('.hp-ai-t'), notT = hero.querySelector('.hp-not-t');
+    var prossima = function () {
+      if (lista.length < 2) return;
+      var r = lista[n % lista.length]; n++;
+      testo = r.q; if (aiT) aiT.innerHTML = r.r; if (notT) notT.textContent = r.n;
+    };
     var t = hero.querySelectorAll('.hp-tappa');
     var accendi = function (n) { for (var i = 0; i < t.length; i++) t[i].classList.toggle('hp-on', i === n); };
     if (fermo) {
@@ -1471,7 +1481,7 @@ document.addEventListener('click', function (e) {
       var ciclo = function () {
         timer.forEach(clearTimeout); timer = [];
         if (!visibile) return;
-        accendi(0); q.textContent = '';
+        prossima(); accendi(0); q.textContent = '';
         for (var c = 1; c <= testo.length; c++) {
           (function (c) { timer.push(setTimeout(function () { q.textContent = testo.slice(0, c); }, c * 55)); })(c);
         }
@@ -1499,7 +1509,26 @@ document.addEventListener('click', function (e) {
       box.querySelectorAll('.hp-pane').forEach(function (p) { p.classList.toggle('hp-on', p.id === b.getAttribute('aria-controls')); });
       if (fuoco) b.focus();
     };
+    // Su telefono le schede diventano una fisarmonica: ogni pannello si apre sotto la sua scheda.
+    var tabs = box.querySelector('.hp-tabs'), pannello = box.querySelector('.hp-pannello');
+    var mq = window.matchMedia ? matchMedia('(max-width: 700px)') : null;
+    var disponi = function () {
+      var fis = !!(mq && mq.matches);
+      box.classList.toggle('hp-fis', fis);
+      tab.forEach(function (b) {
+        var p = document.getElementById(b.getAttribute('aria-controls'));
+        if (!p) return;
+        if (fis) b.after(p); else pannello.appendChild(p);
+      });
+    };
+    if (mq && tabs && pannello) { disponi(); if (mq.addEventListener) mq.addEventListener('change', disponi); }
     tab.forEach(function (b, i) {
+      b.addEventListener('click', function () {
+        if (box.classList.contains('hp-fis')) setTimeout(function () {
+          var y = b.getBoundingClientRect().top;
+          if (y < 70 || y > window.innerHeight * 0.6) window.scrollBy({ top: y - 80, behavior: fermo ? 'auto' : 'smooth' });
+        }, 30);
+      });
       b.tabIndex = i === 0 ? 0 : -1;
       b.addEventListener('click', function () { mostra(b); });
       b.addEventListener('keydown', function (e) {
