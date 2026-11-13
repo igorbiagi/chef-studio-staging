@@ -88,3 +88,16 @@ add_filter('authenticate', function ($user) {
     }
     return $user;
 }, 99);
+
+// Messaggio di errore unico: non rivela se un nome utente esiste.
+add_filter('wp_login_errors', function ($errors) {
+    if (is_wp_error($errors)) {
+        foreach (['invalid_username', 'invalid_email', 'incorrect_password'] as $code) {
+            if ($errors->get_error_message($code)) {
+                $errors->remove($code);
+                $errors->add('chef_login', 'Nome utente o password non corretti.');
+            }
+        }
+    }
+    return $errors;
+});
