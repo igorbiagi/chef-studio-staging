@@ -14058,8 +14058,8 @@ html, body{ overflow-x:clip; }
 .hp-ant-tu{background:#fff;color:#3d2a31}
 @media (max-width:700px){
  .contenitore .hp-percorsi .hp-strada{gap:8px;margin-bottom:20px}
- .contenitore .hp-percorsi .hp-strada li{display:flex;gap:10px;align-items:baseline;padding:10px 12px!important;font-size:15px}
- .contenitore .hp-percorsi .hp-strada li:before{margin:0;flex:none}
+ .contenitore .hp-percorsi .hp-strada li{padding:10px 12px 10px 34px!important;font-size:15px}
+ .contenitore .hp-percorsi .hp-strada li:before{position:absolute;left:13px;top:12px;margin:0}
  .contenitore .hp-percorsi .hp-strada li:not(:last-child):after{content:none}
  .contenitore .hp-percorsi .hp-servizi-tit{margin-top:4px}
 }
