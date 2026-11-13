@@ -1788,7 +1788,7 @@ function chefstudio_schema_pagine_servizio_standard() {
             'name'        => 'Consulente SEO',
             'serviceType' => 'Consulenza SEO',
             'category'    => 'SEO',
-            'person'      => 'igor-biagi',
+            'person'      => ['igor-biagi', 'andrea-biagi'],
             'image'       => get_stylesheet_directory_uri() . '/img/seo/consulente-seo-pisa-igor-biagi-chef-studio.jpg',
             'description' => 'Consulenza SEO per analizzare siti web, individuare opportunita di crescita e costruire strategie organiche sostenibili.',
         ],
@@ -1796,7 +1796,7 @@ function chefstudio_schema_pagine_servizio_standard() {
             'name'        => 'Consulenza SEO',
             'serviceType' => 'Consulenza SEO',
             'category'    => 'SEO',
-            'person'      => 'igor-biagi',
+            'person'      => ['igor-biagi', 'andrea-biagi'],
             'image'       => get_stylesheet_directory_uri() . '/img/seo/consulenza-seo.jpg',
             'description' => 'Consulenza SEO tecnica, strategica e contenutistica per rendere il sito piu chiaro, competitivo e visibile.',
         ],
@@ -1804,7 +1804,7 @@ function chefstudio_schema_pagine_servizio_standard() {
             'name'        => 'Ottimizzazione siti web',
             'serviceType' => 'Ottimizzazione SEO siti web',
             'category'    => 'SEO',
-            'person'      => 'igor-biagi',
+            'person'      => ['igor-biagi', 'andrea-biagi'],
             'image'       => get_stylesheet_directory_uri() . '/img/seo/ottimizzazione-siti-web.svg',
             'description' => 'Ottimizzazione tecnica, contenutistica e strutturale di siti web per migliorare performance, usabilita e posizionamento.',
         ],
@@ -1812,7 +1812,7 @@ function chefstudio_schema_pagine_servizio_standard() {
             'name'        => 'Posizionamento siti su Google',
             'serviceType' => 'Posizionamento SEO',
             'category'    => 'SEO',
-            'person'      => 'igor-biagi',
+            'person'      => ['igor-biagi', 'andrea-biagi'],
             'image'       => get_stylesheet_directory_uri() . '/img/seo/seo-pisa.jpg',
             'description' => 'Strategie SEO per migliorare il posizionamento su Google attraverso analisi, contenuti, tecnica e continuita.',
         ],
@@ -1820,7 +1820,7 @@ function chefstudio_schema_pagine_servizio_standard() {
             'name'        => 'SEO per e-commerce',
             'serviceType' => 'SEO per e-commerce',
             'category'    => 'SEO e-commerce',
-            'person'      => 'igor-biagi',
+            'person'      => ['igor-biagi', 'andrea-biagi'],
             'image'       => get_stylesheet_directory_uri() . '/img/seo/seo-per-ecommerce.jpg',
             'description' => 'SEO per e-commerce orientata a categorie, schede prodotto, struttura informativa e traffico qualificato.',
         ],
@@ -1990,9 +1990,13 @@ function chefstudio_schema_pagine_servizio_standard() {
         $description = $config['description'];
     }
 
-    $image = has_post_thumbnail($post_id)
-        ? get_the_post_thumbnail_url($post_id, 'full')
-        : $config['image'];
+    // Immagine: prima quella della hero (ACF), poi l'immagine in evidenza, poi quella di riserva
+    $image = chefstudio_schema_immagine_hero($post_id);
+    if ($image === '') {
+        $image = has_post_thumbnail($post_id)
+            ? get_the_post_thumbnail_url($post_id, 'full')
+            : $config['image'];
+    }
 
     $service = [
         '@type'            => 'Service',
@@ -2064,6 +2068,29 @@ function chefstudio_schema_pagine_servizio_standard() {
     echo "\n<script type=\"application/ld+json\">" .
         wp_json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) .
         "</script>\n";
+}
+
+// URL dell'immagine della hero (primo blocco "header" del layout flessibile), stringa vuota se manca
+function chefstudio_schema_immagine_hero($post_id) {
+    if (!function_exists('get_field')) {
+        return '';
+    }
+    $blocchi = get_field('layout_flessibile_1', $post_id);
+    if (empty($blocchi) || !is_array($blocchi)) {
+        return '';
+    }
+    foreach ($blocchi as $blocco) {
+        if (($blocco['acf_fc_layout'] ?? '') !== 'header') {
+            continue;
+        }
+        $img = $blocco['immagine'] ?? '';
+        if (is_array($img)) {
+            $img = $img['ID'] ?? ($img['id'] ?? 0);
+        }
+        $url = $img ? wp_get_attachment_image_url((int) $img, 'full') : '';
+        return $url ? $url : '';
+    }
+    return '';
 }
 
 function chefstudio_schema_pagina_servizio_standard_config_from_ancestors($post_id, $configs) {
