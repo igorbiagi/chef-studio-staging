@@ -49,3 +49,24 @@ add_filter('single_template', function ($template) {
     }
     return $template;
 }, 99); // dopo il filtro del plugin local-pages-generator (priorità 30)
+
+/**
+ * Title, meta description e keyword di Yoast leggibili e scrivibili via REST
+ * (pagine locali, pagine e articoli), per aggiornarli in serie senza aprire ogni pagina.
+ * Serve un utente che può modificare il contenuto.
+ */
+add_action('init', function () {
+    $campi = ['_yoast_wpseo_title', '_yoast_wpseo_metadesc', '_yoast_wpseo_focuskw'];
+    foreach (['pagine-locali', 'page', 'post'] as $tipo) {
+        foreach ($campi as $campo) {
+            register_post_meta($tipo, $campo, [
+                'type'          => 'string',
+                'single'        => true,
+                'show_in_rest'  => true,
+                'auth_callback' => function ($allowed, $meta_key, $post_id) {
+                    return current_user_can('edit_post', $post_id);
+                },
+            ]);
+        }
+    }
+}, 20);
