@@ -1478,6 +1478,8 @@ document.addEventListener('click', function (e) {
       for (var i = 0; i < t.length; i++) t[i].classList.toggle('hp-on', i === n);
       // il puntino scende alla tappa accesa e si illumina quando arriva
       hero.setAttribute('data-passo', n);
+      // posizione calcolata sulle tappe vere: funziona a ogni larghezza (su telefono le tappe sono più alte)
+      if (punto && t[n]) punto.style.transform = 'translateY(' + Math.max(0, t[n].offsetTop - t[0].offsetTop) + 'px)';
       if (punto) { punto.classList.remove('hp-luce'); setTimeout(function () { punto.classList.add('hp-luce'); }, 750); }
     };
     if (fermo) {
@@ -1511,9 +1513,11 @@ document.addEventListener('click', function (e) {
   schede.forEach(function (box) {
     var tab = box.querySelectorAll('.hp-tab');
     var mostra = function (b, fuoco) {
-      tab.forEach(function (x) { x.setAttribute('aria-selected', x === b ? 'true' : 'false'); x.tabIndex = x === b ? 0 : -1; });
-      box.querySelectorAll('.hp-pane').forEach(function (p) { p.classList.toggle('hp-on', p.id === b.getAttribute('aria-controls')); });
-      if (fuoco) b.focus();
+      // su telefono un secondo tocco sulla scheda aperta la richiude
+      if (b && box.classList.contains('hp-fis') && b.getAttribute('aria-selected') === 'true' && !fuoco) b = null;
+      tab.forEach(function (x, k) { x.setAttribute('aria-selected', x === b ? 'true' : 'false'); x.tabIndex = (b ? x === b : k === 0) ? 0 : -1; });
+      box.querySelectorAll('.hp-pane').forEach(function (p) { p.classList.toggle('hp-on', !!b && p.id === b.getAttribute('aria-controls')); });
+      if (fuoco && b) b.focus();
     };
     // Su telefono le schede diventano una fisarmonica: ogni pannello si apre sotto la sua scheda.
     var tabs = box.querySelector('.hp-tabs'), pannello = box.querySelector('.hp-pannello');
@@ -1526,6 +1530,9 @@ document.addEventListener('click', function (e) {
         if (!p) return;
         if (fis) b.after(p); else pannello.appendChild(p);
       });
+      // su telefono si parte con tutte chiuse: si vedono subito i quattro obiettivi
+      if (fis) mostra(null);
+      else if (!box.querySelector('.hp-tab[aria-selected=true]')) mostra(tab[0]);
     };
     if (mq && tabs && pannello) { disponi(); if (mq.addEventListener) mq.addEventListener('change', disponi); }
     tab.forEach(function (b, i) {

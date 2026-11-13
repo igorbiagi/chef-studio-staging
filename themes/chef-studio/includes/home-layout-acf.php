@@ -65,6 +65,8 @@ add_filter('chef_rsw_definizioni_layout', function ($L) {
       chef_rsw_campo($p . '_p', 'testo_bottone', 'Bottone: testo', 'text', chef_rsw_larghezza(50)),
       chef_rsw_campo($p . '_p', 'link_bottone', 'Bottone: link', 'link', chef_rsw_larghezza(50) + ['return_format' => 'array']),
     ], ['max' => 5]),
+    chef_rsw_campo($p, 'titolo_servizi', 'Titolo sopra le pagine collegate', 'text', chef_rsw_larghezza(50) + ['default_value' => 'I servizi per questo obiettivo']),
+    chef_rsw_campo($p, 'etichetta_anteprima', 'Etichetta sopra le anteprime disegnate', 'text', chef_rsw_larghezza(50) + ['default_value' => 'Esempio']),
     chef_rsw_wysiwyg($p, 'nota', 'Nota sotto le schede'),
   ]];
 

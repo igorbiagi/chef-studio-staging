@@ -14046,3 +14046,20 @@ html, body{ overflow-x:clip; }
  .contenitore .hp-percorsi .hp-tab:hover:after{transform:translate(4px,-50%) rotate(45deg)}
  .contenitore .hp-percorsi .hp-tab[aria-selected=true]:after{color:#fff}
 }
+/* percorsi: titolo sopra le pagine collegate, anteprime disegnate da illustrazione (non sembrano campi da usare) */
+.contenitore .hp-percorsi .hp-servizi-tit{font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--primary-color);margin:0 0 12px}
+.contenitore .hp-percorsi .hp-ant-eti{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#8a787e;margin:0 0 8px 2px}
+.hp-ant-serp,.hp-ant-chat{pointer-events:none;user-select:none}
+.hp-ant-serp{background:#f6f1ee;border:0;box-shadow:none;padding:12px;font-size:12.5px;color:#6b5a60}
+.hp-ant-q{border:0;background:#fff;color:#6b5a60;padding:6px 12px 6px 30px;position:relative}
+.hp-ant-q:before{content:"";position:absolute;left:12px;top:50%;width:8px;height:8px;margin-top:-6px;border:1.5px solid #a8979c;border-radius:50%}
+.hp-ant-ai{background:#fff;color:#6b5a60}
+.hp-ant-ris{border-top-color:#e8ded9}
+.hp-ant-tu{background:#fff;color:#3d2a31}
+@media (max-width:700px){
+ .contenitore .hp-percorsi .hp-strada{gap:8px;margin-bottom:20px}
+ .contenitore .hp-percorsi .hp-strada li{display:flex;gap:10px;align-items:baseline;padding:10px 12px!important;font-size:15px}
+ .contenitore .hp-percorsi .hp-strada li:before{margin:0;flex:none}
+ .contenitore .hp-percorsi .hp-strada li:not(:last-child):after{content:none}
+ .contenitore .hp-percorsi .hp-servizi-tit{margin-top:4px}
+}
