@@ -2050,3 +2050,14 @@ button#gform_submit_button_1 {
 }
 .contenitore.hp-hero-sez .hp-hero a.hp-b1{color:#270d17}
 .contenitore.hp-hero-sez .hp-hero a.hp-b2{color:#fff}
+/* bottoni hero più pieni, WhatsApp ben visibile */
+.contenitore.hp-hero-sez .hp-hero .hp-b1,.contenitore.hp-hero-sez .hp-hero .hp-b2{min-height:56px;padding:15px 28px;font-size:18px;font-weight:500;justify-content:center}
+.contenitore.hp-hero-sez .hp-hero .hp-b2{border:1.5px solid rgba(255,255,255,.55)}
+.contenitore.hp-hero-sez .hp-hero .hp-b2 img{width:24px;height:24px}
+@media (min-width:701px){.contenitore.hp-hero-sez .hp-hero .hp-b1,.contenitore.hp-hero-sez .hp-hero .hp-b2{min-width:250px}}
+/* il puntino si illumina quando arriva a ogni tappa; la tappa accesa prende il bordo giallo */
+.hp-viaggio .hp-filo i:after{content:"";position:absolute;inset:-7px;border-radius:50%;background:radial-gradient(circle,rgba(249,178,51,.75) 0%,rgba(249,178,51,0) 70%);opacity:0;transform:scale(.6);animation:hpglow 9s infinite}
+@keyframes hpglow{0%,1%{opacity:0;transform:scale(.6)}4%,9%{opacity:1;transform:scale(1.9)}14%,30%{opacity:0;transform:scale(.6)}37%,42%{opacity:1;transform:scale(1.9)}47%,63%{opacity:0;transform:scale(.6)}70%,92%{opacity:1;transform:scale(1.9)}100%{opacity:0;transform:scale(.6)}}
+.hp-tappa.hp-on{border-color:rgba(249,178,51,.55);box-shadow:0 0 0 1px rgba(249,178,51,.18),0 18px 40px -24px rgba(249,178,51,.45)}
+@media (max-width:700px){.hp-viaggio .hp-filo i:after{animation:none}}
+@media (prefers-reduced-motion:reduce){.hp-viaggio .hp-filo i:after{animation:none}}
