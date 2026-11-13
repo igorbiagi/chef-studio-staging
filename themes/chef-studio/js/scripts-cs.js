@@ -1473,7 +1473,13 @@ document.addEventListener('click', function (e) {
       testo = r.q; if (aiT) aiT.innerHTML = r.r; if (notT) notT.textContent = r.n;
     };
     var t = hero.querySelectorAll('.hp-tappa');
-    var accendi = function (n) { for (var i = 0; i < t.length; i++) t[i].classList.toggle('hp-on', i === n); };
+    var punto = hero.querySelector('.hp-filo i');
+    var accendi = function (n) {
+      for (var i = 0; i < t.length; i++) t[i].classList.toggle('hp-on', i === n);
+      // il puntino scende alla tappa accesa e si illumina quando arriva
+      hero.setAttribute('data-passo', n);
+      if (punto) { punto.classList.remove('hp-luce'); setTimeout(function () { punto.classList.add('hp-luce'); }, 750); }
+    };
     if (fermo) {
       for (var i = 0; i < t.length; i++) t[i].classList.add('hp-on');
     } else if (q && t.length === 3) {

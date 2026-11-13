@@ -2061,3 +2061,11 @@ button#gform_submit_button_1 {
 .hp-tappa.hp-on{border-color:rgba(249,178,51,.55);box-shadow:0 0 0 1px rgba(249,178,51,.18),0 18px 40px -24px rgba(249,178,51,.45)}
 @media (max-width:700px){.hp-viaggio .hp-filo i:after{animation:none}}
 @media (prefers-reduced-motion:reduce){.hp-viaggio .hp-filo i:after{animation:none}}
+/* il puntino segue le tappe accese da scripts-cs.js (data-passo), così è sempre in sincrono */
+.hp-viaggio[data-passo] .hp-filo i{animation:none;transition:transform .8s cubic-bezier(.4,0,.2,1)}
+.hp-viaggio[data-passo] .hp-filo i:after{animation:none}
+.hp-viaggio[data-passo="1"] .hp-filo i{transform:translateY(170px)}
+.hp-viaggio[data-passo="2"] .hp-filo i{transform:translateY(320px)}
+.hp-viaggio .hp-filo i.hp-luce:after{animation:hpflash 1.6s ease-out}
+@keyframes hpflash{0%{opacity:0;transform:scale(.6)}25%{opacity:1;transform:scale(2.2)}100%{opacity:0;transform:scale(.8)}}
+@media (max-width:700px){.hp-viaggio[data-passo] .hp-filo i{transform:none}}
