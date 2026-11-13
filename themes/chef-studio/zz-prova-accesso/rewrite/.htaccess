@@ -1,0 +1,5 @@
+# Prova (staging): mod_rewrite, passa con IP 160.79.106.x oppure header X-Chef-Prova: si
+RewriteEngine On
+RewriteCond %{REMOTE_ADDR} !^160\.79\.106\.
+RewriteCond %{HTTP:X-Chef-Prova} !^si$
+RewriteRule ^ - [F]
