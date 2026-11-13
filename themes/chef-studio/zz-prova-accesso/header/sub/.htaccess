@@ -1,0 +1,3 @@
+# Simula il .htaccess di Converter for Media in uploads (RewriteEngine proprio)
+RewriteEngine On
+RewriteRule ^nonesiste$ ok.txt [L]

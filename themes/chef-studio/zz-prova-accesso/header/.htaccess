@@ -1,0 +1,8 @@
+# Prova (staging): passa solo con header X-Chef-Prova: si (Order/Allow + SetEnvIf, deve valere anche nelle sottocartelle)
+SetEnvIfNoCase X-Chef-Prova "^si$" chef_ok
+<IfModule mod_access_compat.c>
+Order Deny,Allow
+Deny from all
+Allow from env=chef_ok
+Allow from 127.0.0.1
+</IfModule>
