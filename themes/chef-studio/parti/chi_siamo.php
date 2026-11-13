@@ -265,6 +265,11 @@ if (is_front_page() && !empty($persone) && is_array($persone)):
       $persona_schema = chefstudio_schema_person($persona_schema_slug);
     }
 
+    // Persone note (Igor, Andrea): i dati vengono solo da chefstudio_schema_person(),
+    // così la stessa entità è identica su tutte le pagine. I campi del blocco
+    // completano lo schema solo per persone non censite.
+    $persona_schema_canonica = !empty($persona_schema);
+
     if (empty($persona_schema)) {
       $persona_schema = [
         '@type' => 'Person',
@@ -278,7 +283,7 @@ if (is_front_page() && !empty($persone) && is_array($persone)):
       ];
     }
 
-    if (!empty($ruolo_persona)) {
+    if (!$persona_schema_canonica && !empty($ruolo_persona)) {
       $job_titles = $normalizza_lista_schema($ruolo_persona);
 
       if (!empty($job_titles)) {
@@ -286,11 +291,11 @@ if (is_front_page() && !empty($persone) && is_array($persone)):
       }
     }
 
-    if (!empty($immagine_persona['url'])) {
+    if (!$persona_schema_canonica && !empty($immagine_persona['url'])) {
       $persona_schema['image'] = esc_url_raw($immagine_persona['url']);
     }
 
-    if (!empty($testo_persona)) {
+    if (!$persona_schema_canonica && !empty($testo_persona)) {
       $persona_schema['description'] = $normalizza_testo_schema($testo_persona);
     }
 
@@ -300,14 +305,14 @@ if (is_front_page() && !empty($persone) && is_array($persone)):
      * - formazione_schema
      * - competenze_schema
      */
-    if (!empty($persona['formazione_schema'])) {
+    if (!$persona_schema_canonica && !empty($persona['formazione_schema'])) {
       $persona_schema['alumniOf'] = [
         '@type' => 'EducationalOrganization',
         'name'  => $normalizza_testo_schema($persona['formazione_schema']),
       ];
     }
 
-    if (!empty($persona['competenze_schema'])) {
+    if (!$persona_schema_canonica && !empty($persona['competenze_schema'])) {
       $competenze = $normalizza_lista_schema($persona['competenze_schema']);
 
       if (!empty($competenze)) {

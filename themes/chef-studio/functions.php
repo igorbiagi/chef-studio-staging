@@ -1092,6 +1092,12 @@ function chefstudio_extend_yoast_organization_schema($data, $context) {
 
     $data['slogan'] = 'Web marketing, comunicazione visiva, SEO e siti web su misura.';
 
+    $data['foundingDate'] = '2012';
+    $data['founder'] = [
+        ['@id' => chefstudio_schema_person_id('igor-biagi')],
+        ['@id' => chefstudio_schema_person_id('andrea-biagi')],
+    ];
+
     if (chefstudio_schema_should_include_organization_rating()) {
         $data['aggregateRating'] = [
             '@type'       => 'AggregateRating',
@@ -1411,7 +1417,12 @@ function chefstudio_schema_person($person_slug) {
                 'Communication Designer',
             ],
             'url'      => home_url('/#igor-biagi'),
-            'image'    => get_stylesheet_directory_uri() . '/img/igor-biagi-cta.png',
+            'image'    => home_url('/wp-content/uploads/2026/02/igor-biagi-consulente-seo-ai-champion-marketing.jpg'),
+            'description' => 'Co-fondatore di Chef Studio. Laureato in Design della Comunicazione, Politecnico di Milano.',
+            'alumniOf' => [
+                '@type' => 'EducationalOrganization',
+                'name'  => 'Politecnico di Milano',
+            ],
             'worksFor' => [
                 '@id' => $organization_id,
             ],
@@ -1420,8 +1431,11 @@ function chefstudio_schema_person($person_slug) {
                 'Consulenza SEO',
                 'Agenzia SEO',
                 'Local SEO',
+                'Marketing digitale',
                 'WordPress',
                 'Web design',
+                'Communication design',
+                'UX/UI design',
                 'Google Analytics',
                 'Google Search Console',
                 'SEO per AI',
@@ -1434,23 +1448,29 @@ function chefstudio_schema_person($person_slug) {
             '@id'      => chefstudio_schema_person_id('andrea-biagi'),
             'name'     => 'Andrea Biagi',
             'jobTitle' => [
-                'Web Designer',
                 'Graphic Designer',
+                'Web Designer',
             ],
             'url'      => home_url('/#andrea-biagi'),
-            'image'    => get_stylesheet_directory_uri() . '/img/realizzazione-siti-web/chef-studio-andrea-biagi-contatti.png',
+            'image'    => home_url('/wp-content/uploads/2026/01/andrea-biagi-chef-studio-graphic-designer.jpg'),
+            'description' => 'Co-fondatore di Chef Studio. Laureato in Graphic Design and Multimedia, Libera Accademia di Belle Arti, Firenze.',
+            'alumniOf' => [
+                '@type' => 'EducationalOrganization',
+                'name'  => 'Libera Accademia di Belle Arti, Firenze',
+            ],
             'worksFor' => [
                 '@id' => $organization_id,
             ],
             'knowsAbout' => [
+                'Graphic design',
                 'Web design',
+                'Comunicazione visiva',
+                'Brand identity',
+                'Multimedia design',
                 'WordPress',
                 'Sviluppo siti web',
                 'UX/UI design',
-                'Graphic design',
-                'Brand identity',
                 'E-commerce',
-                'Marketing digitale',
             ],
         ],
     ];
