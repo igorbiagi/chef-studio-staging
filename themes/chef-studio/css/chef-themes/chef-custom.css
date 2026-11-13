@@ -14017,3 +14017,32 @@ html, body{ overflow-x:clip; }
 .hp-js .hp-pane.hp-on .hp-bolla{opacity:0;transform:translateY(6px);animation:hpstep .4s forwards;animation-delay:calc(.35s + var(--i) * .7s)}
 @media (prefers-reduced-motion:reduce){.hp-js .hp-pane.hp-on .hp-bolla{opacity:1;transform:none;animation:none}}
 .hp-vai{text-align:center}
+/* pannelli: altezza dal contenuto, bottone sotto le pagine collegate (desktop) e in fondo (telefono) */
+.hp-js .hp-pannello{min-height:0}
+.hp-due{grid-template-areas:"serv ant" "vai ant";grid-template-rows:auto 1fr;align-items:start}
+.hp-due>div:first-child{grid-area:serv}
+.hp-due>.hp-due-dx{grid-area:ant}
+.hp-due>.hp-vai{grid-area:vai;margin-top:10px;justify-self:start;align-self:start}
+@media (max-width:700px){
+ .hp-due{grid-template-areas:"serv" "ant" "vai";grid-template-rows:auto}
+ .hp-due>.hp-vai{justify-self:stretch}
+}
+/* schede: si capisce che sono pulsanti (freccia, stato attivo pieno) */
+@media (min-width:701px){
+ .contenitore .hp-percorsi .hp-tab{padding-right:44px;position:relative}
+ .contenitore .hp-percorsi .hp-tab:after{content:"›";position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:26px;line-height:1;color:var(--primary-color);transition:transform .25s}
+ .contenitore .hp-percorsi .hp-tab:hover:after{transform:translate(4px,-50%)}
+ .contenitore .hp-percorsi .hp-tab[aria-selected=true]{background:var(--primary-color);color:#fff;border-color:var(--primary-color)}
+ .contenitore .hp-percorsi .hp-tab[aria-selected=true] small,.contenitore .hp-percorsi .hp-tab[aria-selected=true]:after{color:rgba(255,255,255,.85)}
+ .contenitore .hp-percorsi .hp-tab[aria-selected=true] img.hp-tab-ic{filter:brightness(0) invert(1)}
+}
+.hp-fis .hp-tab[aria-selected=true]{background:var(--primary-color);color:#fff}
+.hp-fis .hp-tab[aria-selected=true] small,.hp-fis .hp-tab[aria-selected=true]:after{color:rgba(255,255,255,.85)}
+.hp-fis .hp-tab[aria-selected=true] img.hp-tab-ic{filter:brightness(0) invert(1)}
+.hp-scegli{font-size:13px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--primary-color);margin:0 0 10px 4px}
+@media (min-width:701px){
+ .contenitore .hp-percorsi .hp-tab{padding-right:48px!important}
+ .contenitore .hp-percorsi .hp-tab:after{content:"";width:9px;height:9px;border-top:2px solid currentColor;border-right:2px solid currentColor;right:22px;transform:translateY(-50%) rotate(45deg);color:var(--primary-color);font-size:0}
+ .contenitore .hp-percorsi .hp-tab:hover:after{transform:translate(4px,-50%) rotate(45deg)}
+ .contenitore .hp-percorsi .hp-tab[aria-selected=true]:after{color:#fff}
+}

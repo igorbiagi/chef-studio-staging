@@ -10,6 +10,7 @@ chef_rsw_apri('testo-largo hp-percorsi');
 if ($percorsi) : ?>
 <div class="hp-grid">
   <div class="hp-sx">
+    <p class="hp-scegli" aria-hidden="true">Scegli un obiettivo</p>
     <div class="hp-tabs" role="tablist">
       <?php foreach ($percorsi as $i => $pc) : ?>
       <button type="button" class="hp-tab" role="tab" id="<?php echo $uid . '-t' . $i; ?>" aria-controls="<?php echo $uid . '-p' . $i; ?>" aria-selected="<?php echo $i === 0 ? 'true' : 'false'; ?>">
@@ -44,8 +45,8 @@ if ($percorsi) : ?>
           <?php foreach ($righe as $i => $r) : ?><div class="hp-bolla <?php echo $i % 2 ? 'hp-bolla-ai' : 'hp-bolla-cli'; ?>" style="--i:<?php echo (int) $i; ?>"><?php echo chef_hp_inline($r); ?></div><?php endforeach; ?></div>
         <?php if (!empty($pc['prova_testo'])) : ?><p class="hp-ant-nota"><?php echo chef_hp_inline($pc['prova_testo']); ?></p><?php endif; ?>
         <?php elseif (!empty($pc['prova_numero']) || !empty($pc['prova_testo'])) : ?><div class="hp-prova"><b><?php echo chef_rsw_t($pc['prova_numero'] ?? ''); ?></b><p><?php echo chef_hp_inline($pc['prova_testo'] ?? ''); ?></p></div><?php endif; ?></div>
-      </div>
       <?php if (!empty($bt['url'])) : ?><a class="hp-vai" href="<?php echo esc_url($bt['url']); ?>"><?php echo chef_rsw_t($pc['testo_bottone'] ?? ''); ?> <span aria-hidden="true">→</span></a><?php endif; ?>
+      </div>
     </div>
     <?php endforeach; ?>
   </div>
