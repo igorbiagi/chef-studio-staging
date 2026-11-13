@@ -13995,3 +13995,25 @@ html, body{ overflow-x:clip; }
  .hp-fis .hp-pane h3{font-size:21px}
 }
 @media (max-width:700px){.hp-fis .hp-tab>span{flex:1;text-align:left}}
+/* percorsi: anteprime del lavoro (immagine, risultato Google/AI, chat AI) */
+.hp-due>div{min-width:0}
+.hp-ant{margin:0;border-radius:16px;overflow:hidden}
+.hp-ant-img img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;border-radius:16px!important}
+.hp-ant-img figcaption,.hp-ant-nota{font-size:14px;line-height:1.5;color:#6b5a60;margin:10px 2px 0}
+.hp-ant-img figcaption b{color:var(--primary-color)}
+.hp-ant-serp{background:#fff;border:1px solid #eadfd9;padding:14px;font-size:13px;line-height:1.45;box-shadow:0 16px 40px -28px rgba(39,13,23,.4)}
+.hp-ant-q{border:1px solid #ddd;border-radius:100px;padding:7px 14px;margin-bottom:10px;color:#270d17}
+.hp-ant-ai{background:#f6f1ee;border-radius:10px;padding:9px 11px;margin-bottom:8px;color:#3d2a31}
+.hp-ant-ai span{display:inline-block;font-size:10px;border:1px solid #c9b8b0;border-radius:4px;padding:0 4px;margin-right:6px}
+.hp-ant-ai b,.hp-ant-ris b{color:var(--primary-color)}
+.hp-ant-ris{padding:7px 4px;border-top:1px solid #f0e8e4;color:#6b5a60}
+.hp-ant-tu{color:#270d17;border-left:3px solid var(--super-color);padding-left:9px;background:#fffaf0}
+.hp-ant-chat{background:#efeae2;padding:0 0 12px;display:flex;flex-direction:column;gap:8px;font-size:13.5px;line-height:1.45}
+.hp-ant-chat-top{background:#075e54;color:#fff;padding:9px 12px;font-size:13px;display:flex;align-items:center;gap:8px}
+.hp-ant-chat-top span{width:22px;height:22px;border-radius:50%;background:#25d366}
+.hp-bolla{max-width:82%;padding:8px 11px;border-radius:10px;margin:0 12px;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.hp-bolla-cli{align-self:flex-end;background:#d9fdd3;color:#111}
+.hp-bolla-ai{align-self:flex-start;background:#fff;color:#111}
+.hp-js .hp-pane.hp-on .hp-bolla{opacity:0;transform:translateY(6px);animation:hpstep .4s forwards;animation-delay:calc(.35s + var(--i) * .7s)}
+@media (prefers-reduced-motion:reduce){.hp-js .hp-pane.hp-on .hp-bolla{opacity:1;transform:none;animation:none}}
+.hp-vai{text-align:center}

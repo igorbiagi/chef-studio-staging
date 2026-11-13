@@ -26,9 +26,24 @@ if ($percorsi) : ?>
       <h3><?php echo chef_rsw_t($pc['titolo_pannello'] ?? ''); ?></h3>
       <p><?php echo chef_hp_inline($pc['testo'] ?? ''); ?></p>
       <?php $passi = chef_rsw_righe($pc['passi'] ?? ''); if ($passi) : ?><ol class="hp-strada"><?php foreach ($passi as $ps) : ?><li><?php echo chef_hp_inline($ps); ?></li><?php endforeach; ?></ol><?php endif; ?>
-      <div class="hp-due">
-        <ul class="hp-servizi"><?php foreach (chef_hp_link_righe($pc['servizi'] ?? '') as [$t, $u]) : ?><li><a href="<?php echo esc_url($u); ?>"><?php echo chef_rsw_t($t); ?></a></li><?php endforeach; ?></ul>
-        <?php if (!empty($pc['prova_numero']) || !empty($pc['prova_testo'])) : ?><div class="hp-prova"><b><?php echo chef_rsw_t($pc['prova_numero'] ?? ''); ?></b><p><?php echo chef_hp_inline($pc['prova_testo'] ?? ''); ?></p></div><?php endif; ?>
+      <div class="hp-due"><div>
+        <ul class="hp-servizi"><?php foreach (chef_hp_link_righe($pc['servizi'] ?? '') as [$t, $u]) : ?><li><a href="<?php echo esc_url($u); ?>"><?php echo chef_rsw_t($t); ?></a></li><?php endforeach; ?></ul></div>
+        <div class="hp-due-dx"><?php
+        $tipo  = $pc['anteprima_tipo'] ?? '';
+        $righe = chef_rsw_righe($pc['anteprima_righe'] ?? '');
+        if ($tipo === 'immagine' && !empty($pc['anteprima_immagine'])) : ?>
+        <figure class="hp-ant hp-ant-img"><?php echo wp_get_attachment_image((int) $pc['anteprima_immagine'], 'medium_large', false, ['loading' => 'lazy', 'sizes' => '(max-width:700px) 90vw, 420px']); ?>
+          <?php if (!empty($pc['prova_testo'])) : ?><figcaption><?php if (!empty($pc['prova_numero'])) : ?><b><?php echo chef_rsw_t($pc['prova_numero']); ?></b> <?php endif; echo chef_hp_inline($pc['prova_testo']); ?></figcaption><?php endif; ?></figure>
+        <?php elseif ($tipo === 'ricerca' && $righe) : ?>
+        <div class="hp-ant hp-ant-serp" aria-hidden="true"><div class="hp-ant-q"><?php echo chef_rsw_t(array_shift($righe)); ?></div>
+          <?php if ($righe) : ?><div class="hp-ant-ai"><span>AI</span><?php echo chef_hp_inline(array_shift($righe)); ?></div><?php endif; ?>
+          <?php foreach ($righe as $i => $r) : ?><div class="hp-ant-ris<?php echo $i === 0 ? ' hp-ant-tu' : ''; ?>"><?php echo chef_hp_inline($r); ?></div><?php endforeach; ?></div>
+        <?php if (!empty($pc['prova_testo'])) : ?><p class="hp-ant-nota"><?php echo chef_hp_inline($pc['prova_testo']); ?></p><?php endif; ?>
+        <?php elseif ($tipo === 'chat' && $righe) : ?>
+        <div class="hp-ant hp-ant-chat" aria-hidden="true"><div class="hp-ant-chat-top"><span></span>Assistente AI · risponde subito</div>
+          <?php foreach ($righe as $i => $r) : ?><div class="hp-bolla <?php echo $i % 2 ? 'hp-bolla-ai' : 'hp-bolla-cli'; ?>" style="--i:<?php echo (int) $i; ?>"><?php echo chef_hp_inline($r); ?></div><?php endforeach; ?></div>
+        <?php if (!empty($pc['prova_testo'])) : ?><p class="hp-ant-nota"><?php echo chef_hp_inline($pc['prova_testo']); ?></p><?php endif; ?>
+        <?php elseif (!empty($pc['prova_numero']) || !empty($pc['prova_testo'])) : ?><div class="hp-prova"><b><?php echo chef_rsw_t($pc['prova_numero'] ?? ''); ?></b><p><?php echo chef_hp_inline($pc['prova_testo'] ?? ''); ?></p></div><?php endif; ?></div>
       </div>
       <?php if (!empty($bt['url'])) : ?><a class="hp-vai" href="<?php echo esc_url($bt['url']); ?>"><?php echo chef_rsw_t($pc['testo_bottone'] ?? ''); ?> <span aria-hidden="true">→</span></a><?php endif; ?>
     </div>
