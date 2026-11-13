@@ -57,3 +57,34 @@ add_action('do_feed', function () {
         wp_die('Staging privato.', '', ['response' => 401]);
     }
 }, 0);
+
+// Tutto cio' che WordPress serve prima di template_redirect (sitemap e XSL di Yoast, ecc.):
+// solo per utenti collegati. Restano liberi robots.txt (deve dire Disallow a tutti) e l'API REST
+// (che ha gia' il suo 401 qui sopra).
+add_action('parse_request', function ($wp) {
+    if (is_user_logged_in()) {
+        return;
+    }
+    $qv = $wp->query_vars;
+    if (!empty($qv['rest_route']) || !empty($qv['robots']) || !empty($qv['favicon'])) {
+        return;
+    }
+    auth_redirect();
+}, 0);
+
+// Login: dopo 5 tentativi sbagliati dallo stesso IP in 15 minuti, blocco per 15 minuti.
+// (Lo staging e' senza proxy Cloudflare, quindi senza il WAF che protegge wp-login sul sito vero.)
+function chef_staging_ip() {
+    return isset($_SERVER['REMOTE_ADDR']) ? preg_replace('/[^0-9a-f:.]/i', '', $_SERVER['REMOTE_ADDR']) : '';
+}
+add_action('wp_login_failed', function () {
+    $k = 'chef_lf_' . md5(chef_staging_ip());
+    $n = (int) get_transient($k);
+    set_transient($k, $n + 1, 15 * MINUTE_IN_SECONDS);
+});
+add_filter('authenticate', function ($user) {
+    if ((int) get_transient('chef_lf_' . md5(chef_staging_ip())) >= 5) {
+        return new WP_Error('chef_bloccato', 'Troppi tentativi. Riprova tra 15 minuti.');
+    }
+    return $user;
+}, 99);
