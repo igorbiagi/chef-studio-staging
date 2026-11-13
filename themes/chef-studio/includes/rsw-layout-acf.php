@@ -264,7 +264,8 @@ function chef_rsw_definizioni_layout() {
     chef_rsw_wysiwyg($p, 'testo_dopo', 'Testo dopo'),
   ]];
 
-  return $L;
+  // Altri layout definiti in file separati (es. includes/home-layout-acf.php)
+  return apply_filters('chef_rsw_definizioni_layout', $L);
 }
 
 /* -----------------------------------------------------------------

@@ -1447,3 +1447,78 @@ document.addEventListener('click', function (e) {
     window.addEventListener(ev, accendi, { passive: true, capture: true });
   });
 })();
+
+// Home (layout hero_percorso, percorsi_obiettivi, percorso_cliente): animazioni leggere.
+// Solo classi e testo; con prefers-reduced-motion tutto resta fermo e visibile.
+(function () {
+  var hero = document.querySelector('.hp-viaggio');
+  var schede = document.querySelectorAll('.hp-percorsi');
+  var tappe = document.querySelectorAll('.hp-vc, .hp-rv');
+  if (!hero && !schede.length && !tappe.length) return;
+  document.documentElement.classList.add('hp-js');
+  var fermo = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Hero: la ricerca si scrive da sola, poi si accendono pagina e richiesta (ciclo di 9 secondi).
+  if (hero) {
+    var q = hero.querySelector('.hp-q');
+    var testo = q ? q.getAttribute('data-testo') || '' : '';
+    var t = hero.querySelectorAll('.hp-tappa');
+    var accendi = function (n) { for (var i = 0; i < t.length; i++) t[i].classList.toggle('hp-on', i === n); };
+    if (fermo) {
+      for (var i = 0; i < t.length; i++) t[i].classList.add('hp-on');
+    } else if (q && t.length === 3) {
+      var timer = [], visibile = true;
+      var ciclo = function () {
+        timer.forEach(clearTimeout); timer = [];
+        if (!visibile) return;
+        accendi(0); q.textContent = '';
+        for (var c = 1; c <= testo.length; c++) {
+          (function (c) { timer.push(setTimeout(function () { q.textContent = testo.slice(0, c); }, c * 55)); })(c);
+        }
+        timer.push(setTimeout(function () { accendi(1); }, 3000));
+        timer.push(setTimeout(function () { accendi(2); }, 6000));
+        timer.push(setTimeout(ciclo, 9000));
+      };
+      // Il ciclo gira solo quando la hero è visibile.
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (es) {
+          var ora = es[0].isIntersecting;
+          if (ora && !visibile) { visibile = true; ciclo(); }
+          visibile = ora;
+        }).observe(hero);
+      }
+      ciclo();
+    }
+  }
+
+  // Percorsi: schede con tastiera (frecce) e clic.
+  schede.forEach(function (box) {
+    var tab = box.querySelectorAll('.hp-tab');
+    var mostra = function (b, fuoco) {
+      tab.forEach(function (x) { x.setAttribute('aria-selected', x === b ? 'true' : 'false'); x.tabIndex = x === b ? 0 : -1; });
+      box.querySelectorAll('.hp-pane').forEach(function (p) { p.classList.toggle('hp-on', p.id === b.getAttribute('aria-controls')); });
+      if (fuoco) b.focus();
+    };
+    tab.forEach(function (b, i) {
+      b.tabIndex = i === 0 ? 0 : -1;
+      b.addEventListener('click', function () { mostra(b); });
+      b.addEventListener('keydown', function (e) {
+        var d = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
+        if (d) { e.preventDefault(); mostra(tab[(i + d + tab.length) % tab.length], true); }
+      });
+    });
+  });
+
+  // Tappe del cliente e comparse allo scroll.
+  var apri = function (el) {
+    if (el.classList.contains('hp-vc')) {
+      el.style.setProperty('--hp-p', 1);
+      Array.prototype.forEach.call(el.children, function (li, i) { setTimeout(function () { li.classList.add('hp-on'); }, fermo ? 0 : 250 + i * 300); });
+    } else el.classList.add('hp-in');
+  };
+  if (!('IntersectionObserver' in window)) { tappe.forEach(apri); return; }
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { apri(e.target); io.unobserve(e.target); } });
+  }, { threshold: 0.2 });
+  tappe.forEach(function (el) { io.observe(el); });
+})();
