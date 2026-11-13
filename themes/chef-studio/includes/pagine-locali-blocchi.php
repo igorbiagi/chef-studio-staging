@@ -48,4 +48,4 @@ add_filter('single_template', function ($template) {
         }
     }
     return $template;
-}, 20);
+}, 99); // dopo il filtro del plugin local-pages-generator (priorità 30)
