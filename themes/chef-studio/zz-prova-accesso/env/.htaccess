@@ -1,0 +1,6 @@
+# Prova (staging): passa solo con header X-Chef-Prova: si
+SetEnvIfNoCase X-Chef-Prova "^si$" chef_ok
+<RequireAny>
+Require env chef_ok
+Require ip 127.0.0.1
+</RequireAny>

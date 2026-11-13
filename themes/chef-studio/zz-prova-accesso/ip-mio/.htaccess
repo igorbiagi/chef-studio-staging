@@ -1,0 +1,4 @@
+# Prova (staging): passa solo da 160.79.106.0/24
+<RequireAny>
+Require ip 160.79.106.0/24
+</RequireAny>
