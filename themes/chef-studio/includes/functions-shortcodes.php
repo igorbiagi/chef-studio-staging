@@ -495,18 +495,14 @@ add_shortcode('chef_blog_cta_personalizzata', 'chefstudio_blog_cta_shortcode');
  * ------------------------------------------------------------------ */
 
 function chefstudio_articolo_pulisci_contenuto($content) {
-  $content = trim((string) $content);
-  // wpautop gira prima degli shortcode: tolgo i <p> rimasti spezzati ai bordi
-  $content = preg_replace('#^(\s*</p>)+#i', '', $content);
-  $content = preg_replace('#(<p>\s*)+$#i', '', $content);
-  $content = preg_replace('#^\s*<br\s*/?>#i', '', $content);
+  // wpautop gira prima degli shortcode e lascia <p> spezzati: li tolgo e rifaccio i paragrafi
+  $content = (string) $content;
+  $content = preg_replace('#</p>\s*<p>#i', "\n\n", $content);
+  $content = preg_replace('#</?p>#i', '', $content);
+  $content = preg_replace('#<br\s*/?>\s*\n#i', "\n", $content);
   $content = trim($content);
 
-  if ($content !== '' && !preg_match('/<(p|ul|ol|h[1-6]|blockquote|div|table)\b/i', $content)) {
-    $content = wpautop($content);
-  }
-
-  return $content;
+  return $content === '' ? '' : wpautop($content);
 }
 
 function chefstudio_articolo_risolvi_url($value) {
