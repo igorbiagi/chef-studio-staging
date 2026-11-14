@@ -439,7 +439,11 @@ function chefstudio_blog_cta_shortcode($atts = [], $content = null) {
 
         <div class="info">
           <?php if ($title !== ''): ?>
-            <h2><?php echo esc_html($title); ?></h2>
+            <?php if (is_singular('post')): // negli articoli non e un titolo: niente voce nell'indice ?>
+              <p class="cta-premium-titolo"><?php echo esc_html($title); ?></p>
+            <?php else: ?>
+              <h2><?php echo esc_html($title); ?></h2>
+            <?php endif; ?>
           <?php endif; ?>
 
           <?php echo wp_kses_post(do_shortcode($text)); ?>
@@ -482,3 +486,171 @@ add_shortcode('chef_blog_cta', 'chefstudio_blog_cta_shortcode');
 add_shortcode('chef_cta_blog', 'chefstudio_blog_cta_shortcode');
 add_shortcode('chef_blog_cta_custom', 'chefstudio_blog_cta_shortcode');
 add_shortcode('chef_blog_cta_personalizzata', 'chefstudio_blog_cta_shortcode');
+
+
+/* ------------------------------------------------------------------
+ * Articoli: box e link al servizio (editor classico)
+ * [chef_box tipo="in-breve|nota|attenzione" titolo="..."]...[/chef_box]
+ * [chef_link_servizio titolo="..." url="consulenza-seo"]Testo breve[/chef_link_servizio]
+ * ------------------------------------------------------------------ */
+
+function chefstudio_articolo_pulisci_contenuto($content) {
+  $content = trim((string) $content);
+  // wpautop gira prima degli shortcode: tolgo i <p> rimasti spezzati ai bordi
+  $content = preg_replace('#^(\s*</p>)+#i', '', $content);
+  $content = preg_replace('#(<p>\s*)+$#i', '', $content);
+  $content = preg_replace('#^\s*<br\s*/?>#i', '', $content);
+  $content = trim($content);
+
+  if ($content !== '' && !preg_match('/<(p|ul|ol|h[1-6]|blockquote|div|table)\b/i', $content)) {
+    $content = wpautop($content);
+  }
+
+  return $content;
+}
+
+function chefstudio_articolo_risolvi_url($value) {
+  $value = trim((string) $value);
+
+  if ($value === '') {
+    return chefstudio_blog_cta_contact_url();
+  }
+
+  $value = chefstudio_blog_cta_resolve_url_alias($value);
+
+  if (is_string($value) && !preg_match('#^(https?:)?//|^[/#?]|^mailto:|^tel:#i', $value)) {
+    $page = get_page_by_path(trim($value, '/'));
+    if ($page) {
+      return get_permalink($page);
+    }
+    return home_url('/' . trim($value, '/') . '/');
+  }
+
+  return $value;
+}
+
+function chefstudio_box_shortcode($atts, $content = null) {
+  $atts = shortcode_atts([
+    'tipo'   => 'in-breve',
+    'titolo' => '',
+  ], $atts, 'chef_box');
+
+  $titoli = [
+    'in-breve'   => 'In breve',
+    'nota'       => 'Da sapere',
+    'attenzione' => 'Attenzione',
+  ];
+
+  $tipo = sanitize_key((string) $atts['tipo']);
+  if ($tipo === 'inbreve') {
+    $tipo = 'in-breve';
+  }
+  if (!isset($titoli[$tipo])) {
+    $tipo = 'in-breve';
+  }
+
+  $titolo = trim(wp_strip_all_tags((string) $atts['titolo']));
+  if ($titolo === '') {
+    $titolo = $titoli[$tipo];
+  }
+
+  $content = chefstudio_articolo_pulisci_contenuto(do_shortcode((string) $content));
+
+  return '<div class="chef-box chef-box-' . esc_attr($tipo) . '">'
+    . '<p class="chef-box-titolo">' . esc_html($titolo) . '</p>'
+    . wp_kses_post($content)
+    . '</div>';
+}
+add_shortcode('chef_box', 'chefstudio_box_shortcode');
+
+function chefstudio_link_servizio_shortcode($atts, $content = null) {
+  $atts = shortcode_atts([
+    'titolo' => '',
+    'url'    => 'contatti',
+    'testo'  => '',
+  ], $atts, 'chef_link_servizio');
+
+  $url = chefstudio_articolo_risolvi_url($atts['url']);
+  $titolo = trim(wp_strip_all_tags((string) $atts['titolo']));
+  $testo = $content !== null && trim((string) $content) !== '' ? (string) $content : (string) $atts['testo'];
+  $testo = trim(wp_strip_all_tags(preg_replace('#</?p[^>]*>|<br\s*/?>#i', ' ', $testo)));
+
+  if ($titolo === '' && $testo === '') {
+    return '';
+  }
+
+  $html  = '<a class="chef-link-servizio chef-track-link-servizio" href="' . esc_url($url) . '">';
+  $html .= '<span class="chef-link-servizio-testo">';
+  if ($titolo !== '') {
+    $html .= '<strong>' . esc_html($titolo) . '</strong>';
+  }
+  if ($testo !== '') {
+    $html .= esc_html($testo);
+  }
+  $html .= '</span><span class="chef-link-servizio-freccia" aria-hidden="true">&rarr;</span></a>';
+
+  return $html;
+}
+add_shortcode('chef_link_servizio', 'chefstudio_link_servizio_shortcode');
+
+/* Tabelle degli articoli dentro un contenitore che scorre su mobile */
+function chefstudio_articolo_avvolgi_tabelle($content) {
+  if (!is_singular('post') || !in_the_loop() || !is_main_query() || stripos($content, '<table') === false) {
+    return $content;
+  }
+
+  return preg_replace('#(<table\b.*?</table>)#is', '<div class="chef-tabella-wrap">$1</div>', $content);
+}
+add_filter('the_content', 'chefstudio_articolo_avvolgi_tabelle', 20);
+
+/* Indice dei contenuti chiuso su mobile: i link restano nella pagina */
+function chefstudio_articolo_indice_mobile() {
+  if (!is_singular('post')) {
+    return;
+  }
+  ?>
+  <script>
+  (function () {
+    var toc = document.querySelector('.articolo #ez-toc-container');
+    if (!toc || toc.querySelector('.toc-apri')) { return; }
+    var n = toc.querySelectorAll('nav li').length;
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'toc-apri';
+    b.setAttribute('aria-expanded', 'false');
+    b.textContent = 'Indice dei contenuti' + (n ? ' (' + n + ')' : '');
+    toc.insertBefore(b, toc.firstChild);
+    toc.classList.add('toc-chiuso');
+    b.addEventListener('click', function () {
+      var aperto = toc.classList.toggle('toc-chiuso') === false;
+      b.setAttribute('aria-expanded', aperto ? 'true' : 'false');
+    });
+    toc.addEventListener('click', function (e) {
+      if (e.target.closest('nav a') && window.innerWidth < 768) {
+        toc.classList.add('toc-chiuso');
+        b.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
+  </script>
+  <?php
+}
+add_action('wp_footer', 'chefstudio_articolo_indice_mobile', 30);
+
+/* Pulsanti nella scheda Testo dell'editor classico */
+function chefstudio_articolo_quicktags() {
+  if (!wp_script_is('quicktags')) {
+    return;
+  }
+  ?>
+  <script>
+  if (typeof QTags !== 'undefined') {
+    QTags.addButton('chef_inbreve', 'In breve', '[chef_box tipo="in-breve"]\n<ul>\n<li>', '</li>\n</ul>\n[/chef_box]');
+    QTags.addButton('chef_nota', 'Da sapere', '[chef_box tipo="nota"]', '[/chef_box]');
+    QTags.addButton('chef_attenzione', 'Attenzione', '[chef_box tipo="attenzione"]', '[/chef_box]');
+    QTags.addButton('chef_link_servizio', 'Link servizio', '[chef_link_servizio titolo="" url="contatti"]', '[/chef_link_servizio]');
+  }
+  </script>
+  <?php
+}
+add_action('admin_print_footer_scripts', 'chefstudio_articolo_quicktags', 100);
