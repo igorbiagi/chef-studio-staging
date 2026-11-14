@@ -14106,3 +14106,6 @@ html, body{ overflow-x:clip; }
 .contenitore .hp-percorsi .hp-tab{justify-content:flex-start!important}
 .contenitore .hp-percorsi .hp-tab>span{flex:1;min-width:0;text-align:left}
 .contenitore .hp-percorsi .hp-tab img.hp-tab-ic{flex:0 0 32px;margin:0!important}
+
+/* --- bottone dentro il percorso a tappe (pagine locali) --- */
+.rsw-tl-cta{ margin-top:30px; }

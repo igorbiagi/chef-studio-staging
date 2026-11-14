@@ -132,6 +132,8 @@ function chef_rsw_definizioni_layout() {
     chef_rsw_campo($p, 'inizio', 'Scritta all\'inizio della linea', 'text', chef_rsw_larghezza(50) + ['default_value' => 'Primo contatto']),
     chef_rsw_campo($p, 'fine', 'Scritta alla fine della linea', 'text', chef_rsw_larghezza(50)),
     chef_rsw_wysiwyg($p, 'testo_dopo', 'Testo dopo il percorso'),
+    chef_rsw_campo($p, 'testo_bottone', 'Testo del bottone (facoltativo)', 'text', chef_rsw_larghezza(50)),
+    chef_rsw_campo($p, 'link_bottone', 'Link del bottone', 'link', chef_rsw_larghezza(50)),
   ]];
 
   // 3. Schede con numeri e schermate
