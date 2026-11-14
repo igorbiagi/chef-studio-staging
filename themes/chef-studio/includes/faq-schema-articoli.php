@@ -29,8 +29,12 @@ function chefstudio_faq_da_testo($html) {
     $voci  = [];
 
     for ($i = 1; $i < count($parti); $i += 2) {
+        // I tag citati come testo (&lt;h1&gt;) diventano nomi semplici: nello script JSON-LD
+        // un "<img>" decodificato verrebbe riscritto dai filtri di lazy load e romperebbe il JSON.
+        $parti[$i + 1] = preg_replace('/&lt;\/?([a-z][a-z0-9]*)[^&]*?&gt;/i', '$1', $parti[$i + 1] ?? '');
+        $parti[$i]     = preg_replace('/&lt;\/?([a-z][a-z0-9]*)[^&]*?&gt;/i', '$1', $parti[$i]);
         $domanda  = trim(wp_strip_all_tags($parti[$i]));
-        $risposta = trim(preg_replace('/\s+/', ' ', wp_strip_all_tags(preg_replace('/<\/(p|li|ul|ol|div|table|tr|td|th)>/i', '$0 ', strip_shortcodes($parti[$i + 1] ?? '')))));
+        $risposta = trim(str_replace(['<', '>'], '', preg_replace('/\s+/', ' ', wp_strip_all_tags(preg_replace('/<\/(p|li|ul|ol|div|table|tr|td|th)>/i', '$0 ', strip_shortcodes($parti[$i + 1] ?? ''))))));
         if ($domanda !== '' && $risposta !== '') {
             $voci[] = ['question' => $domanda, 'answer' => $risposta];
         }
