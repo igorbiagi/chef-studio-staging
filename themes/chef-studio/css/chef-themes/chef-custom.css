@@ -14132,16 +14132,16 @@ html, body{ overflow-x:clip; }
 .articolo h3{ font-size: clamp(1.25rem, 1.1rem + .5vw, 1.45rem)!important; line-height: 1.3!important; margin: 1.5em 0 .4em!important; scroll-margin-top: 110px; }
 .articolo h4{ font-size: 1.1rem; line-height: 1.35; margin: 1.5em 0 .4em; }
 
-/* Elenchi: stessa dimensione del testo, segni nel colore del marchio */
-.articolo ul:not(.ez-toc-list):not([class*="anteprime"]),
-.articolo ol:not(.ez-toc-list){ margin: .2em 0 1.4em!important; padding-left: 0!important; list-style: none!important; }
-.articolo ul:not(.ez-toc-list) > li,
-.articolo ol:not(.ez-toc-list) > li{ list-style: none!important; font-size: var(--art-fs)!important; line-height: 1.55!important; position: relative; padding-left: 1.7em; margin: 0 0 .4em!important; }
-.articolo ul:not(.ez-toc-list) > li::marker, .articolo ol:not(.ez-toc-list) > li::marker{ content: none; }
-.articolo ul:not(.ez-toc-list) > li::before{ content:""; position:absolute; left:.35em; top:.62em; width:.48em; height:.48em; border-radius:50%; background: var(--primary-color); }
-.articolo ol:not(.ez-toc-list){ counter-reset: art-ol; }
-.articolo ol:not(.ez-toc-list) > li{ counter-increment: art-ol; padding-left: 2.3em; }
-.articolo ol:not(.ez-toc-list) > li::before{ content: counter(art-ol); position:absolute; left:0; top:.08em; width:1.6em; height:1.6em; border-radius:50%; background: var(--bonus-color); color: var(--primary-color); font-weight:700; font-size:.85em; display:grid; place-items:center; }
+/* Elenchi del testo (solo quelli scritti nell'articolo e nei box, non condivisione, indice o altri componenti) */
+.articolo .contenuto-standard > ul, .articolo .contenuto-standard > ol,
+.articolo .chef-box ul, .articolo .chef-box ol{ margin: .2em 0 1.4em!important; padding-left: 0!important; list-style: none!important; }
+.articolo .contenuto-standard > ul > li, .articolo .contenuto-standard > ol > li,
+.articolo .chef-box ul > li, .articolo .chef-box ol > li{ list-style: none!important; font-size: var(--art-fs)!important; line-height: 1.55!important; position: relative; padding-left: 1.7em; margin: 0 0 .4em!important; }
+.articolo .contenuto-standard > ul > li::marker, .articolo .contenuto-standard > ol > li::marker, .articolo .chef-box li::marker{ content: none; }
+.articolo .contenuto-standard > ul > li::before, .articolo .chef-box ul > li::before{ content:""; position:absolute; left:.35em; top:.62em; width:.48em; height:.48em; border-radius:50%; background: var(--primary-color); }
+.articolo .contenuto-standard > ol, .articolo .chef-box ol{ counter-reset: art-ol; }
+.articolo .contenuto-standard > ol > li, .articolo .chef-box ol > li{ counter-increment: art-ol; padding-left: 2.3em; }
+.articolo .contenuto-standard > ol > li::before, .articolo .chef-box ol > li::before{ content: counter(art-ol); position:absolute; left:0; top:.08em; width:1.6em; height:1.6em; border-radius:50%; background: var(--bonus-color); color: var(--primary-color); font-weight:700; font-size:.85em; display:grid; place-items:center; }
 
 /* Indice: compatto, due colonne su desktop, chiuso su mobile. Link e ancore restano quelli del plugin */
 .articolo #ez-toc-container{ background: var(--soft-color)!important; border-radius: var(--border-radius)!important; padding: 16px 22px 10px!important; margin: 6px 0 26px!important; }
@@ -14174,14 +14174,6 @@ html, body{ overflow-x:clip; }
 .articolo .chef-box-attenzione .chef-box-titolo{ color: #7a4b00; }
 .articolo .chef-box ul > li{ margin-bottom: .4em!important; }
 
-/* Tabelle leggibili */
-.articolo .chef-tabella-wrap{ overflow-x:auto; margin: 1.4em 0 2em; border-radius: var(--border-radius); border:1px solid var(--bonus-color); }
-.articolo table{ font-size: 1rem!important; width:100%; border-collapse: collapse; margin:0!important; }
-.articolo table th{ background: var(--bonus-color)!important; color: var(--txt-color)!important; font-size: .85rem!important; text-transform: uppercase; letter-spacing:.05em; padding: 14px 16px!important; text-align:left; border:0!important; }
-.articolo table td{ padding: 13px 16px!important; border:0!important; border-top: 1px solid var(--bonus-color)!important; background: #fff!important; line-height:1.45; }
-.articolo table tr:nth-child(odd) td{ background: var(--soft-light-color)!important; }
-.articolo table td:last-child{ white-space: nowrap; }
-
 /* Link contestuale verso un servizio (CTA leggera) */
 .articolo .chef-link-servizio{ display:flex; gap:16px; align-items:center; padding: 14px 20px; margin: 1.3em 0 1.6em; border-radius: var(--border-radius); background: var(--bonus-color); text-decoration:none!important; color: var(--txt-color)!important; }
 .articolo .chef-link-servizio-testo{ flex:1; font-size: 1rem; line-height:1.45; }
@@ -14200,7 +14192,6 @@ html, body{ overflow-x:clip; }
   .articolo .chef-box{ padding: 16px 18px 4px; }
   .articolo #ez-toc-container{ padding: 14px 18px!important; }
   .articolo .chef-link-servizio{ padding: 16px; }
-  .articolo table td:last-child{ white-space: normal; }
 }
 
 /* H1 articolo su mobile: piu contenuto */

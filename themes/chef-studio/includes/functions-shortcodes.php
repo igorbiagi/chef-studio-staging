@@ -589,16 +589,6 @@ function chefstudio_link_servizio_shortcode($atts, $content = null) {
 }
 add_shortcode('chef_link_servizio', 'chefstudio_link_servizio_shortcode');
 
-/* Tabelle degli articoli dentro un contenitore che scorre su mobile */
-function chefstudio_articolo_avvolgi_tabelle($content) {
-  if (!is_singular('post') || !in_the_loop() || !is_main_query() || stripos($content, '<table') === false) {
-    return $content;
-  }
-
-  return preg_replace('#(<table\b.*?</table>)#is', '<div class="chef-tabella-wrap">$1</div>', $content);
-}
-add_filter('the_content', 'chefstudio_articolo_avvolgi_tabelle', 20);
-
 /* Indice dei contenuti chiuso su mobile: i link restano nella pagina */
 function chefstudio_articolo_indice_mobile() {
   if (!is_singular('post')) {
