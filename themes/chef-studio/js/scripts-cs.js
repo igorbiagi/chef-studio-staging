@@ -1447,3 +1447,120 @@ document.addEventListener('click', function (e) {
     window.addEventListener(ev, accendi, { passive: true, capture: true });
   });
 })();
+
+// Home (layout hero_percorso, percorsi_obiettivi, percorso_cliente): animazioni leggere.
+// Solo classi e testo; con prefers-reduced-motion tutto resta fermo e visibile.
+(function () {
+  var hero = document.querySelector('.hp-viaggio');
+  var schede = document.querySelectorAll('.hp-percorsi');
+  var tappe = document.querySelectorAll('.hp-vc, .hp-rv');
+  if (!hero && !schede.length && !tappe.length) return;
+  document.documentElement.classList.add('hp-js');
+  var fermo = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Hero: la ricerca si scrive da sola, poi si accendono pagina e richiesta (ciclo di 9 secondi).
+  if (hero) {
+    var q = hero.querySelector('.hp-q');
+    var testo = q ? q.getAttribute('data-testo') || '' : '';
+    // Più ricerche (data-ricerche): girano in ordine, partendo da una a caso.
+    var lista = [], n = 0;
+    try { lista = JSON.parse(hero.getAttribute('data-ricerche') || '[]'); } catch (e) { lista = []; }
+    if (lista.length > 1) n = Math.floor(Math.random() * lista.length);
+    var aiT = hero.querySelector('.hp-ai-t'), notT = hero.querySelector('.hp-not-t');
+    var prossima = function () {
+      if (lista.length < 2) return;
+      var r = lista[n % lista.length]; n++;
+      testo = r.q; if (aiT) aiT.innerHTML = r.r; if (notT) notT.textContent = r.n;
+    };
+    var t = hero.querySelectorAll('.hp-tappa');
+    var punto = hero.querySelector('.hp-filo i');
+    var accendi = function (n) {
+      for (var i = 0; i < t.length; i++) t[i].classList.toggle('hp-on', i === n);
+      // il puntino scende alla tappa accesa e si illumina quando arriva
+      hero.setAttribute('data-passo', n);
+      // posizione calcolata sulle tappe vere: funziona a ogni larghezza (su telefono le tappe sono più alte)
+      if (punto && t[n]) punto.style.transform = 'translateY(' + Math.max(0, t[n].offsetTop - t[0].offsetTop) + 'px)';
+      if (punto) { punto.classList.remove('hp-luce'); setTimeout(function () { punto.classList.add('hp-luce'); }, 750); }
+    };
+    if (fermo) {
+      for (var i = 0; i < t.length; i++) t[i].classList.add('hp-on');
+    } else if (q && t.length === 3) {
+      var timer = [], visibile = true;
+      var ciclo = function () {
+        timer.forEach(clearTimeout); timer = [];
+        if (!visibile) return;
+        prossima(); accendi(0); q.textContent = '';
+        for (var c = 1; c <= testo.length; c++) {
+          (function (c) { timer.push(setTimeout(function () { q.textContent = testo.slice(0, c); }, c * 55)); })(c);
+        }
+        timer.push(setTimeout(function () { accendi(1); }, 3000));
+        timer.push(setTimeout(function () { accendi(2); }, 6000));
+        timer.push(setTimeout(ciclo, 9000));
+      };
+      // Il ciclo gira solo quando la hero è visibile.
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (es) {
+          var ora = es[0].isIntersecting;
+          if (ora && !visibile) { visibile = true; ciclo(); }
+          visibile = ora;
+        }).observe(hero);
+      }
+      ciclo();
+    }
+  }
+
+  // Percorsi: schede con tastiera (frecce) e clic.
+  schede.forEach(function (box) {
+    var tab = box.querySelectorAll('.hp-tab');
+    var mostra = function (b, fuoco) {
+      // su telefono un secondo tocco sulla scheda aperta la richiude
+      if (b && box.classList.contains('hp-fis') && b.getAttribute('aria-selected') === 'true' && !fuoco) b = null;
+      tab.forEach(function (x, k) { x.setAttribute('aria-selected', x === b ? 'true' : 'false'); x.tabIndex = (b ? x === b : k === 0) ? 0 : -1; });
+      box.querySelectorAll('.hp-pane').forEach(function (p) { p.classList.toggle('hp-on', !!b && p.id === b.getAttribute('aria-controls')); });
+      if (fuoco && b) b.focus();
+    };
+    // Su telefono le schede diventano una fisarmonica: ogni pannello si apre sotto la sua scheda.
+    var tabs = box.querySelector('.hp-tabs'), pannello = box.querySelector('.hp-pannello');
+    var mq = window.matchMedia ? matchMedia('(max-width: 700px)') : null;
+    var disponi = function () {
+      var fis = !!(mq && mq.matches);
+      box.classList.toggle('hp-fis', fis);
+      tab.forEach(function (b) {
+        var p = document.getElementById(b.getAttribute('aria-controls'));
+        if (!p) return;
+        if (fis) b.after(p); else pannello.appendChild(p);
+      });
+      // su telefono si parte con tutte chiuse: si vedono subito i quattro obiettivi
+      if (fis) mostra(null);
+      else if (!box.querySelector('.hp-tab[aria-selected=true]')) mostra(tab[0]);
+    };
+    if (mq && tabs && pannello) { disponi(); if (mq.addEventListener) mq.addEventListener('change', disponi); }
+    tab.forEach(function (b, i) {
+      b.addEventListener('click', function () {
+        if (box.classList.contains('hp-fis')) setTimeout(function () {
+          var y = b.getBoundingClientRect().top;
+          if (y < 70 || y > window.innerHeight * 0.6) window.scrollBy({ top: y - 80, behavior: fermo ? 'auto' : 'smooth' });
+        }, 30);
+      });
+      b.tabIndex = i === 0 ? 0 : -1;
+      b.addEventListener('click', function () { mostra(b); });
+      b.addEventListener('keydown', function (e) {
+        var d = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
+        if (d) { e.preventDefault(); mostra(tab[(i + d + tab.length) % tab.length], true); }
+      });
+    });
+  });
+
+  // Tappe del cliente e comparse allo scroll.
+  var apri = function (el) {
+    if (el.classList.contains('hp-vc')) {
+      el.style.setProperty('--hp-p', 1);
+      Array.prototype.forEach.call(el.children, function (li, i) { setTimeout(function () { li.classList.add('hp-on'); }, fermo ? 0 : 250 + i * 300); });
+    } else el.classList.add('hp-in');
+  };
+  if (!('IntersectionObserver' in window)) { tappe.forEach(apri); return; }
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { apri(e.target); io.unobserve(e.target); } });
+  }, { threshold: 0.2 });
+  tappe.forEach(function (el) { io.observe(el); });
+})();
