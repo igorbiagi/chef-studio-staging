@@ -52,13 +52,15 @@ add_filter('single_template', function ($template) {
 
 /**
  * FAQ: lo schema FAQPage del plugin Chef Studio FAQ SEO esce solo sui tipi di contenuto abilitati.
- * Le pagine locali hanno il blocco FAQ come le pagine nazionali: le abilitiamo sempre,
+ * Pagine, pagine locali e progetti possono avere il blocco FAQ: li abilitiamo sempre,
  * così dove ci sono FAQ c'è anche lo schema.
  */
 $chefstudio_faq_tipi = function ($valore) {
     $tipi = is_array($valore) ? $valore : ['post'];
-    if (!in_array('pagine-locali', $tipi, true)) {
-        $tipi[] = 'pagine-locali';
+    foreach (['page', 'pagine-locali', 'progetti'] as $tipo) {
+        if (!in_array($tipo, $tipi, true)) {
+            $tipi[] = $tipo;
+        }
     }
     return $tipi;
 };
