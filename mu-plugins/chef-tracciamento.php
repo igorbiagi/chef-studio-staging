@@ -13,6 +13,7 @@
  * 2. Clic su telefono, WhatsApp ed email in tutto il sito: eventi clic_telefono, clic_whatsapp, clic_email,
  *    con il parametro "posizione" (menu, footer, pulsante WhatsApp fisso, contenuto).
  *    Sulle landing Ads i link con le classi lbh-track-* li traccia già il tema: qui vengono saltati.
+ * Sullo staging Analytics è spento (ga-disable), così le prove non finiscono nei dati del sito.
  * 3. Pagina "Richiesta inviata" (6576): evento generate_lead con "origine" (sito, bonifica, care)
  *    e "pagina_modulo" (la pagina da cui è partito il modulo). Una volta sola per sessione e per pagina di partenza,
  *    così un aggiornamento della pagina non conta una richiesta in più.
@@ -33,6 +34,9 @@ add_action('wp_head', function () {
     }
     ?>
 <script id="chef-consenso-google">
+<?php if (isset($_SERVER['HTTP_HOST']) && strtolower($_SERVER['HTTP_HOST']) === 'staging.chefstudio.it') : ?>
+window['ga-disable-G-07BG70WRTE'] = true; // lo staging non manda dati alla proprietà GA4 del sito
+<?php endif; ?>
 window.dataLayer = window.dataLayer || [];
 window.gtag = window.gtag || function () { dataLayer.push(arguments); };
 (function () {
