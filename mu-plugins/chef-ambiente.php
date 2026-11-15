@@ -5,7 +5,7 @@
  *              Sul sito vero forza "visibile ai motori di ricerca" e spegne i plugin che servono solo
  *              allo staging, anche se il database copiato dallo staging dice il contrario.
  *              Sullo staging non cambia nulla (lì il noindex e l'accesso privato li gestisce staging-privato.php).
- * Version: 1.0 (14/11/2026)
+ * Version: 1.1 (15/11/2026)
  */
 
 if (!defined('ABSPATH')) {
@@ -39,4 +39,22 @@ add_filter('option_active_plugins', function ($plugins) {
         'wordpress-importer/wordpress-importer.php',
     );
     return array_values(array_diff($plugins, $solo_staging));
+}, 99);
+
+// 3. L'utente "Claude" serve solo sullo staging: sul sito vero non può accedere (né con password né con altro),
+//    così non va cancellato o declassato a mano dopo ogni push.
+add_filter('wp_authenticate_user', function ($user) {
+    if ($user instanceof WP_User && strtolower($user->user_login) === 'claude') {
+        return new WP_Error('chef_utente_staging', 'Accesso non consentito.');
+    }
+    return $user;
+}, 99);
+add_filter('determine_current_user', function ($user_id) {
+    if ($user_id) {
+        $u = get_userdata($user_id);
+        if ($u && strtolower($u->user_login) === 'claude') {
+            return 0;
+        }
+    }
+    return $user_id;
 }, 99);
