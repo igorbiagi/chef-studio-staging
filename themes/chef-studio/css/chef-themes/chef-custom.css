@@ -14106,3 +14106,112 @@ html, body{ overflow-x:clip; }
 .contenitore .hp-percorsi .hp-tab{justify-content:flex-start!important}
 .contenitore .hp-percorsi .hp-tab>span{flex:1;min-width:0;text-align:left}
 .contenitore .hp-percorsi .hp-tab img.hp-tab-ic{flex:0 0 32px;margin:0!important}
+
+/* --- bottone dentro il percorso a tappe (pagine locali) --- */
+.rsw-tl-cta{ margin-top:30px; }
+
+/* ==================== ARTICOLI BLOG: lettura, box, indice, CTA (14/11/2026) ==================== */
+.articolo, .struttura-side-blog{ --art-fs: 1.125rem; --art-lh: 1.6; --art-measure: 50rem; }
+
+
+/* Colonna di lettura */
+.struttura-side-blog article.contenuto-side{ max-width: var(--art-measure); }
+@media (min-width: 1025px){ .struttura-side-blog{ justify-content: space-between; } }
+.articolo .contenuto-standard{ font-size: var(--art-fs); line-height: var(--art-lh); }
+
+/* Paragrafi */
+.articolo p{ font-size: var(--art-fs)!important; line-height: var(--art-lh)!important; margin: 0 0 .85em!important; }
+.articolo p:empty{ display:none; }
+.articolo strong{ font-weight: 700; color: var(--txt-color); }
+.articolo a:not(.btn):not(.cta-premium-phone){ color: var(--primary-color); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: color-mix(in srgb, var(--primary-color) 45%, transparent); }
+.articolo a:not(.btn):hover{ text-decoration-color: var(--primary-color); }
+
+/* Titoli: piu aria sopra che sotto, cosi il titolo si lega al suo testo */
+.articolo h2{ font-size: clamp(1.6rem, 1.2rem + 1.3vw, 2.1rem)!important; line-height: 1.18!important; letter-spacing: -0.01em; margin: 1.5em 0 .45em!important; scroll-margin-top: 110px; }
+.articolo h2::before{ content:""; display:block; width: 48px; height: 4px; border-radius: 4px; background: var(--super-color); margin-bottom: .55em; }
+.articolo h3{ font-size: clamp(1.25rem, 1.1rem + .5vw, 1.45rem)!important; line-height: 1.3!important; margin: 1.5em 0 .4em!important; scroll-margin-top: 110px; }
+.articolo h4{ font-size: 1.1rem; line-height: 1.35; margin: 1.5em 0 .4em; }
+
+/* Elenchi del testo (solo quelli scritti nell'articolo e nei box, non condivisione, indice o altri componenti) */
+.articolo .contenuto-standard > ul, .articolo .contenuto-standard > ol,
+.articolo .chef-box ul, .articolo .chef-box ol{ margin: .2em 0 1.4em!important; padding-left: 0!important; list-style: none!important; }
+.articolo .contenuto-standard > ul > li, .articolo .contenuto-standard > ol > li,
+.articolo .chef-box ul > li, .articolo .chef-box ol > li{ list-style: none!important; font-size: var(--art-fs)!important; line-height: 1.55!important; position: relative; padding-left: 1.7em; margin: 0 0 .4em!important; }
+.articolo .contenuto-standard > ul > li::marker, .articolo .contenuto-standard > ol > li::marker, .articolo .chef-box li::marker{ content: none; }
+.articolo .contenuto-standard > ul > li::before, .articolo .chef-box ul > li::before{ content:""; position:absolute; left:.35em; top:.62em; width:.48em; height:.48em; border-radius:50%; background: var(--primary-color); }
+.articolo .contenuto-standard > ol, .articolo .chef-box ol{ counter-reset: art-ol; }
+.articolo .contenuto-standard > ol > li, .articolo .chef-box ol > li{ counter-increment: art-ol; padding-left: 2.3em; }
+.articolo .contenuto-standard > ol > li::before, .articolo .chef-box ol > li::before{ content: counter(art-ol); position:absolute; left:0; top:.08em; width:1.6em; height:1.6em; border-radius:50%; background: var(--bonus-color); color: var(--primary-color); font-weight:700; font-size:.85em; display:grid; place-items:center; }
+
+/* Indice: compatto, due colonne su desktop, chiuso su mobile. Link e ancore restano quelli del plugin */
+.articolo #ez-toc-container{ background: var(--soft-color)!important; border-radius: var(--border-radius)!important; padding: 16px 22px 10px!important; margin: 6px 0 26px!important; }
+.articolo #ez-toc-container .ez-toc-title{ font-weight:700; font-size: .8rem!important; text-transform: uppercase; letter-spacing:.07em; }
+.articolo #ez-toc-container .ez-toc-title-container{ margin-bottom: 8px!important; }
+.articolo #ez-toc-container a{ font-size: .95rem!important; line-height:1.35; text-decoration:none!important; }
+.articolo #ez-toc-container li{ margin: 0 0 .5em!important; break-inside: avoid; }
+@media (min-width: 768px){ .articolo #ez-toc-container nav > ul{ column-count: 2; column-gap: 32px; } }
+@media (max-width: 767px){
+  .articolo #ez-toc-container.toc-chiuso nav{ display:none; }
+  .articolo #ez-toc-container .toc-apri{ display:flex; justify-content:space-between; width:100%; background:none; border:0; padding:0; font: inherit; font-weight:700; font-size:.8rem; letter-spacing:.07em; text-transform:uppercase; color: var(--txt-color); cursor:pointer; }
+  .articolo #ez-toc-container .toc-apri::after{ content:"+"; color: var(--primary-color); font-size: 1.2rem; line-height: 1; }
+  .articolo #ez-toc-container:has(.toc-apri) .ez-toc-title-container{ display:none; }
+}
+@media (min-width: 768px){ .articolo #ez-toc-container .toc-apri{ display:none; } }
+
+/* Citazione: sobria */
+.articolo blockquote{ margin: 1.6em 0!important; padding: 0 0 0 1.2em!important; border-left: 2px solid var(--primary-color-soft); font-style: italic; color: color-mix(in srgb, var(--txt-color) 82%, white); background: none; }
+.articolo blockquote::before, .articolo blockquote::after, .articolo blockquote p::before, .articolo blockquote p::after{ content: none!important; display: none!important; }
+.articolo blockquote p{ font-size: inherit!important; line-height: inherit!important; margin-bottom: .4em!important; }
+.articolo blockquote cite{ display:block; font-size: .85em; font-style: normal; opacity: .75; margin-top: .3em; }
+
+/* Box: in breve, da sapere, attenzione */
+.articolo .chef-box{ border-radius: var(--border-radius); padding: 16px 22px 4px; margin: 1.3em 0 1.5em; background: var(--soft-color); border-left: 5px solid var(--super-color); }
+.articolo .chef-box-titolo{ display:block; font-weight:700; text-transform: uppercase; letter-spacing:.06em; font-size: .82rem!important; color: var(--txt-color); margin-bottom: .5em!important; }
+.articolo .chef-box-in-breve ul > li::before{ background: var(--super-color); }
+.articolo .chef-box-nota{ border-left-color: var(--secondary-color); background: color-mix(in srgb, var(--secondary-color-soft) 45%, white); }
+.articolo .chef-box-nota .chef-box-titolo{ color: #265B7D; }
+.articolo .chef-box-attenzione{ border-left-color: #c98a00; background: color-mix(in srgb, var(--warning-color) 30%, white); }
+.articolo .chef-box-attenzione .chef-box-titolo{ color: #7a4b00; }
+.articolo .chef-box ul > li{ margin-bottom: .4em!important; }
+
+/* Link contestuale verso un servizio (CTA leggera) */
+.articolo .chef-link-servizio{ display:flex; gap:16px; align-items:center; padding: 14px 20px; margin: 1.3em 0 1.6em; border-radius: var(--border-radius); background: var(--bonus-color); text-decoration:none!important; color: var(--txt-color)!important; }
+.articolo .chef-link-servizio-testo{ flex:1; font-size: 1rem; line-height:1.45; }
+.articolo .chef-link-servizio-testo strong{ display:block; font-size: 1.12rem; margin-bottom: 2px; }
+.articolo .chef-link-servizio-freccia{ flex: none; width: 42px; height: 42px; border-radius:50%; background: var(--super-color); display:grid; place-items:center; font-size: 1.3rem; font-weight:700; }
+.articolo .chef-link-servizio:hover .chef-link-servizio-freccia{ transform: translateX(3px); }
+
+/* CTA grande: titolo non piu h2 */
+.articolo .chef-blog-cta .cta-premium-titolo{ font-size: clamp(1.4rem, 1.1rem + 1vw, 1.9rem)!important; line-height:1.2!important; font-weight:700; margin: 0 0 .4em!important; }
+
+/* Mobile */
+@media (max-width: 767px){
+  .articolo{ --art-fs: 1.0625rem; --art-lh: 1.6; }
+  .struttura-side-blog .contenuto-standard.pad-x-standard{ padding-left: 8px!important; padding-right: 8px!important; }
+  .articolo h2{ margin-top: 1.9em!important; }
+  .articolo .chef-box{ padding: 16px 18px 4px; }
+  .articolo #ez-toc-container{ padding: 14px 18px!important; }
+  .articolo .chef-link-servizio{ padding: 16px; }
+}
+
+/* H1 articolo su mobile: piu contenuto */
+@media (max-width: 767px){ .single-post article.contenuto-side header h1{ font-size: clamp(1.7rem, 7.2vw, 2rem)!important; line-height: 1.12!important; } }
+
+/* Immagine in evidenza: la classe anti-shift resta, ma la proporzione la danno width/height dell'immagine (cosi niente vuoto con copertine non 16:9, es. Costi SEO 1000x335) */
+.single-post article.contenuto-side header figure.img-no-shift{ aspect-ratio: auto!important; height: auto!important; margin-bottom: 0!important; }
+.single-post article.contenuto-side header figure.img-no-shift img{ border-radius: var(--border-radius); }
+
+/* H1 articolo: un po' piu compatto nella colonna di lettura */
+@media (min-width: 1025px){ .single-post article.contenuto-side header h1{ font-size: clamp(2.4rem, 1.6rem + 1.6vw, 3.1rem)!important; line-height: 1.08!important; } }
+
+/* CTA grande nella colonna di lettura: foto a sinistra, testo e bottoni impilati */
+@media (min-width: 768px){
+  .articolo .chef-blog-cta .cta-premium-inner{ grid-template-columns: 190px minmax(0,1fr)!important; grid-template-rows: auto auto; min-height: 0!important; }
+  .articolo .chef-blog-cta .cta-premium-media{ grid-row: 1 / span 2; }
+  .articolo .chef-blog-cta .cta-premium-copy{ padding-bottom: 6px!important; }
+  .articolo .chef-blog-cta .cta-premium-actions{ grid-column: 2; flex-direction: row!important; align-items: center!important; justify-content: flex-start!important; gap: 22px!important; border-left: 0!important; padding: 4px 32px 28px!important; }
+  .articolo .chef-blog-cta .cta-premium-button{ white-space: nowrap; flex: 0 0 auto!important; width: auto!important; min-width: 0!important; gap: 18px; }
+  .articolo .chef-blog-cta .cta-premium-phone{ flex: 0 0 auto!important; width: auto!important; }
+  .articolo .chef-blog-cta .cta-premium-phone strong{ white-space: nowrap; }
+}
+/* ==================== FINE ARTICOLI BLOG ==================== */
