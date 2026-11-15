@@ -80,7 +80,7 @@ add_action('wp_footer', function () {
     else if (href.indexOf('mailto:') === 0) evento = 'clic_email';
     else if (/(^|\/\/)(wa\.me|api\.whatsapp\.com|web\.whatsapp\.com)/.test(href)) evento = 'clic_whatsapp';
     if (!evento) return;
-    gtag('event', evento, { posizione: posizione(a), pagina: location.pathname, transport_type: 'beacon' });
+    gtag('event', evento, { posizione: posizione(a), pagina: location.pathname });
   }, true);
 <?php if ($thank_you) : ?>
 
