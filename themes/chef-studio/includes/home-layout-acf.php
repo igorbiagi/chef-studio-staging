@@ -124,6 +124,9 @@ add_filter('chef_rsw_definizioni_layout', function ($L) {
       chef_rsw_campo($p . '_s', 'etichette', 'Etichette (separate da |)', 'text', chef_rsw_larghezza(40)),
     ], ['max' => 4]),
     chef_rsw_campo($p, 'nota', 'Riga sotto la griglia', 'textarea', ['rows' => 2, 'new_lines' => '', 'instructions' => 'Si possono inserire link.']),
+    chef_rsw_campo($p, 'mostra_sottoservizi', 'Mostra i servizi in evidenza sotto la griglia', 'true_false', chef_rsw_larghezza(30) + ['ui' => 1]),
+    chef_rsw_campo($p, 'titolo_sottoservizi', 'Servizi in evidenza: titoletto', 'text', chef_rsw_larghezza(70) + ['default_value' => 'In evidenza']),
+    chef_rsw_campo($p, 'sottoservizi', 'Servizi in evidenza (uno per riga: Testo | /indirizzo/)', 'textarea', ['rows' => 5, 'new_lines' => '', 'instructions' => 'Si vedono solo se l\'interruttore qui sopra è acceso.']),
   ]];
 
   return $L;

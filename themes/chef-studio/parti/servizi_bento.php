@@ -36,6 +36,8 @@ $giu = '<svg viewBox="0 0 12 20" width="12" height="18" fill="none" stroke="curr
       <?php endforeach; ?>
     </div>
     <?php if ($t = get_sub_field('nota')) : ?><p class="hb-nota"><?php echo chef_hp_inline($t); ?></p><?php endif; ?>
+    <?php $sotto = get_sub_field('mostra_sottoservizi') ? chef_hp_link_righe(get_sub_field('sottoservizi')) : [];
+    if ($sotto) : ?><div class="hb-sotto"><span><?php echo chef_rsw_t(get_sub_field('titolo_sottoservizi') ?: 'In evidenza'); ?></span><ul><?php foreach ($sotto as [$t, $u]) : ?><li><a href="<?php echo esc_url($u); ?>"><?php echo chef_rsw_t($t); ?></a></li><?php endforeach; ?></ul></div><?php endif; ?>
   </div>
 </div>
 <?php get_template_part('parti/layout_close');
