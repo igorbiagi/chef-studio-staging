@@ -3,9 +3,11 @@
 defined('ABSPATH') || exit;
 
 /**
- * Disabilita le Application Passwords di WordPress.
+ * Application Passwords: consentite solo all'utente "Claude" (modifiche ai contenuti via REST), spente per tutti gli altri.
  */
-add_filter('wp_is_application_passwords_available', '__return_false');
+add_filter('wp_is_application_passwords_available_for_user', function ($ok, $user) {
+    return $ok && $user instanceof WP_User && $user->user_login === 'Claude';
+}, 10, 2);
 
 /**
  * Disabilita le funzioni XML-RPC autenticate.
