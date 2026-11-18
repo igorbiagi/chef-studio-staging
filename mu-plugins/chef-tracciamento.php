@@ -13,6 +13,8 @@
  * 2. Clic su telefono, WhatsApp ed email in tutto il sito: eventi clic_telefono, clic_whatsapp, clic_email,
  *    con il parametro "posizione" (menu, footer, pulsante WhatsApp fisso, contenuto).
  *    Sulle landing Ads i link con le classi lbh-track-* li traccia già il tema: qui vengono saltati.
+ * Gli script hanno data-no-optimize/data-no-defer: LiteSpeed non deve ritardarli fino al primo tocco,
+ * altrimenti generate_lead parte solo se il visitatore tocca la pagina di ringraziamento.
  * Sullo staging Analytics è spento (ga-disable), così le prove non finiscono nei dati del sito.
  * 3. Pagina "Richiesta inviata" (6576): evento generate_lead con "origine" (sito, bonifica, care)
  *    e "pagina_modulo" (la pagina da cui è partito il modulo). Una volta sola per sessione e per pagina di partenza,
@@ -33,7 +35,7 @@ add_action('wp_head', function () {
         return;
     }
     ?>
-<script id="chef-consenso-google">
+<script id="chef-consenso-google" data-no-optimize="1" data-no-defer="1" data-cfasync="false">
 <?php if (isset($_SERVER['HTTP_HOST']) && strtolower($_SERVER['HTTP_HOST']) === 'staging.chefstudio.it') : ?>
 window['ga-disable-G-07BG70WRTE'] = true; // lo staging non manda dati alla proprietà GA4 del sito
 <?php endif; ?>
@@ -62,7 +64,7 @@ add_action('wp_footer', function () {
     }
     $thank_you = is_page(6576);
     ?>
-<script id="chef-tracciamento">
+<script id="chef-tracciamento" data-no-optimize="1" data-no-defer="1" data-cfasync="false">
 (function () {
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function () { dataLayer.push(arguments); };
